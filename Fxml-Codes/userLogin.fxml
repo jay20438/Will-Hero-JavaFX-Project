@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="524.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.HelloController">
+   <children>
+      <ImageView fitHeight="532.0" fitWidth="1077.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/backGroundLogin.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="68.0" layoutX="683.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/lockOpenClosed.gif" />
+         </image>
+      </ImageView>
+      <TextField layoutX="392.0" layoutY="342.0" prefHeight="60.0" prefWidth="279.0" promptText="Enter Username" text="Enter Username" />
+   </children>
+</AnchorPane>
