@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.HelloController">
+   <children>
+      <ImageView fitHeight="611.0" fitWidth="1098.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/backGround.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="234.0" fitWidth="326.0" layoutX="14.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/4treesIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="286.0" fitWidth="337.0" layoutX="31.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/4treesIsland3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="234.0" fitWidth="298.0" layoutX="326.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/MediumFloatingIslandNew.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="60.0" layoutX="393.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/enemyCrushPlayer.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="768.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/CoinPic.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="811.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/CoinPic.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="855.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/CoinPic.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="900.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/CoinPic.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="37.0" layoutX="937.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/CoinPic.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="81.0" fitWidth="94.0" layoutX="223.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/openChest.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="540.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/GreenOrcNew.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="123.0" layoutX="600.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/playerWithHisCap.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="189.0" fitWidth="243.0" layoutX="-8.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/4treesIsland2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="496.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/redOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="68.0" layoutX="280.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/TreasureBox1.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="159.0" fitWidth="210.0" layoutX="243.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/SideIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="296.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/WideIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="479.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/doubleIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="75.0" layoutX="579.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/TNT.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="71.0" layoutX="400.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/PlayerNew.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="81.0" fitWidth="116.0" layoutX="542.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/playerWithKnife.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="44.0" layoutX="465.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/enemyBlood.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="60.0" layoutX="617.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/playerWithMissile.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="106.0" fitWidth="102.0" layoutX="672.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/missileFire.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="123.0" layoutX="688.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/playerMovingWhileThrowingKnife.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="91.0" layoutX="698.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/playerMovingWhileThrowingMissile.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="175.0" layoutX="567.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/missileFlying.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="116.0" fitWidth="380.0" layoutX="354.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/missileHitBoss.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
