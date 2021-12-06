@@ -101,7 +101,7 @@
             <Image url="@WillHeroImages/doubleIsland.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="54.0" fitWidth="75.0" layoutX="579.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="80.0" layoutX="584.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/TNT.png" />
          </image>
@@ -149,6 +149,16 @@
       <ImageView fitHeight="116.0" fitWidth="380.0" layoutX="354.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/missileHitBoss.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="754.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/playerBurnt.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="164.0" fitWidth="161.0" layoutX="803.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/tntFire.png" />
          </image>
       </ImageView>
    </children>
