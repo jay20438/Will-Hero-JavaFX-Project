@@ -4,9 +4,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.HelloController">
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.HelloController">
    <children>
-      <ImageView fitHeight="611.0" fitWidth="1098.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background" fitHeight="611.0" fitWidth="1098.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/backGround.png" />
          </image>

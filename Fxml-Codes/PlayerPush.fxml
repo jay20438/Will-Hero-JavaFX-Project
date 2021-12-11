@@ -4,14 +4,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx2.SettingsPageView">
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.HelloController">
    <children>
       <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
          <image>
-            <Image url="@WillHeroImages/Background.jpeg" />
+            <Image url="@WillHeroImages/backGround.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="448.0" layoutX="14.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="124.0" fitWidth="431.0" layoutX="14.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/LargeFloatingIsland.png" />
          </image>
@@ -21,14 +21,14 @@
             <Image url="@WillHeroImages/MediumFloatingIslandNew.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="56.0" fitWidth="71.0" layoutX="224.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="74.0" fitWidth="79.0" layoutX="216.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/PlayerNew.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="108.0" fitWidth="300.0" layoutX="455.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="220.0" fitWidth="334.0" layoutX="451.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WillHeroImages/FloatingIslandNew.png" />
+            <Image url="@WillHeroImages/LongIsland.png" />
          </image>
       </ImageView>
    </children>

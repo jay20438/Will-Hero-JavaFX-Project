@@ -4,11 +4,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx2.SettingsPageView">
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.SettingsPageView">
    <children>
       <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
          <image>
-            <Image url="@WillHeroImages/Background.jpeg" />
+            <Image url="@WillHeroImages/backGround.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="603.0" fitWidth="739.0" layoutX="209.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
@@ -16,27 +16,27 @@
             <Image url="@WillHeroImages/SettingsMenuPic.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="playButton" fitHeight="93.0" fitWidth="118.0" layoutX="515.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="93.0" fitWidth="118.0" layoutX="515.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/PlayButton-removebg-preview.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="restartButton" fitHeight="95.0" fitWidth="98.0" layoutX="384.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="95.0" fitWidth="98.0" layoutX="384.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/RestartButtonpic.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="soundButton" fitHeight="118.0" fitWidth="118.0" layoutX="647.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="118.0" fitWidth="118.0" layoutX="647.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/SoundButtonpic.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="homeButton" fitHeight="100.0" fitWidth="98.0" layoutX="377.0" layoutY="199.0" onMouseClicked="#goToHomePage" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="98.0" layoutX="377.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/HomeButtonpic.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="musicButton" fitHeight="112.0" fitWidth="86.0" layoutX="663.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="112.0" fitWidth="86.0" layoutX="663.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/MusicButtonpic.png" />
          </image>

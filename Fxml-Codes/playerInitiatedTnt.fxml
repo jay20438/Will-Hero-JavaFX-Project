@@ -4,21 +4,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.HelloController">
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.PlayerInitiatedTnt">
    <children>
-      <ImageView fitHeight="611.0" fitWidth="1098.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background" fitHeight="611.0" fitWidth="1098.0" layoutX="-6.0" layoutY="3.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/backGround.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="264.0" fitWidth="261.0" layoutX="335.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="264.0" fitWidth="261.0" layoutX="322.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/4treesIsland3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="171.0" fitWidth="232.0" layoutX="25.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@WillHeroImages/WideIsland.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="176.0" fitWidth="393.0" layoutX="705.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
@@ -31,7 +26,7 @@
             <Image url="@WillHeroImages/missileFire.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="54.0" fitWidth="91.0" layoutX="516.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="myImage" fitHeight="54.0" fitWidth="91.0" layoutX="702.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/playerMovingWhileThrowingMissile.png" />
          </image>
@@ -51,24 +46,34 @@
             <Image url="@WillHeroImages/tntInitiated.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="985.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@WillHeroImages/redOrc.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="1040.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@WillHeroImages/redOrc.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="25.0" fitWidth="175.0" layoutX="618.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/missileFlying.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="48.0" fitWidth="80.0" layoutX="104.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="234.0" fitWidth="326.0" layoutX="-40.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WillHeroImages/TNT.png" />
+            <Image url="@WillHeroImages/4treesIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="57.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/redOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="102.0" layoutX="435.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/openChest.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="956.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/GreenOrcNew.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="1006.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
       </ImageView>
    </children>

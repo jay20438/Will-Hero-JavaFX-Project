@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="2154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.blankController">
+   <children>
+      <ImageView fx:id="background" fitHeight="532.0" fitWidth="1016.0" layoutY="-1.0" onMouseClicked="#moveContent" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/backGround.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island1" fitHeight="238.0" fitWidth="211.0" layoutX="60.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/4treesIsland3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island2" fitHeight="225.0" fitWidth="288.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/4treesIsland2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island3" fitHeight="225.0" fitWidth="342.0" layoutX="699.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/SideIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island4" fitHeight="209.0" fitWidth="331.0" layoutX="1111.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/4treesIsland3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island5" fitHeight="239.0" fitWidth="338.0" layoutX="1414.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/doubleIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island6" fitHeight="173.0" fitWidth="307.0" layoutX="1778.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/LongIsland.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="player" fitHeight="79.0" fitWidth="45.0" layoutX="129.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/PlayerNew.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

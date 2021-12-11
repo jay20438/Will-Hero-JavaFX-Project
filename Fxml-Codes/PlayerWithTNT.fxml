@@ -4,11 +4,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx4.SettingsPageView">
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.HelloController">
    <children>
       <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
          <image>
-            <Image url="@../../../../../../../../../../../Downloads/SkyCloudBackground.jpeg" />
+            <Image url="@WillHeroImages/backGround.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="236.0" fitWidth="329.0" layoutX="707.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
@@ -31,7 +31,7 @@
             <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="536.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="56.0" fitWidth="61.0" layoutX="535.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
