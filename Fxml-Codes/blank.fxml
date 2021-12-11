@@ -4,9 +4,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="2154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.blankController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="2134.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.blankController">
    <children>
-      <ImageView fx:id="background" fitHeight="532.0" fitWidth="1016.0" layoutY="-1.0" onMouseClicked="#moveContent" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="background" fitHeight="756.0" fitWidth="1404.0" layoutY="-1.0" onMouseClicked="#moveContent" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/backGround.png" />
          </image>
@@ -16,27 +16,27 @@
             <Image url="@WillHeroImages/4treesIsland3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="island2" fitHeight="225.0" fitWidth="288.0" layoutX="395.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="island2" fitHeight="225.0" fitWidth="288.0" layoutX="394.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/4treesIsland2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="island3" fitHeight="225.0" fitWidth="342.0" layoutX="699.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="island3" fitHeight="225.0" fitWidth="342.0" layoutX="710.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/SideIsland.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="island4" fitHeight="209.0" fitWidth="331.0" layoutX="1111.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="island4" fitHeight="209.0" fitWidth="331.0" layoutX="1114.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/4treesIsland3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="island5" fitHeight="239.0" fitWidth="338.0" layoutX="1414.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="island5" fitHeight="165.0" fitWidth="374.0" layoutX="1414.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/doubleIsland.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="island6" fitHeight="173.0" fitWidth="307.0" layoutX="1778.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="island6" fitHeight="175.0" fitWidth="268.0" layoutX="1842.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/LongIsland.png" />
          </image>

@@ -31,7 +31,7 @@
             <Image url="@WillHeroImages/SoundButtonpic.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="98.0" layoutX="377.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="98.0" layoutX="377.0" layoutY="199.0" onMouseClicked="#goToHomePage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/HomeButtonpic.png" />
          </image>

@@ -34,7 +34,7 @@ public class Homepage implements Initializable {
 
     @FXML
     void playTheGame(MouseEvent event) {
-        HelloApplication.setDifferentScene(fxmlLoader.getScene("arena"));
+        HelloApplication.setDifferentScene(fxmlLoader.getScene("blank"));
     }
 
     @FXML

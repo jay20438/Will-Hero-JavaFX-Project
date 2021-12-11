@@ -13,10 +13,10 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SettingsPageView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("userLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1017, 532);
         staged = stage;
-        stage.setTitle("Hello!");
+        stage.setTitle("");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
