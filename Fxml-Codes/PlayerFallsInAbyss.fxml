@@ -4,7 +4,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.HelloController">
+=======
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.PlayerFallsInAbyss">
+>>>>>>> 934576c9a3704edab3911d08231a077d3ce7a5b7
    <children>
       <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
          <image>
