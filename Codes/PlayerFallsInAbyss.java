@@ -60,8 +60,7 @@ public class PlayerFallsInAbyss implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         translate.setNode(player);
         translate.setDuration(Duration.millis(1010));
-        translate.setCycleCount(TranslateTransition.INDEFINITE);
-        translate.setByY(150);
+        translate.setByY(300);
         translate.play();
 
         rotate.setNode(player);
