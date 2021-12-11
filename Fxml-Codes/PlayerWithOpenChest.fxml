@@ -13,7 +13,7 @@
       </ImageView>
       <ImageView fitHeight="273.0" fitWidth="368.0" layoutX="14.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WillHeroImages/SideIsland.png" />
+<!--            <Image url="@WillHeroImages/SideIsland.png" />-->
          </image>
       </ImageView>
       <ImageView fitHeight="236.0" fitWidth="329.0" layoutX="360.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
@@ -31,7 +31,7 @@
             <Image url="@WillHeroImages/PlayerNew.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="259.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="157.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
@@ -49,6 +49,11 @@
       <ImageView fitHeight="81.0" fitWidth="94.0" layoutX="858.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/openChest.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="236.0" fitWidth="350.0" layoutX="31.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/sideIsland.png" />
          </image>
       </ImageView>
    </children>

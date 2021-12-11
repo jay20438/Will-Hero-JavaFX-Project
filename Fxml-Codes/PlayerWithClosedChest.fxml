@@ -13,7 +13,7 @@
       </ImageView>
       <ImageView fitHeight="273.0" fitWidth="368.0" layoutX="14.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WillHeroImages/SideIsland.png" />
+<!--            <Image url="@WillHeroImages/SideIsland.png" />-->
          </image>
       </ImageView>
       <ImageView fitHeight="236.0" fitWidth="329.0" layoutX="360.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
@@ -26,19 +26,9 @@
             <Image url="@WillHeroImages/LongIsland.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="56.0" fitWidth="71.0" layoutX="166.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@WillHeroImages/PlayerNew.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="56.0" fitWidth="68.0" layoutX="869.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/TreasureBox1.PNG" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="259.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="796.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
@@ -49,6 +39,21 @@
       <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="494.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/GreenOrcNew.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="234.0" fitWidth="394.0" layoutX="34.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/4treesIsland2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="198.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/GreenOrcNew.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="71.0" layoutX="91.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/PlayerNew.png" />
          </image>
       </ImageView>
    </children>

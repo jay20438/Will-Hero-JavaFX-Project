@@ -5,9 +5,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="myAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.HelloController">
+<AnchorPane fx:id="myAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.HelloController">
    <children>
-      <Button fx:id="myButton" layoutY="-1.0" mnemonicParsing="false" onAction="#move" prefHeight="400.0" prefWidth="601.0" />
+      <Button fx:id="myButton" layoutY="-1.0" mnemonicParsing="false" prefHeight="400.0" prefWidth="601.0" />
       <ImageView fx:id="myImage" fitHeight="153.0" fitWidth="92.0" layoutX="201.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/PlayerNew.png" />
