@@ -1,4 +1,4 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -27,24 +27,27 @@ public class SettingsPageView
     @FXML
     private AnchorPane myAnchorPane;
 
-//    @FXML
-//    private ImageView player;
-    FxmlLoader fxmlLoader = new FxmlLoader();
-//
+    @FXML
+    private ImageView player;
+    FxmlLoader obj1 = new FxmlLoader();
+
     public void goToHomePage(MouseEvent mouseEvent) {
-        HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage"));
+        scene2 = obj1.getScene("homepage");
+        if(scene2==null){
+            System.out.println("it is null");
+        }
+        HelloApplication.setDifferentScene(scene2);
     }
 
 
 
 
-
-//    static FxmlLoader obj4 = new FxmlLoader();
-//    public static void goToSettings(MouseEvent mouseEvent) {
-//        scene4 = obj4.getScene("SettingsPageView");
-//        if(scene4==null){
-//            System.out.println("it is null");
-//        }
-//        HelloApplication.setDifferentScene(scene4);
-//    }
+    static FxmlLoader obj4 = new FxmlLoader();
+    public static void goToSettings(MouseEvent mouseEvent) {
+        scene4 = obj4.getScene("SettingsPageView");
+        if(scene4==null){
+            System.out.println("it is null");
+        }
+        HelloApplication.setDifferentScene(scene4);
+    }
 }
