@@ -5,19 +5,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="524.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.UserLogin">
+<AnchorPane fx:id="myPane" prefHeight="528.0" prefWidth="1141.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.UserLogin">
    <children>
       <ImageView fitHeight="532.0" fitWidth="1077.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/backGroundLogin.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="lock" fitHeight="60.0" fitWidth="74.0" layoutX="677.0" layoutY="346.0" onMouseClicked="#verifyAndAllow" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lock" fitHeight="60.0" fitWidth="74.0" layoutX="1077.0" layoutY="369.0" onMouseClicked="#verifyAndAllow" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/lockOpenClosed.gif" />
          </image>
       </ImageView>
-      <TextField fx:id="textFieldForUsername" layoutX="392.0" layoutY="342.0" prefHeight="60.0" prefWidth="279.0" promptText="Enter Username" text="Enter Username" />
-      <TextField fx:id="prompt" layoutX="492.0" layoutY="429.0" prefHeight="31.0" prefWidth="143.0" visible="false" />
+      <TextField fx:id="prompt" layoutX="504.0" layoutY="452.0" prefHeight="31.0" prefWidth="143.0" visible="false" />
+      <TextField fx:id="textFieldForUsername" layoutX="-274.0" layoutY="369.0" prefHeight="60.0" prefWidth="268.0" promptText="Enter Username" text="Enter Username" />
    </children>
 </AnchorPane>

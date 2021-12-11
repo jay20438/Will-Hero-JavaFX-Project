@@ -1,6 +1,5 @@
 package com.example.javafxproject;
 
-//import com.sun.tools.javac.util.Names;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -14,10 +13,8 @@ public class FxmlLoader {
     private Scene view;
     //private Names JavaFxProject;
 
-    public Scene getPage(String filename) {
+    public Scene getScene(String filename) {
         try{
-            //(HelloApplication.class.getResource("blank.fxml"));
-            //view = new Scene(fxmlLoader.load());
             URL fileUrl = HelloApplication.class.getResource(filename+".fxml");
             System.out.println(fileUrl);
             if(fileUrl == null){

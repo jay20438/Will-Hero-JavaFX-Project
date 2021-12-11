@@ -13,8 +13,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("playerInitiatedTnt.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("userLogin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1077, 527);
         staged = stage;
         stage.setTitle("Hello!");
         stage.setScene(scene);
