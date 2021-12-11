@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 public class SettingsPageView
 {
     private Scene scene2;
+    private static Scene scene4;
 
     @FXML
     private AnchorPane myAnchorPane;
@@ -41,12 +42,12 @@ public class SettingsPageView
 
 
 
-    FxmlLoader obj2 = new FxmlLoader();
+    static FxmlLoader obj4 = new FxmlLoader();
     public static void goToSettings(MouseEvent mouseEvent) {
-//        scene3 = obj2.getScene("SettingsPageView");
-//        if(scene3==null){
-//            System.out.println("it is null");
-//        }
-        //HelloApplication.setDifferentScene(scene3);
+        scene4 = obj4.getScene("SettingsPageView");
+        if(scene4==null){
+            System.out.println("it is null");
+        }
+        HelloApplication.setDifferentScene(scene4);
     }
 }
