@@ -4,11 +4,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx4.SettingsPageView">
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx2.SettingsPageView">
    <children>
       <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
          <image>
-            <Image url="@WillHeroImages/backGround.png" />
+            <Image url="@WillHeroImages/Background.jpeg" />
          </image>
       </ImageView>
       <ImageView fitHeight="273.0" fitWidth="368.0" layoutX="14.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
@@ -26,7 +26,7 @@
             <Image url="@WillHeroImages/LongIsland.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="56.0" fitWidth="71.0" layoutX="166.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player" fitHeight="56.0" fitWidth="71.0" layoutX="166.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/PlayerNew.png" />
          </image>
@@ -36,17 +36,17 @@
             <Image url="@WillHeroImages/TreasureBox1.PNG" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="259.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc1" fitHeight="62.0" fitWidth="61.0" layoutX="259.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="796.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc3" fitHeight="62.0" fitWidth="61.0" layoutX="796.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="62.0" fitWidth="61.0" layoutX="494.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc2" fitHeight="62.0" fitWidth="61.0" layoutX="494.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/GreenOrcNew.png" />
          </image>
