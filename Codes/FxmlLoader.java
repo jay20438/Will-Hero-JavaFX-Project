@@ -1,4 +1,4 @@
-package com.example.javafxproject;
+package com.example.willherojavafxproject;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,7 +18,7 @@ public class FxmlLoader {
             URL fileUrl = HelloApplication.class.getResource(filename+".fxml");
             System.out.println(fileUrl);
             if(fileUrl == null){
-                throw new java.io.FileNotFoundException("fxml file can not be found");
+                throw new FileNotFoundException("fxml file can not be found");
             }
             FXMLLoader fxmlLoader = new FXMLLoader(fileUrl);
             view  = new Scene(fxmlLoader.load());

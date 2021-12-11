@@ -1,4 +1,4 @@
-package com.example.javafxproject;
+package com.example.willherojavafxproject;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -38,8 +38,8 @@ public class Homepage implements Initializable {
     }
 
     @FXML
-    void showSettings(MouseEvent event) {
-        HelloApplication.setDifferentScene(fxmlLoader.getScene("settings"));
+    void goToSettings(MouseEvent event) {
+        HelloApplication.setDifferentScene(fxmlLoader.getScene("SettingsPageView"));
     }
 
     @FXML

@@ -1,4 +1,4 @@
-package com.example.javafxproject;
+package com.example.willherojavafxproject;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -53,12 +53,12 @@ public class UserLogin implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         t1.setNode(lock);
-        t1.setDuration(Duration.millis(1000));
+        t1.setDuration(Duration.millis(2000));
         t1.setCycleCount(1);
         t1.setByX(-400);
         t1.play();
         t2.setNode(textFieldForUsername);
-        t2.setDuration(Duration.millis(1000));
+        t2.setDuration(Duration.millis(2000));
         t2.setCycleCount(1);
         t2.setByX(670);
         t2.play();
