@@ -1,4 +1,4 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -90,7 +90,7 @@ public class PlayerFallsInAbyss implements Initializable {
         //System.out.println("move");
 //        System.out.println("hi3");
         //myImage.setX(x+=100);
-        scene = obj.getPage("PlayerWithTNT");
+        scene = obj.getScene("PlayerWithTNT");
         if(scene==null){
             System.out.println("it is null");
         }
@@ -100,7 +100,7 @@ public class PlayerFallsInAbyss implements Initializable {
     FxmlLoader obj2 = new FxmlLoader();
 
     public void goToSettings(MouseEvent mouseEvent) {
-        scene3 = obj2.getPage("SettingsPageView.fxml");
+        scene3 = obj2.getScene("SettingsPageView.fxml");
         if(scene3==null){
             System.out.println("it is null");
         }
