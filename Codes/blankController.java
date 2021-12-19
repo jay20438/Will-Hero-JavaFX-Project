@@ -1,12 +1,12 @@
 package com.example.willherojavafxproject;
 import java.net.URL;
-import java.util.Random;
-import java.util.Timer;
+import java.util.*;
 
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,18 +15,22 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import java.util.ResourceBundle;
-
 public class blankController implements Initializable {
     private Random random;
     static TranslateTransition translateTransition;
     private String[] namesOfIslands;
+    private int[] widthOfIslands;
+    private int[] heightOfIslands;
+    private int[] depthOfBaseOfIslands;
+    private int nOfClick;
 
 
     public blankController(){
-        random = new Random();
         translateTransition = new TranslateTransition();
-        namesOfIslands = new String[]{"4treesIsland", "4treesIsland2", "4treesIsland3", "SideIsland"};
+        widthOfIslands = new int[]{316, 381, 426, 563, 343, 403};
+        heightOfIslands = new int[]{288, 270, 260, 260, 297, 168};
+        depthOfBaseOfIslands = new int[]{108, 108, 122, 87, 144, 57};
+        nOfClick = 0;
     }
 
 
@@ -54,99 +58,108 @@ public class blankController implements Initializable {
     @FXML
     private ImageView player;
 
+    @FXML
+    private Group contIsland2;
+
+    @FXML
+    private Group contIsland1;
+
+    @FXML
+    private Group contIsland3;
+
+    @FXML
+    private Group contIsland4;
+
+    @FXML
+    private Group contIsland5;
+
+    @FXML
+    private Group contIsland6;
+
+    @FXML
+    private Group contPlayer;
+
+    @FXML
+    private ImageView tnt;
 
 
     @FXML
     void moveContent(MouseEvent event) throws FileNotFoundException {
-        island1.setLayoutX(island1.getLayoutX()-70);
-        island2.setLayoutX(island2.getLayoutX()-70);
-        island3.setLayoutX(island3.getLayoutX()-70);
-        island4.setLayoutX(island4.getLayoutX()-70);
-        island5.setLayoutX(island5.getLayoutX()-70);
-        island6.setLayoutX(island6.getLayoutX()-70);
-        double temp =  player.getLayoutY() + player.getFitHeight();
-        double temp2 = -1.0;
-        if (temp==island1.getLayoutY()){
-            temp2 = island1.getLayoutY();
+        nOfClick += 1;
+//        System.out.println("s-------------");
+//        System.out.println("xcoordinate1:" + contIsland1.getLayoutX() + " width:" + contIsland1.getBoundsInParent().getWidth());
+//        System.out.println("xcoordinate2:" + contIsland2.getLayoutX() + " width:" + contIsland2.getBoundsInParent().getWidth());
+//        System.out.println("xcoordinate3:" + contIsland3.getLayoutX() + " width:" + contIsland3.getBoundsInParent().getWidth());
+//        System.out.println("xcoordinate4:" + contIsland4.getLayoutX());
+//        System.out.println("xcoordinate5:" + contIsland5.getLayoutX());
+//        System.out.println("xcoordinate6:" + contIsland6.getLayoutX());
+//        System.out.println("e------------");
+        contIsland1.setLayoutX(contIsland1.getLayoutX()-100);
+        contIsland2.setLayoutX(contIsland2.getLayoutX()-100);
+        contIsland3.setLayoutX(contIsland3.getLayoutX()-100);
+        contIsland4.setLayoutX(contIsland4.getLayoutX()-100);
+        contIsland5.setLayoutX(contIsland5.getLayoutX()-100);
+        contIsland6.setLayoutX(contIsland6.getLayoutX()-100);
+        if((int)(contIsland3.getLayoutX() + contIsland3.getBoundsInParent().getWidth()) < 20){
+            createIsland(1);
         }
-        if (temp==island2.getLayoutY()){
-            temp2 = island2.getLayoutY();
+        if((int)(contIsland6.getLayoutX() + contIsland6.getBoundsInParent().getWidth()) < 20){
+            createIsland(4);
         }
-        if (temp==island3.getLayoutY()){
-            temp2 = island3.getLayoutY();
-        }
-        if (temp==island4.getLayoutY()){
-            temp2 = island4.getLayoutY();
-        }
-        if (temp==island5.getLayoutY()){
-            temp2 = island5.getLayoutY();
-        }
-        if (temp==island6.getLayoutY()){
-            temp2 = island6.getLayoutY();
-        }
-        if(temp2!=-1.0){
-            translateTransition.setFromY(temp2);
-            translateTransition.setToY(temp2-90.0);
-        }
-        if((int)(island3.getLayoutX() + island3.getFitWidth()) < 20){
-            createIsland(island1, island2, island3);
-        }
-        if((int)(island6.getLayoutX() + island6.getFitWidth()) < 20){
-            createIsland(island4, island5, island6);
-        }
+        checkCollision();
     }
 
-    public void createIsland(ImageView imageView1, ImageView imageView2, ImageView imageView3) throws FileNotFoundException {
-        Image image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[random.nextInt(0, 4)] +".png"));
-        Image image2 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[random.nextInt(0, 4)] +".png"));
-        Image image3 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[random.nextInt(0, 4)] +".png"));
-        imageView1.setImage(image1);
-        imageView2.setImage(image2);
-        imageView3.setImage(image3);
-        imageView1.setLayoutX(imageView1.getLayoutX()+2134);
-        imageView2.setLayoutX(imageView2.getLayoutX()+2134);
-        imageView3.setLayoutX(imageView3.getLayoutX()+2134);
-        image1 = null;
-        image2 = null;
-        image3 = null;
-
+    public void createIsland(int identifier) throws FileNotFoundException {
+        if(identifier==1){
+            contIsland1.setLayoutX(contIsland6.getLayoutX()+ contIsland6.getBoundsInParent().getWidth() + 250);
+            contIsland2.setLayoutX(contIsland1.getLayoutX()+ contIsland1.getBoundsInParent().getWidth() + 250);
+            contIsland3.setLayoutX(contIsland2.getLayoutX()+ contIsland2.getBoundsInParent().getWidth() + 250);
+        }else{
+            contIsland4.setLayoutX(contIsland3.getLayoutX()+ contIsland3.getBoundsInParent().getWidth()  + 250);
+            contIsland5.setLayoutX(contIsland4.getLayoutX()+ contIsland4.getBoundsInParent().getWidth() + 250);
+            contIsland6.setLayoutX(contIsland5.getLayoutX() + contIsland5.getBoundsInParent().getWidth() + 250);
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        translateTransition.setNode(player);
+        translateTransition.setNode(contPlayer);
         translateTransition.setDuration(Duration.millis(700));
         translateTransition.setCycleCount(Animation.INDEFINITE);
         translateTransition.setByY(-90);
         translateTransition.setAutoReverse(true);
         translateTransition.play();
-    }
 
-    public ImageView getPlayerM(){
-        return player;
-    }
-
-    public ImageView getIsland1(){
-        return island1;
-    }
-    public ImageView getIsland2(){
-        return island2;
-    }
-    public ImageView getIsland3(){
-        return island3;
-    }
-    public ImageView getIsland4(){
-        return island4;
-
-    }
-    public ImageView getIsland5(){
-        return island5;
-    }
-    public ImageView getIsland6(){
-        return island6;
     }
 
 
+
+    public void checkCollision(){
+//        if(player.getLayoutX()>= tnt.getLayoutX() && player.getLayoutY()<= tnt.getLayoutY()){
+//            Image image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "tntInitiated.png"));
+//            tnt.setImage(image1);
+//            startTimer();
+//        }
+    }
+
+    public void startTimer(){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                Image image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "tntFire.png"));
+                tnt.setImage(image1);
+                tnt.setFitWidth(300);
+                tnt.setFitHeight(100);
+
+                if(player.getLayoutX()>= tnt.getLayoutX() && (player.getLayoutX()+ player.getFitWidth())<tnt.getLayoutX() && (player.getLayoutY()+ player.getFitHeight())< tnt.getLayoutY()){
+                    image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "playerBurnt.png"));
+                    player.setImage(image1);
+               }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 2000, 10);
+    }
 }
 
 
