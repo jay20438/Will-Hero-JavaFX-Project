@@ -4,12 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class Orc {
+public class Enemy {
 
     private Image image;
     private ImageView imageView;
 
-    public Orc(double x, double y, double height, double width){
+    public Enemy(double x, double y, double height, double width){
         image = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "GreenOrcNew.png"));
         imageView = new ImageView();
         imageView.setImage(image);
