@@ -21,11 +21,6 @@
                </image>
             </ImageView>
             <TextField fx:id="tf1" text="4treesIsland3" visible="false" />
-            <ImageView fx:id="player" fitHeight="93.0" fitWidth="49.0" layoutX="36.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/PlayerNew.png" />
-               </image>
-            </ImageView>
          </children></Group>
       <Group fx:id="contIsland2" layoutX="675.0" layoutY="237.0">
          <children>
@@ -80,6 +75,16 @@
                </image>
             </ImageView>
             <TextField fx:id="tf6" layoutX="89.0" layoutY="14.0" text="LongIsland" visible="false" />
+         </children>
+      </Group>
+      <Group fx:id="contPlayer" layoutX="156.0" layoutY="63.0">
+         <children>
+            <ImageView fitHeight="336.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player" fitHeight="93.0" fitWidth="49.0" layoutX="-1.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/PlayerNew.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
    </children>

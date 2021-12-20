@@ -33,7 +33,7 @@ public class blankController implements Initializable {
         random = new Random();
         widthOfIslands = new HashMap<>();
         heightOfIslands = new HashMap<>();
-//        depthOfIslands = new HashMap<>();
+        depthOfIslands = new HashMap<>();
 //        depthOfBaseIslands
         translateTransition = new TranslateTransition();
         namesOfIslands = new String[]{"4treesIsland", "4treesIsland2", "4treesIsland3", "SideIsland", "LongIsland", "doubleIsland"};
@@ -142,36 +142,36 @@ public class blankController implements Initializable {
             contIsland5.setLayoutX(contIsland5.getLayoutX() - 100);
             contIsland6.setLayoutX(contIsland6.getLayoutX() - 100);
 
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-
-                @Override
-                public void run() {
-                    double playerPos = player.getBoundsInParent().getMinX();
-                    if(playerPos>=contIsland1.getBoundsInParent().getMinX() && playerPos<=contIsland1.getBoundsInParent().getMaxX()){
-                        System.out.println("1");
-                        System.out.println(tf1.getText());
-                        System.out.println(depthOfIslands.get(tf1.getText()));
-                        makeChangesToTranslate(contIsland1.getBoundsInParent().getMinY(), depthOfIslands.get(tf1.getText()));
-                    }else if(playerPos>=contIsland2.getBoundsInParent().getMinX() && playerPos<=contIsland2.getBoundsInParent().getMaxX()){
-                        System.out.println("2");
-                        makeChangesToTranslate(contIsland2.getBoundsInParent().getMinY(), depthOfIslands.get(tf2.getText()));
-                    }else if(playerPos>=contIsland3.getBoundsInParent().getMinX() && playerPos<=contIsland3.getBoundsInParent().getMaxX()){
-                        System.out.println("3");
-                        makeChangesToTranslate(contIsland3.getBoundsInParent().getMinY(), depthOfIslands.get(tf3.getText()));
-                    }else if(playerPos>=contIsland4.getBoundsInParent().getMinX() && playerPos<=contIsland4.getBoundsInParent().getMaxX()){
-                        System.out.println("4");
-                        makeChangesToTranslate(contIsland4.getBoundsInParent().getMinY(), depthOfIslands.get(tf4.getText()));
-                    }else if(playerPos>=contIsland5.getBoundsInParent().getMinX() && playerPos<=contIsland5.getBoundsInParent().getMaxX()){
-                        System.out.println("5");
-                        makeChangesToTranslate(contIsland5.getBoundsInParent().getMinY(), depthOfIslands.get(tf5.getText()));
-                    }else if(playerPos>=contIsland6.getBoundsInParent().getMinX() && playerPos<=contIsland6.getBoundsInParent().getMaxX()){
-                        System.out.println("6");
-                        makeChangesToTranslate(contIsland6.getBoundsInParent().getMinY(), depthOfIslands.get(tf6.getText()));
-                    }
-                }
-            };
-            timer.scheduleAtFixedRate(task, 12, 10);
+//            Timer timer = new Timer();
+//            TimerTask task = new TimerTask() {
+//
+//                @Override
+//                public void run() {
+//                    double playerPos = contPlayer.getBoundsInParent().getMinX();
+//                    if(playerPos>=contIsland1.getBoundsInParent().getMinX() && playerPos<=contIsland1.getBoundsInParent().getMaxX()){
+//                        System.out.println("1");
+//                        System.out.println(tf1.getText());
+//                        System.out.println(depthOfIslands.get(tf1.getText()));
+//                        makeChangesToTranslate(contIsland1.getBoundsInParent().getMinY(), depthOfIslands.get(tf1.getText()));
+//                    }else if(playerPos>=contIsland2.getBoundsInParent().getMinX() && playerPos<=contIsland2.getBoundsInParent().getMaxX()){
+//                        System.out.println("2");
+//                        makeChangesToTranslate(contIsland2.getBoundsInParent().getMinY(), depthOfIslands.get(tf2.getText()));
+//                    }else if(playerPos>=contIsland3.getBoundsInParent().getMinX() && playerPos<=contIsland3.getBoundsInParent().getMaxX()){
+//                        System.out.println("3");
+//                        makeChangesToTranslate(contIsland3.getBoundsInParent().getMinY(), depthOfIslands.get(tf3.getText()));
+//                    }else if(playerPos>=contIsland4.getBoundsInParent().getMinX() && playerPos<=contIsland4.getBoundsInParent().getMaxX()){
+//                        System.out.println("4");
+//                        makeChangesToTranslate(contIsland4.getBoundsInParent().getMinY(), depthOfIslands.get(tf4.getText()));
+//                    }else if(playerPos>=contIsland5.getBoundsInParent().getMinX() && playerPos<=contIsland5.getBoundsInParent().getMaxX()){
+//                        System.out.println("5");
+//                        makeChangesToTranslate(contIsland5.getBoundsInParent().getMinY(), depthOfIslands.get(tf5.getText()));
+//                    }else if(playerPos>=contIsland6.getBoundsInParent().getMinX() && playerPos<=contIsland6.getBoundsInParent().getMaxX()){
+//                        System.out.println("6");
+//                        makeChangesToTranslate(contIsland6.getBoundsInParent().getMinY(), depthOfIslands.get(tf6.getText()));
+//                    }
+//                }
+//            };
+//            timer.scheduleAtFixedRate(task, 12, 10);
 
             if ((int) (contIsland3.getLayoutX() + island3.getFitWidth()) < 20) {
                 createIsland(1, island1, island2, island3);
