@@ -1,4 +1,4 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 import java.net.URL;
 import java.util.*;
 
@@ -17,10 +17,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class blankController implements Initializable {
+    private final TranslateTransition translate2;
+    private final TranslateTransition translate3;
+    private final TranslateTransition translate4;
+    private final TranslateTransition translate5;
     private Random random;
     private HashMap<String, Integer> widthOfIslands;
     private HashMap<String, Integer> heightOfIslands;
-    private HashMap<String, Integer> depthOfIslands;
+    private HashMap<String, Integer> depthOfBaseOfIslands;
+    private HashMap<String, Integer> widthOfEntities;
+    private HashMap<String, Integer> heightOfEntities;
     static TranslateTransition translateTransition;
     private String[] namesOfIslands;
     //private int[] widthOfIslands;
@@ -31,10 +37,16 @@ public class blankController implements Initializable {
 
 
     public blankController(){
+        translate2 = new TranslateTransition();
+        translate3 = new TranslateTransition();
+        translate4 = new TranslateTransition();
+        translate5 = new TranslateTransition();
         random = new Random();
         widthOfIslands = new HashMap<>();
         heightOfIslands = new HashMap<>();
-        depthOfIslands = new HashMap<>();
+        depthOfBaseOfIslands = new HashMap<>();
+        heightOfEntities = new HashMap<>();
+        widthOfEntities = new HashMap<>();
 //        depthOfBaseIslands
         translateTransition = new TranslateTransition();
         namesOfIslands = new String[]{"4treesIsland", "4treesIsland2", "4treesIsland3", "SideIsland", "LongIsland", "doubleIsland"};
@@ -50,18 +62,30 @@ public class blankController implements Initializable {
         heightOfIslands.put("SideIsland", 260);
         heightOfIslands.put("LongIsland", 168);
         heightOfIslands.put("doubleIsland", 260);
-        depthOfIslands.put("4treesIsland", 144);
-        depthOfIslands.put("4treesIsland2", 108);
-        depthOfIslands.put("4treesIsland3", 108);
-        depthOfIslands.put("SideIsland", 122);
-        depthOfIslands.put("LongIsland", 57);
-        depthOfIslands.put("doubleIsland", 87);
+        depthOfBaseOfIslands.put("4treesIsland", 144);
+        depthOfBaseOfIslands.put("4treesIsland2", 108);
+        depthOfBaseOfIslands.put("4treesIsland3", 108);
+        depthOfBaseOfIslands.put("SideIsland", 122);
+        depthOfBaseOfIslands.put("LongIsland", 57);
+        depthOfBaseOfIslands.put("doubleIsland", 87);
+        heightOfEntities.put("greenOrc",62);
+        widthOfEntities.put("greenOrc",61);
+        heightOfEntities.put("redOrc",62);
+        widthOfEntities.put("redOrc",61);
+        heightOfEntities.put("TNT",56);
+        widthOfEntities.put("TNT",60);
+        heightOfEntities.put("closedChest",80);
+        widthOfEntities.put("closedChest",60);
+        heightOfEntities.put("openChest",80);
+        widthOfEntities.put("openChest",60);
+        heightOfEntities.put("coin",48);
+        widthOfEntities.put("coin",32);
         nOfClick = 0;
     }
 
 
     @FXML
-    private ImageView background;
+    private ImageView backGround;
 
     @FXML
     private ImageView island1;
@@ -83,6 +107,18 @@ public class blankController implements Initializable {
 
     @FXML
     private ImageView player;
+
+    @FXML
+    private ImageView greenOrc1;
+
+    @FXML
+    private ImageView greenOrc2;
+
+    @FXML
+    private ImageView redOrc1;
+
+    @FXML
+    private ImageView redOrc2;
 
     @FXML
     private Group contIsland2;
@@ -153,9 +189,9 @@ public class blankController implements Initializable {
     }
 
     public void createIsland(int identifier, ImageView imageView1, ImageView imageView2, ImageView imageView3) throws FileNotFoundException {
-        randNo1 = random.nextInt(0, 6);
-        randNo2 = random.nextInt(0, 6);
-        randNo3 = random.nextInt(0, 6);
+        randNo1 = random.nextInt( 6);
+        randNo2 = random.nextInt(6);
+        randNo3 = random.nextInt(6);
         Image image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo1] +".png"));
         Image image2 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo2] +".png"));
         Image image3 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo3] +".png"));
@@ -199,6 +235,36 @@ public class blankController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        translate2.setNode(greenOrc1);
+        translate2.setDuration(Duration.millis(1050));
+        translate2.setCycleCount(TranslateTransition.INDEFINITE);
+        translate2.setByY(-50);
+        translate2.setAutoReverse(true);
+        translate2.play();
+
+        translate3.setNode(greenOrc2);
+        translate3.setDuration(Duration.millis(1000));
+        translate3.setCycleCount(TranslateTransition.INDEFINITE);
+        translate3.setByY(-50);
+        translate3.setAutoReverse(true);
+        translate3.play();
+
+
+        translate4.setNode(redOrc1);
+        translate4.setDuration(Duration.millis(1050));
+        translate4.setCycleCount(TranslateTransition.INDEFINITE);
+        translate4.setByY(-50);
+        translate4.setAutoReverse(true);
+        translate4.play();
+
+        translate5.setNode(redOrc2);
+        translate5.setDuration(Duration.millis(1000));
+        translate5.setCycleCount(TranslateTransition.INDEFINITE);
+        translate5.setByY(-50);
+        translate5.setAutoReverse(true);
+        translate5.play();
+
     }
 
 //    public void makeChangesToTranslate(double start, int depth){
@@ -214,51 +280,51 @@ public class blankController implements Initializable {
             public void run() {
                 double playerPos = contPlayer.getBoundsInParent().getMinY();
 
-                    if(playerPos>=contIsland1.getBoundsInParent().getMinX() && playerPos<=contIsland1.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY()>(contIsland1.getBoundsInParent().getMinY() + depthOfIslands.get(tf1.getText()))){
-                        if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland1.getBoundsInParent().getMinY() + depthOfIslands.get(tf1.getText()))){
-                            flag = true;
-                        }else{
-                            playerFalls = true;
-                        }
-
-                    }else if(playerPos>=contIsland2.getBoundsInParent().getMinX() && playerPos<=contIsland2.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland2.getBoundsInParent().getMinY() + depthOfIslands.get(tf2.getText())) ){
-                        if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland2.getBoundsInParent().getMinY() + depthOfIslands.get(tf2.getText()))){
-                            flag = true;
-                        }else{
-                            playerFalls = true;
-                        }
-//                        makeChangesToTranslate(contIsland2.getBoundsInParent().getMinY(), depthOfIslands.get(tf2.getText()));
-                    }else if(playerPos>=contIsland3.getBoundsInParent().getMinX() && playerPos<=contIsland3.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland3.getBoundsInParent().getMinY() + depthOfIslands.get(tf3.getText()))){
-                        if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland3.getBoundsInParent().getMinY() + depthOfIslands.get(tf3.getText()))){
-                            flag = true;
-                        }else{
-                            playerFalls = true;
-                        }
-//                        makeChangesToTranslate(contIsland3.getBoundsInParent().getMinY(), depthOfIslands.get(tf3.getText()));
-                    }else if(playerPos>=contIsland4.getBoundsInParent().getMinX() && playerPos<=contIsland4.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland4.getBoundsInParent().getMinY() + depthOfIslands.get(tf4.getText()))){
-                        if( contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland4.getBoundsInParent().getMinY() + depthOfIslands.get(tf4.getText()))){
-                            flag = true;
-                        }else{
-                            playerFalls = true;
-                        }
-//                        makeChangesToTranslate(contIsland4.getBoundsInParent().getMinY(), depthOfIslands.get(tf4.getText()));
-                    }else if(playerPos>=contIsland5.getBoundsInParent().getMinX() && playerPos<=contIsland5.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland5.getBoundsInParent().getMinY() + depthOfIslands.get(tf5.getText())) ){
-
-                        if( contPlayer.getBoundsInParent().getMaxY()<(50+ contIsland5.getBoundsInParent().getMinY() + depthOfIslands.get(tf5.getText()))){
-                            flag = true;
-                        }else{
-                            playerFalls = true;
-                        }
-                    }else if(playerPos>=contIsland6.getBoundsInParent().getMinX() && playerPos<=contIsland6.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland6.getBoundsInParent().getMinY() + depthOfIslands.get(tf6.getText()))&& contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland6.getBoundsInParent().getMinY() + depthOfIslands.get(tf6.getText()))){
-                        if( contPlayer.getBoundsInParent().getMaxY()<(50+ contIsland6.getBoundsInParent().getMinY() + depthOfIslands.get(tf6.getText()))){
-                            flag = true;
-                        }else{
-                            playerFalls = true;
-                        }
+                if(playerPos>=contIsland1.getBoundsInParent().getMinX() && playerPos<=contIsland1.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY()>(contIsland1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))){
+                    if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
                     }
-                     if(flag){
-                         for (int i = 0; i < 10; i++) {
-                            contPlayer.setLayoutY(contPlayer.getBoundsInParent().getMinY()-10);
+
+                }else if(playerPos>=contIsland2.getBoundsInParent().getMinX() && playerPos<=contIsland2.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText())) ){
+                    if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+//                        makeChangesToTranslate(contIsland2.getBoundsInParent().getMinY(), depthOfIslands.get(tf2.getText()));
+                }else if(playerPos>=contIsland3.getBoundsInParent().getMinX() && playerPos<=contIsland3.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))){
+                    if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+//                        makeChangesToTranslate(contIsland3.getBoundsInParent().getMinY(), depthOfIslands.get(tf3.getText()));
+                }else if(playerPos>=contIsland4.getBoundsInParent().getMinX() && playerPos<=contIsland4.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))){
+                    if( contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+//                        makeChangesToTranslate(contIsland4.getBoundsInParent().getMinY(), depthOfIslands.get(tf4.getText()));
+                }else if(playerPos>=contIsland5.getBoundsInParent().getMinX() && playerPos<=contIsland5.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText())) ){
+
+                    if( contPlayer.getBoundsInParent().getMaxY()<(50+ contIsland5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+                }else if(playerPos>=contIsland6.getBoundsInParent().getMinX() && playerPos<=contIsland6.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))&& contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))){
+                    if( contPlayer.getBoundsInParent().getMaxY()<(50+ contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+                }
+                if(flag){
+                    for (int i = 0; i < 10; i++) {
+                        contPlayer.setLayoutY(contPlayer.getBoundsInParent().getMinY()-10);
                     }
                 }
                 else{
@@ -273,5 +339,4 @@ public class blankController implements Initializable {
     }
 
 }
-
 
