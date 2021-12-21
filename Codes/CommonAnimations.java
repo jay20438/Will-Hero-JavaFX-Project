@@ -7,8 +7,9 @@ import javafx.util.Duration;
 
 public class CommonAnimations {
 
-    static public TranslateTransition makeYTranslationalObj(int from, int to, boolean autoReverse, Duration duration){
+    static public TranslateTransition makeYTranslationalObj(ImageView imageView, int from, int to, boolean autoReverse, Duration duration){
         TranslateTransition translateTransition = new TranslateTransition();
+        translateTransition.setNode(imageView);
         translateTransition.setDuration(duration);
         translateTransition.setAutoReverse(autoReverse);
         translateTransition.setToY(to);
@@ -30,5 +31,9 @@ public class CommonAnimations {
     static public void replaceImageView(String newImage, ImageView imageView){
         Image image = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ newImage + ".png"));
         imageView.setImage(image);
+    }
+
+    static public void loadIamge(String imageName){
+
     }
 }
