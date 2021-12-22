@@ -46,11 +46,11 @@
             <children>
                 <ImageView fx:id="island3" fitHeight="260.0" fitWidth="426.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@WillHeroImages/SideIsland.png" />
+                        <Image url="@../../../../../../target/classes/com/example/javafx2/WillHeroImages/SideIsland.png" />
                     </image>
                 </ImageView>
                 <TextField fx:id="tf3" layoutX="141.0" layoutY="26.0" text="SideIsland" visible="false" />
-            <ImageView fitHeight="56.0" fitWidth="60.0" layoutX="124.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="56.0" fitWidth="60.0" layoutX="124.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/TNT.png" />
                </image>
@@ -109,9 +109,9 @@
         </Group>
         <Group fx:id="contIsland6" layoutX="2600.0" layoutY="399.0">
             <children>
-                <ImageView fx:id="island6" fitHeight="168.0" fitWidth="403.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="island6" fitHeight="283.0" fitWidth="480.0" layoutX="-55.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@WillHeroImages/LongIsland.png" />
+                        <Image url="@../../../../../../target/classes/com/example/javafx2/WillHeroImages/LongIsland.png" />
                     </image>
                 </ImageView>
                 <TextField fx:id="tf6" layoutX="89.0" layoutY="14.0" text="LongIsland" visible="false" />
