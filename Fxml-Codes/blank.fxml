@@ -106,7 +106,7 @@
             <children>
                 <ImageView fx:id="island6" fitHeight="283.0" fitWidth="480.0" layoutX="-55.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../../../target/classes/com/example/javafx2/WillHeroImages/LongIsland.png" />
+                        <Image url="@WillHeroImages/LongIsland.png" />
                     </image>
                 </ImageView>
                 <TextField fx:id="tf6" layoutX="89.0" layoutY="14.0" text="LongIsland" visible="false" />
