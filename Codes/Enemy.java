@@ -1,5 +1,6 @@
 package com.example.willherojavafxproject;
 
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -13,7 +14,7 @@ public abstract class Enemy {
     private double height;
     private double width;
 
-    public Enemy(String imageName, double x, double y, double height, double width){
+    public Enemy(String imageName, Group gp, double x, double y, double height, double width){
 //        image = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "GreenOrcNew.png"));
 //        imageView = new ImageView();
 //        imageView.setImage(image);
@@ -21,11 +22,15 @@ public abstract class Enemy {
 //        imageView.setFitWidth(width);
 //        imageView.setLayoutX(x);
 //        imageView.setLayoutY(y);
-        this.x = x;
-        this.y = y;
-        this.height = height;
-        this.width = width;
+        System.out.println("in enemy");
+//        this.x = x;
+//        this.y = y;
+//        this.height = height;
+//        this.width = width;
         imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        //gp.getChildren().add(imageView);
+        System.out.println("in enemy :" + imageView.getBoundsInParent().getMinY());
+        System.out.println(gp.getId());
         imageView.setPreserveRatio(true);
     }
 
