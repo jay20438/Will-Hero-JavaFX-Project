@@ -1,24 +1,32 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 import java.net.URL;
 import java.util.*;
 
+import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class blankController implements Initializable {
+    private final TranslateTransition translate2;
+    private final TranslateTransition translate3;
+    private final TranslateTransition translate4;
+    private final TranslateTransition translate5;
     private Random random;
     private HashMap<String, Integer> widthOfIslands;
     private HashMap<String, Integer> heightOfIslands;
     private HashMap<String, Integer> depthOfBaseOfIslands;
+    private HashMap<String, Integer> widthOfEntities;
+    private HashMap<String, Integer> heightOfEntities;
     static TranslateTransition translateTransition;
     private String[] namesOfIslands;
     //private int[] widthOfIslands;
@@ -26,18 +34,24 @@ public class blankController implements Initializable {
     //private int[] depthOfBaseOfIslands;
     boolean playerFalls = false;
     private int nOfClick;
-    CreateEntity createEntity;
 
 
     public blankController(){
+        translate2 = new TranslateTransition();
+        translate3 = new TranslateTransition();
+        translate4 = new TranslateTransition();
+        translate5 = new TranslateTransition();
         random = new Random();
         widthOfIslands = new HashMap<>();
         heightOfIslands = new HashMap<>();
         depthOfBaseOfIslands = new HashMap<>();
+        heightOfEntities = new HashMap<>();
+        widthOfEntities = new HashMap<>();
+//        depthOfBaseIslands
         translateTransition = new TranslateTransition();
         namesOfIslands = new String[]{"4treesIsland", "4treesIsland2", "4treesIsland3", "SideIsland", "LongIsland", "doubleIsland"};
         widthOfIslands.put("4treesIsland", 343);
-        widthOfIslands.put("4treesIsland2", 343);
+        widthOfIslands.put("4treesIsland2", 381);
         widthOfIslands.put("4treesIsland3", 316);
         widthOfIslands.put("SideIsland", 426);
         widthOfIslands.put("LongIsland", 403);
@@ -54,12 +68,24 @@ public class blankController implements Initializable {
         depthOfBaseOfIslands.put("SideIsland", 122);
         depthOfBaseOfIslands.put("LongIsland", 57);
         depthOfBaseOfIslands.put("doubleIsland", 87);
+        heightOfEntities.put("greenOrc",62);
+        widthOfEntities.put("greenOrc",61);
+        heightOfEntities.put("redOrc",62);
+        widthOfEntities.put("redOrc",61);
+        heightOfEntities.put("TNT",56);
+        widthOfEntities.put("TNT",60);
+        heightOfEntities.put("closedChest",80);
+        widthOfEntities.put("closedChest",60);
+        heightOfEntities.put("openChest",80);
+        widthOfEntities.put("openChest",60);
+        heightOfEntities.put("coin",48);
+        widthOfEntities.put("coin",32);
         nOfClick = 0;
     }
 
 
     @FXML
-    private ImageView background;
+    private ImageView backGround;
 
     @FXML
     private ImageView island1;
@@ -81,6 +107,18 @@ public class blankController implements Initializable {
 
     @FXML
     private ImageView player;
+
+    @FXML
+    private ImageView greenOrc1;
+
+    @FXML
+    private ImageView greenOrc2;
+
+    @FXML
+    private ImageView redOrc1;
+
+    @FXML
+    private ImageView redOrc2;
 
     @FXML
     private Group contIsland2;
@@ -131,7 +169,6 @@ public class blankController implements Initializable {
     @FXML
     void moveContent(MouseEvent event) throws FileNotFoundException {
         nOfClick += 1;
-//        System.out.println(contIsland1.getChildren().get(1).getId());
         if(nOfClick>122){
             player.setLayoutX(player.getLayoutX() + 100);
         }else if(!playerFalls) {
@@ -144,57 +181,21 @@ public class blankController implements Initializable {
 
             if ((int) (contIsland3.getLayoutX() + island3.getFitWidth()) < 20) {
                 createIsland(1, island1, island2, island3);
-                CreateEntity createEntity1 = new CreateEntity(contIsland1, this);
-                CreateEntity createEntity2 = new CreateEntity(contIsland2, this);
-                CreateEntity createEntity3 = new CreateEntity(contIsland3, this);
-                createEntity = new CreateEntity(contIsland1, this);
-                createEntity.create();
-                createEntity = new CreateEntity(contIsland2, this);
-                createEntity.create();
-                createEntity = new CreateEntity(contIsland3, this);
-                createEntity.create();
-//                Thread t1 = new Thread(createEntity1);
-//                Thread t2 = new Thread(createEntity2);
-//                Thread t3 = new Thread(createEntity3);
-//                t1.setDaemon(true);
-//                t2.setDaemon(true);
-//                t3.setDaemon(true);
-//                t1.start();
-//                t2.start();
-//                t3.start();
             }
-
             if ((int) (contIsland6.getLayoutX() + island6.getFitWidth()) < 20) {
-                 createIsland(4, island4, island5, island6);
-                createEntity = new CreateEntity(contIsland4, this);
-                createEntity.create();
-                createEntity = new CreateEntity(contIsland5, this);
-                createEntity.create();
-                createEntity = new CreateEntity(contIsland6, this);
-                createEntity.create();
-//                CreateEntity createEntity1 = new CreateEntity(contIsland4, this);
-//                CreateEntity createEntity2 = new CreateEntity(contIsland5, this);
-//                CreateEntity createEntity3 = new CreateEntity(contIsland6, this);
-//                Thread t4 = new Thread(createEntity1);
-//                Thread t5 = new Thread(createEntity2);
-//                Thread t6 = new Thread(createEntity3);
-//                t4.setDaemon(true);
-//                t5.setDaemon(true);
-//                t6.setDaemon(true);
-//                t4.start();
-//                t5.start();
-//                t6.start();
+                createIsland(4, island4, island5, island6);
             }
         }
     }
 
     public void createIsland(int identifier, ImageView imageView1, ImageView imageView2, ImageView imageView3) throws FileNotFoundException {
-        randNo1 = random.nextInt(0, 6);
-        randNo2 = random.nextInt(0, 6);
-        randNo3 = random.nextInt(0, 6);
+        randNo1 = random.nextInt( 6);
+        randNo2 = random.nextInt(6);
+        randNo3 = random.nextInt(6);
         Image image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo1] +".png"));
         Image image2 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo2] +".png"));
         Image image3 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo3] +".png"));
+//        System.out.println(image1.toString());
         imageView1.setImage(image1);
         imageView2.setImage(image2);
         imageView3.setImage(image3);
@@ -205,37 +206,71 @@ public class blankController implements Initializable {
         imageView2.setFitHeight(heightOfIslands.get(namesOfIslands[randNo2]));
         imageView3.setFitHeight(heightOfIslands.get(namesOfIslands[randNo3]));
         if(identifier==1){
-            int count = 0;
             tf1.setText(namesOfIslands[randNo1]);
             contIsland1.setLayoutX(contIsland6.getBoundsInParent().getMaxX() + 250);
-            //contIsland1.getChildren().remove(2, contIsland1.getChildren().size()-1);
             tf2.setText(namesOfIslands[randNo2]);
             contIsland2.setLayoutX(contIsland1.getBoundsInParent().getMaxX() + 300);
-//            contIsland2.getChildren().remove(2, contIsland2.getChildren().size()-1);
             tf3.setText(namesOfIslands[randNo3]);
             contIsland3.setLayoutX(contIsland2.getBoundsInParent().getMaxX() + 250);
-            //contIsland3.getChildren().remove(2, contIsland3.getChildren().size()-1);
         }else{
             tf4.setText(namesOfIslands[randNo1]);
             contIsland4.setLayoutX(contIsland3.getBoundsInParent().getMaxX()  + 250);
-            //contIsland4.getChildren().remove(2, contIsland4.getChildren().size()-1);
             tf5.setText(namesOfIslands[randNo2]);
             contIsland5.setLayoutX(contIsland4.getBoundsInParent().getMaxX() + 200);
-            //contIsland5.getChildren().remove(2, contIsland5.getChildren().size()-1);
             tf6.setText(namesOfIslands[randNo3]);
             contIsland6.setLayoutX(contIsland5.getBoundsInParent().getMaxX() + 250);
-            //contIsland6.getChildren().remove(2, contIsland6.getChildren().size()-1);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//        translateTransition.setNode(player);
+//        translateTransition.setDuration(Duration.millis(700));
+//        translateTransition.setCycleCount(Animation.INDEFINITE);
+//        translateTransition.setByY(-90);
+//        translateTransition.setAutoReverse(true);
+//        translateTransition.play();
         try {
             detect();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        translate2.setNode(greenOrc1);
+        translate2.setDuration(Duration.millis(1050));
+        translate2.setCycleCount(TranslateTransition.INDEFINITE);
+        translate2.setByY(-50);
+        translate2.setAutoReverse(true);
+        translate2.play();
+
+        translate3.setNode(greenOrc2);
+        translate3.setDuration(Duration.millis(1000));
+        translate3.setCycleCount(TranslateTransition.INDEFINITE);
+        translate3.setByY(-50);
+        translate3.setAutoReverse(true);
+        translate3.play();
+
+
+        translate4.setNode(redOrc1);
+        translate4.setDuration(Duration.millis(1050));
+        translate4.setCycleCount(TranslateTransition.INDEFINITE);
+        translate4.setByY(-50);
+        translate4.setAutoReverse(true);
+        translate4.play();
+
+        translate5.setNode(redOrc2);
+        translate5.setDuration(Duration.millis(1000));
+        translate5.setCycleCount(TranslateTransition.INDEFINITE);
+        translate5.setByY(-50);
+        translate5.setAutoReverse(true);
+        translate5.play();
+
     }
+
+//    public void makeChangesToTranslate(double start, int depth){
+//        translateTransition.setFromY(start + depth);
+//        translateTransition.setToY(start + depth - 90);
+//    }
 
     public void detect() throws InterruptedException {
         Timer timer1 = new Timer();
@@ -243,75 +278,65 @@ public class blankController implements Initializable {
             boolean flag = false;
             @Override
             public void run() {
-                double playerPosFront = contPlayer.getBoundsInParent().getMinX();
-                double playerPosLast = contPlayer.getBoundsInParent().getMaxX();
-                if(contPlayer.getBoundsInParent().getMaxY()>600){
-                    playerFalls = true;
-                }else {
-                    if (playerPosFront >= contIsland1.getBoundsInParent().getMinX() && playerPosLast <= contIsland1.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))) {
-//                        if (contPlayer.getBoundsInParent().getMaxY() > (10 + contIsland1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))) {
-//                            flag = true;
-//                        } else {
-//                            playerFalls = true;
-//                        }
-                        flag = true;
-                    } else if (playerPosFront >= contIsland2.getBoundsInParent().getMinX() && playerPosFront <= contIsland2.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))) {
-//                        if (contPlayer.getBoundsInParent().getMaxY() > (10 + contIsland2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))) {
-//                            flag = true;
-//                        } else {
-//                            playerFalls = true;
-//                        }
-                        flag = true;
-                    } else if (playerPosFront >= contIsland3.getBoundsInParent().getMinX() && playerPosFront <= contIsland3.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))) {
-//                        if (contPlayer.getBoundsInParent().getMaxY() > (10 + contIsland3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))) {
-//                            flag = true;
-//                        } else {
-//                            playerFalls = true;
-//                        }
-                        flag = true;
-                    } else if (playerPosFront >= contIsland4.getBoundsInParent().getMinX() && playerPosFront <= contIsland4.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))) {
-//                        if (contPlayer.getBoundsInParent().getMaxY() > (50 + contIsland4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))) {
-//                            flag = true;
-//                        } else {
-//                            playerFalls = true;
-//                        }
-                        flag = true;
-//                        makeChangesToTranslate(contIsland4.getBoundsInParent().getMinY(), depthOfBaseOfIslands.get(tf4.getText()));
-                    } else if (playerPosFront >= contIsland5.getBoundsInParent().getMinX() && playerPosFront <= contIsland5.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))) {
+                double playerPos = contPlayer.getBoundsInParent().getMinY();
 
-//                        if (contPlayer.getBoundsInParent().getMaxY() > (10 + contIsland5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))) {
-//                            flag = true;
-//                        } else {
-//                            playerFalls = true;
-//                        }
+                if(playerPos>=contIsland1.getBoundsInParent().getMinX() && playerPos<=contIsland1.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY()>(contIsland1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))){
+                    if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))){
                         flag = true;
-                    } else if (playerPosFront >= contIsland6.getBoundsInParent().getMinX() && playerPosFront <= contIsland6.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText())) && contPlayer.getBoundsInParent().getMaxY() < (50 + contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))) {
-//                        if (contPlayer.getBoundsInParent().getMaxY() > (10 + contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))) {
-//                            flag = true;
-//                        } else {
-//                            playerFalls = true;
-//                        }
-                        flag = true;
+                    }else{
+                        playerFalls = true;
                     }
-                    if (flag) {
-                        for (int i = 0; i < 10; i++) {
-                            contPlayer.setLayoutY(contPlayer.getBoundsInParent().getMinY() - 10);
-                        }
+
+                }else if(playerPos>=contIsland2.getBoundsInParent().getMinX() && playerPos<=contIsland2.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText())) ){
+                    if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+//                        makeChangesToTranslate(contIsland2.getBoundsInParent().getMinY(), depthOfIslands.get(tf2.getText()));
+                }else if(playerPos>=contIsland3.getBoundsInParent().getMinX() && playerPos<=contIsland3.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))){
+                    if(contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+//                        makeChangesToTranslate(contIsland3.getBoundsInParent().getMinY(), depthOfIslands.get(tf3.getText()));
+                }else if(playerPos>=contIsland4.getBoundsInParent().getMinX() && playerPos<=contIsland4.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))){
+                    if( contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+//                        makeChangesToTranslate(contIsland4.getBoundsInParent().getMinY(), depthOfIslands.get(tf4.getText()));
+                }else if(playerPos>=contIsland5.getBoundsInParent().getMinX() && playerPos<=contIsland5.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText())) ){
+
+                    if( contPlayer.getBoundsInParent().getMaxY()<(50+ contIsland5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
+                    }
+                }else if(playerPos>=contIsland6.getBoundsInParent().getMinX() && playerPos<=contIsland6.getBoundsInParent().getMaxX()&& contPlayer.getBoundsInParent().getMaxY()>(contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))&& contPlayer.getBoundsInParent().getMaxY()<(50 + contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))){
+                    if( contPlayer.getBoundsInParent().getMaxY()<(50+ contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))){
+                        flag = true;
+                    }else{
+                        playerFalls = true;
                     }
                 }
-                contPlayer.setLayoutY(contPlayer.getBoundsInParent().getMinY() + 10);
+                if(flag){
+                    for (int i = 0; i < 10; i++) {
+                        contPlayer.setLayoutY(contPlayer.getBoundsInParent().getMinY()-10);
+                    }
+                }
+                else{
+                    contPlayer.setLayoutY(playerPos + 10);
+
+                }
                 flag = false;
             }
         };
         timer1.scheduleAtFixedRate(task1, 0, 100);
+
     }
 
-    public double getDepthOfBaseOfIsland(Group gp){
-        System.out.println("tf in the group:" + gp.getChildren().get(1).getId());
-        TextField tf = (TextField) gp.getChildren().get(0);
-        System.out.println("name of tf:"+tf.getText());
-        return depthOfBaseOfIslands.get(tf.getText());
-    }
 }
-
 
