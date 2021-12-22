@@ -46,7 +46,7 @@
             <children>
                 <ImageView fx:id="island3" fitHeight="283.0" fitWidth="426.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../../../target/classes/com/example/javafx2/WillHeroImages/SideIsland.png" />
+                        <Image url="@WillHeroImages/SideIsland.png" />
                     </image>
                 </ImageView>
                 <TextField fx:id="tf3" layoutX="141.0" layoutY="26.0" text="SideIsland" visible="false" />
