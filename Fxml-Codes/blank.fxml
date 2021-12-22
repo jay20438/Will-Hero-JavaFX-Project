@@ -44,7 +44,7 @@
         </Group>
         <Group fx:id="contIsland3" layoutX="953.0" layoutY="277.0">
             <children>
-                <ImageView fx:id="island3" fitHeight="260.0" fitWidth="426.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="island3" fitHeight="283.0" fitWidth="426.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../../../../target/classes/com/example/javafx2/WillHeroImages/SideIsland.png" />
                     </image>
