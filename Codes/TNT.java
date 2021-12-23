@@ -15,15 +15,8 @@ public class TNT extends Obstacle
     private int open;
 
     public TNT(String imageName, Group gp, double x, double y, double height, double width){
-//        imageView = CommonAnimations.makeImageAndSetCoord("treasureBox", x, y, height, width);
-        this.x = x;
-        this.y = y;
-        this.height = height;
-        this.width = width;
         imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-
         gp.getChildren().add(imageView);
-
         imageView.setPreserveRatio(true);
     }
 }

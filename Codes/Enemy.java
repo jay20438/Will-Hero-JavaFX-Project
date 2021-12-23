@@ -15,23 +15,10 @@ public abstract class Enemy {
     private double width;
 
     public Enemy(String imageName, Group gp, double x, double y, double height, double width){
-//        image = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "GreenOrcNew.png"));
-//        imageView = new ImageView();
-//        imageView.setImage(image);
-//        imageView.setFitHeight(height);
-//        imageView.setFitWidth(width);
-//        imageView.setLayoutX(x);
-//        imageView.setLayoutY(y);
-        System.out.println("in enemy");
-//        this.x = x;
-//        this.y = y;
-//        this.height = height;
-//        this.width = width;
         imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        //gp.getChildren().add(imageView);
-        System.out.println("in enemy :" + imageView.getBoundsInParent().getMinY());
-        System.out.println(gp.getId());
+        gp.getChildren().add(imageView);
         imageView.setPreserveRatio(true);
+        this.jump();
     }
 
 
@@ -40,7 +27,7 @@ public abstract class Enemy {
     }
 
     public void jump(){
-        CommonAnimations.makeYTranslationalObj(imageView, 1, 3, true, Duration.INDEFINITE).play();
+        CommonAnimations.makeYTranslationalObj(imageView, (int)imageView.getBoundsInLocal().getMinY(), (int)imageView.getBoundsInLocal().getMinY()-70, true, Duration.millis(1000)).play();
     }
 
     public void die(){
