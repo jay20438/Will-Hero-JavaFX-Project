@@ -6,122 +6,122 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="3036.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx2.blankController">
-    <children>
-        <ImageView fx:id="background" fitHeight="736.0" fitWidth="1518.0" onMouseClicked="#moveContent" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@WillHeroImages/backGround.png" />
-            </image>
-        </ImageView>
-        <Group fx:id="contIsland1" layoutX="85.0" layoutY="288.0">
-            <children>
-                <ImageView fx:id="island1" fitHeight="288.0" fitWidth="316.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@WillHeroImages/4treesIsland3.png" />
-                    </image>
-                </ImageView>
-                <TextField fx:id="tf1" text="4treesIsland3" visible="false" />
-            </children></Group>
-        <Group fx:id="contIsland2" layoutX="675.0" layoutY="237.0">
-            <children>
-                <ImageView fx:id="island2" fitHeight="270.0" fitWidth="343.0" layoutX="-172.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@WillHeroImages/4treesIsland2.png" />
-                    </image>
-                </ImageView>
-                <TextField fx:id="tf2" layoutX="-149.0" layoutY="126.0" text="4treesIsland2" visible="false" />
-            <ImageView fx:id="greenOrc1" fitHeight="62.0" fitWidth="61.0" layoutX="-81.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="3036.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.blankController">
+   <children>
+      <ImageView fx:id="background" fitHeight="736.0" fitWidth="1518.0" onMouseClicked="#moveContent" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/backGround.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="contIsland1" autoSizeChildren="false" layoutX="85.0" layoutY="288.0">
+         <children>
+            <TextField fx:id="tf1" text="4treesIsland3" visible="false" />
+            <ImageView fx:id="island1" fitHeight="288.0" fitWidth="316.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/4treesIsland3.png" />
+               </image>
+            </ImageView>
+         </children></Group>
+      <Group fx:id="contIsland2" layoutX="657.0" layoutY="176.0">
+         <children>
+            <TextField fx:id="tf2" layoutX="-149.0" layoutY="126.0" text="4treesIsland2" visible="false" />
+            <ImageView fx:id="island2" fitHeight="270.0" fitWidth="343.0" layoutX="-172.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/4treesIsland2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="greenOrc1" fitHeight="62.0" fitWidth="61.0" layoutX="-81.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/greenOrc.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="greenOrc2" fitHeight="62.0" fitWidth="61.0" layoutX="13.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="greenOrc2" fitHeight="62.0" fitWidth="61.0" layoutX="13.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/greenOrc.png" />
                </image>
             </ImageView>
-            </children>
-        </Group>
-        <Group fx:id="contIsland3" layoutX="953.0" layoutY="277.0">
-            <children>
-                <ImageView fx:id="island3" fitHeight="283.0" fitWidth="426.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@WillHeroImages/SideIsland.png" />
-                    </image>
-                </ImageView>
-                <TextField fx:id="tf3" layoutX="141.0" layoutY="26.0" text="SideIsland" visible="false" />
-            <ImageView fitHeight="56.0" fitWidth="60.0" layoutX="121.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+         </children>
+      </Group>
+      <Group fx:id="contIsland3" layoutX="953.0" layoutY="277.0">
+         <children>
+            <TextField fx:id="tf3" layoutX="141.0" layoutY="26.0" text="SideIsland" visible="false" />
+            <ImageView fx:id="island3" fitHeight="283.0" fitWidth="426.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@WillHeroImages/tnt.png" />
+                  <Image url="@WillHeroImages/SideIsland.png" />
                </image>
             </ImageView>
-            </children>
-        </Group>
-        <Group fx:id="contIsland4" layoutX="1562.0" layoutY="311.0">
-            <children>
-                <ImageView fx:id="island4" fitHeight="260.0" fitWidth="563.0" layoutX="-96.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@WillHeroImages/doubleIsland.png" />
-                    </image>
-                </ImageView>
-                <TextField fx:id="tf4" layoutX="-43.0" layoutY="58.0" text="doubleIsland" visible="false" />
-            <ImageView fx:id="redOrc1" fitHeight="62.0" fitWidth="61.0" layoutX="2.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+         </children>
+      </Group>
+      <Group fx:id="contIsland4" layoutX="1562.0" layoutY="311.0">
+         <children>
+            <TextField fx:id="tf4" layoutX="-43.0" layoutY="58.0" text="doubleIsland" visible="false" />
+            <ImageView fx:id="island4" fitHeight="260.0" fitWidth="563.0" layoutX="-96.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/doubleIsland.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redOrc1" fitHeight="62.0" fitWidth="61.0" layoutX="1.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/redOrc.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="redOrc2" fitHeight="62.0" fitWidth="61.0" layoutX="228.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="redOrc2" fitHeight="62.0" fitWidth="84.0" layoutX="226.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/redOrc.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="closedChest" fitHeight="80.0" fitWidth="60.0" layoutX="113.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closedChest" fitHeight="80.0" fitWidth="60.0" layoutX="97.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/closedChest.png" />
                </image>
             </ImageView>
-            </children>
-        </Group>
-        <Group fx:id="contIsland5" layoutX="1989.0" layoutY="200.0">
-            <children>
-                <ImageView fx:id="island5" fitHeight="297.0" fitWidth="343.0" layoutX="170.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@WillHeroImages/4treesIsland.png" />
-                    </image>
-                </ImageView>
-                <TextField fx:id="tf5" layoutX="223.0" layoutY="120.0" text="4treesIsland" visible="false" />
-            <ImageView fitHeight="48.0" fitWidth="32.0" layoutX="265.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+         </children>
+      </Group>
+      <Group fx:id="contIsland5" layoutX="1989.0" layoutY="200.0">
+         <children>
+            <TextField fx:id="tf5" layoutX="223.0" layoutY="120.0" text="4treesIsland" visible="false" />
+            <ImageView fx:id="island5" fitHeight="297.0" fitWidth="343.0" layoutX="170.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/4treesIsland.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="32.0" layoutX="265.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/coin.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="32.0" layoutX="308.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="48.0" fitWidth="32.0" layoutX="308.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/coin.png" />
                </image>
             </ImageView>
-            </children>
-        </Group>
-        <Group fx:id="contIsland6" layoutX="2600.0" layoutY="399.0">
-            <children>
-                <ImageView fx:id="island6" fitHeight="283.0" fitWidth="480.0" layoutX="-55.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@WillHeroImages/LongIsland.png" />
-                    </image>
-                </ImageView>
-                <TextField fx:id="tf6" layoutX="89.0" layoutY="14.0" text="LongIsland" visible="false" />
-            </children>
-        </Group>
-        <Group fx:id="contPlayer" layoutX="156.0" layoutY="63.0">
-            <children>
-                <ImageView fitHeight="336.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" />
-                <ImageView fx:id="player" fitHeight="93.0" fitWidth="49.0" layoutX="-1.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@WillHeroImages/PlayerNew.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </Group>
+            <ImageView fitHeight="56.0" fitWidth="60.0" layoutX="373.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/tnt.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="contIsland6" layoutX="2600.0" layoutY="399.0">
+         <children>
+            <TextField fx:id="tf6" layoutX="89.0" layoutY="14.0" text="LongIsland" visible="false" />
+            <ImageView fx:id="island6" fitHeight="280.0" fitWidth="480.0" layoutX="-55.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/LongIsland.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="contPlayer" layoutX="156.0" layoutY="63.0">
+         <children>
+            <ImageView fitHeight="336.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player" fitHeight="93.0" fitWidth="49.0" layoutX="-1.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/PlayerNew.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
       <ImageView fx:id="settingsButton" fitHeight="88.0" fitWidth="98.0" layoutX="545.0" layoutY="49.0" onMouseClicked="#goToSettings" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/SettingsButton-removebg-preview.png" />
@@ -132,5 +132,5 @@
             <Image url="@WillHeroImages/coin.png" />
          </image>
       </ImageView>
-    </children>
+   </children>
 </AnchorPane>
