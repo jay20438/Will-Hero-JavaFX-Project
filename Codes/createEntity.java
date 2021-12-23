@@ -53,7 +53,8 @@ public class CreateEntity{
             randNoLevel2 = random.nextInt(5);
             double heightOfEntity = heightOfEntities.get(entities[randNoLevel2]);
             if(entities[randNoLevel2].equals("closedChest")){
-                new ChestType("closedChest", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + random.nextInt((int) gpOperatingOn.getBoundsInParent().getWidth()-40), depthOfBaseOfIslands - heightOfEntity + 30, heightOfEntities.get("closedChest"), widthOfEntities.get("closedChest"));
+                ChestType chestType = new ChestType("closedChest", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + random.nextInt((int) gpOperatingOn.getBoundsInParent().getWidth()-40), depthOfBaseOfIslands - heightOfEntity + 30, heightOfEntities.get("closedChest"), widthOfEntities.get("closedChest"));
+                bk.setChestObjects(chestType);
                 System.out.println("closed chest c");
             }else{
                 randNoLevel3 = random.nextInt(3) + 1;
@@ -69,20 +70,27 @@ public class CreateEntity{
                     help4Sum += dist[i];
                     if (entities[randNoLevel2].equals("greenOrc")){
                         System.out.println("gOrc c");
-                        new GreenOrc("greenOrc", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("greenOrc"), widthOfEntities.get("greenOrc"));
+                        GreenOrc greenOrc = new GreenOrc("greenOrc", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("greenOrc"), widthOfEntities.get("greenOrc"));
                     }else if(entities[randNoLevel2].equals("redOrc")){
                         System.out.println("rOrc c");
-                        new RedOrc("redOrc", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("redOrc"), widthOfEntities.get("redOrc"));
+                        RedOrc redOrc = new RedOrc("redOrc", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("redOrc"), widthOfEntities.get("redOrc"));
                     }else if(entities[randNoLevel2].equals("coin")){
                         System.out.println("coin c");
-                        new Coin("coin", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), -70 + depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("coin"), widthOfEntities.get("coin"));
+                        Coin coin = new Coin("coin", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), -70 + depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("coin"), widthOfEntities.get("coin"));
                     }else if(entities[randNoLevel2].equals("tnt")){
                         System.out.println("tnt c");
-                        new TNT("tnt", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"));
+                        TNT tnt = new TNT("tnt", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"));
                     }
                 }
             }
         }
     }
 
+    public double getHeightOfEntity(String name){
+        return heightOfEntities.get(name);
+    }
+
+    public double getWidthOfEntity(String name){
+        return widthOfEntities.get(name);
+    }
 }
