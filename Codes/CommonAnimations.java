@@ -12,6 +12,7 @@ public class CommonAnimations {
         translateTransition.setNode(imageView);
         translateTransition.setDuration(duration);
         translateTransition.setAutoReverse(autoReverse);
+        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
         translateTransition.setToY(to);
         translateTransition.setFromY(from);
         return translateTransition;
