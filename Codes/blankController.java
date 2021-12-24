@@ -27,6 +27,7 @@ public class blankController implements Initializable {
     CreateEntity createEntity;
     private FxmlLoader fxmlLoader;
     private ArrayList<ChestType> chestTypeObjects;
+    private ArrayList<TNT> tntObjects;
     private CreateEntity createEntityStandard;
 
     private final TranslateTransition translate2;
@@ -35,7 +36,7 @@ public class blankController implements Initializable {
     private final TranslateTransition translate5;
 
     public blankController(){
-
+        tntObjects = new ArrayList<>();
         fxmlLoader = new FxmlLoader();
         translate2 = new TranslateTransition();
         translate3 = new TranslateTransition();
@@ -156,7 +157,7 @@ public class blankController implements Initializable {
         nOfClick += 1;
         if(nOfClick>122){
             if(!playerFalls)
-                player.setLayoutX(player.getLayoutX() + 100);
+                player.setLayoutX(player.getLayoutX() + 150);
         }else if(!playerFalls) {
             contIsland1.setLayoutX(contIsland1.getLayoutX() - 150);
             contIsland2.setLayoutX(contIsland2.getLayoutX() - 150);
@@ -271,35 +272,8 @@ public class blankController implements Initializable {
         createEntity.create();
         createEntity = new CreateEntity(contIsland6, this);
         createEntity.create();
-//        translate2.setNode(greenOrc1);
-//        translate2.setDuration(Duration.millis(1050));
-//        translate2.setCycleCount(TranslateTransition.INDEFINITE);
-//        translate2.setByY(-50);
-//        translate2.setAutoReverse(true);
-//        translate2.play();
-//
-//        translate3.setNode(greenOrc2);
-//        translate3.setDuration(Duration.millis(1000));
-//        translate3.setCycleCount(TranslateTransition.INDEFINITE);
-//        translate3.setByY(-50);
-//        translate3.setAutoReverse(true);
-//        translate3.play();
-//
-//
-//        translate4.setNode(redOrc1);
-//        translate4.setDuration(Duration.millis(1050));
-//        translate4.setCycleCount(TranslateTransition.INDEFINITE);
-//        translate4.setByY(-50);
-//        translate4.setAutoReverse(true);
-//        translate4.play();
-//
-//        translate5.setNode(redOrc2);
-//        translate5.setDuration(Duration.millis(1000));
-//        translate5.setCycleCount(TranslateTransition.INDEFINITE);
-//        translate5.setByY(-50);
-//        translate5.setAutoReverse(true);
-//        translate5.play();
         checkCollisionWithChestAndPlayer();
+        checkCollisionOfPlayerWithTnt();
     }
 
     public void detect() throws InterruptedException {
@@ -341,6 +315,7 @@ public class blankController implements Initializable {
             }
         };
         timer1.scheduleAtFixedRate(task1, 0, 100);
+
     }
 
     @FXML
@@ -421,6 +396,10 @@ public class blankController implements Initializable {
         chestTypeObjects.add(chest);
     }
 
+    public void setTntObjects(TNT tnt){
+        tntObjects.add(tnt);
+    }
+
     public void checkCollisionWithChestAndPlayer(){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -451,24 +430,60 @@ public class blankController implements Initializable {
                         index += 1;
                     }
                 }
-                System.out.println("---in thread and index:"+index);
-                System.out.println("@@in thread and toDel size:"+toDel.size());
-                System.out.println("###in thread and chestTypeObjects size:"+chestTypeObjects.size());
+//                System.out.println("---in thread and index:"+index);
+//                System.out.println("@@in thread and toDel size:"+toDel.size());
+//                System.out.println("###in thread and chestTypeObjects size:"+chestTypeObjects.size());
                 for (int i = 0; i < toDel.size(); i++) {
-                    chestTypeObjects.remove(i);
+                    chestTypeObjects.remove(toDel.get(i));
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 50);
+        timer.scheduleAtFixedRate(task, 0, 10);
     }
 
     public void checkCollisionOfPlayerWithTnt(){
         Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
+        TimerTask task2 = new TimerTask() {
             @Override
             public void run() {
-
+                ArrayList<Integer> toDel = new ArrayList<>();
+                int index = 0;
+                double playerXFront = contPlayer.getBoundsInParent().getMinX();
+                double playerXLast = contPlayer.getBoundsInParent().getMaxX();
+                if(tntObjects.size()>0){
+                    ListIterator<TNT> listIterator = tntObjects.listIterator();
+                    while (listIterator.hasNext()) {
+                        TNT tnt = listIterator.next();
+                        ImageView tntImageView = tnt.getImageView();
+                        Group gp = tnt.getGroupContainedIn();
+                        double tntImageViewXFront = tntImageView.getParent().getBoundsInParent().getMinX() + tntImageView.getBoundsInParent().getMinX();
+                        double tntImageViewXLast = tntImageView.getParent().getBoundsInParent().getMinX() + tntImageView.getBoundsInParent().getMinX() + tntImageView.getFitWidth();
+                        if (playerXFront < tntImageViewXLast) {
+                            if (playerXLast > tntImageViewXFront) {
+                                if (contPlayer.getBoundsInParent().getMaxY() > gp.getBoundsInParent().getMinY() + (-gp.getBoundsInLocal().getMinY() + tntImageView.getLayoutY())) {
+                                    tnt.initiate();
+//                                    try {
+//                                        wait(1000);
+//                                    } catch (InterruptedException e) {
+//                                        e.printStackTrace();
+//                                    }
+                                    toDel.add(index);
+                                }
+                            }
+                        }else{
+                            toDel.add(index);
+                        }
+                        index += 1;
+                    }
+                }
+                for (int i = 0; i < toDel.size(); i++) {
+                    System.out.println("pesent to del tnt");
+                    tntObjects.remove(toDel.get(i));
+                }
             }
         };
+        timer.scheduleAtFixedRate(task2, 0, 12);
     }
+
+
 }
