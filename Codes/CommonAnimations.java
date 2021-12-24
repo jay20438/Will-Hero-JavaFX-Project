@@ -32,6 +32,14 @@ public class CommonAnimations {
     static public void replaceImageView(String newImage, ImageView imageView){
         Image image = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ newImage + ".png"));
         imageView.setImage(image);
+
+    }
+
+    static public void setCoordinates(ImageView imageView, double x, double y, double height, double width){
+        imageView.setLayoutX(x);
+        imageView.setLayoutY(y);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
     }
 
     static public void loadIamge(String imageName){
