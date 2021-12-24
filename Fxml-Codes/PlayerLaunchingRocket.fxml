@@ -4,7 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxproject.PlayerLaunchingRocket">
+<AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx2.PlayerLaunchingRocket">
    <children>
       <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
          <image>
@@ -26,14 +26,14 @@
             <Image url="@WillHeroImages/PlayerNew.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="231.0" fitWidth="358.0" layoutX="450.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="108.0" fitWidth="300.0" layoutX="455.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WillHeroImages/sideIsland.png" />
+            <Image url="@WillHeroImages/FloatingIslandNew.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc1" fitHeight="62.0" fitWidth="61.0" layoutX="583.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc1" fitHeight="62.0" fitWidth="61.0" layoutX="548.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WillHeroImages/GreenOrcNew.png" />
+            <Image url="@WillHeroImages/greenOrc.png" />
          </image>
       </ImageView>
       <ImageView fx:id="settings" fitHeight="88.0" fitWidth="98.0" layoutX="545.0" layoutY="49.0" onMouseClicked="#goToSettings" pickOnBounds="true" preserveRatio="true">
