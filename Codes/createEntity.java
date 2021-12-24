@@ -26,7 +26,7 @@ public class CreateEntity{
         this.bk = bk;
         this.gpOperatingOn = gp;
         random = new Random();
-        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin"};
+        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire"};
         greenOrcMaxNo = 3;
         redOrcMaxNo = 3;
         tntMaxNo = 3;
@@ -42,6 +42,8 @@ public class CreateEntity{
         widthOfEntities.put("openChest",60);
         heightOfEntities.put("coin",48);
         widthOfEntities.put("coin",32);
+        heightOfEntities.put("tntFire", 150);
+        widthOfEntities.put("tntFire", 200);
     }
 
     public void create() {
@@ -80,6 +82,7 @@ public class CreateEntity{
                     }else if(entities[randNoLevel2].equals("tnt")){
                         System.out.println("tnt c");
                         TNT tnt = new TNT("tnt", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"));
+                        bk.setTntObjects(tnt);
                     }
                 }
             }
