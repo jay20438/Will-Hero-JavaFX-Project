@@ -30,16 +30,6 @@
                   <Image url="@WillHeroImages/4treesIsland2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="greenOrc1" fitHeight="62.0" fitWidth="61.0" layoutX="-81.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/greenOrc.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="greenOrc2" fitHeight="62.0" fitWidth="61.0" layoutX="13.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/greenOrc.png" />
-               </image>
-            </ImageView>
          </children>
       </Group>
       <Group fx:id="contIsland3" layoutX="953.0" layoutY="277.0">
@@ -60,21 +50,6 @@
                   <Image url="@WillHeroImages/doubleIsland.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="redOrc1" fitHeight="62.0" fitWidth="61.0" layoutX="1.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/redOrc.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="redOrc2" fitHeight="62.0" fitWidth="84.0" layoutX="226.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/redOrc.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="closedChest" fitHeight="80.0" fitWidth="60.0" layoutX="97.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/closedChest.png" />
-               </image>
-            </ImageView>
          </children>
       </Group>
       <Group fx:id="contIsland5" layoutX="1989.0" layoutY="200.0">
@@ -83,21 +58,6 @@
             <ImageView fx:id="island5" fitHeight="297.0" fitWidth="343.0" layoutX="170.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@WillHeroImages/4treesIsland.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="32.0" layoutX="265.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/coin.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="32.0" layoutX="308.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/coin.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="56.0" fitWidth="60.0" layoutX="373.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@WillHeroImages/tnt.png" />
                </image>
             </ImageView>
          </children>
