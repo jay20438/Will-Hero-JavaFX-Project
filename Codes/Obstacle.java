@@ -1,4 +1,4 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 import java.util.ArrayList;
 

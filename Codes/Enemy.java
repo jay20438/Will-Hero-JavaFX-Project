@@ -31,7 +31,7 @@ public abstract class Enemy {
     }
 
     public void die(){
-        CommonAnimations.replaceImageView("enemyBlood", imageView);
+       // CommonAnimations.replaceImageView("enemyBlood", imageView);
     }
 
     public void slide(double change){

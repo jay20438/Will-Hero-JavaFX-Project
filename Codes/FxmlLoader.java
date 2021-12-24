@@ -10,10 +10,10 @@ import java.net.URL;
 
 public class FxmlLoader {
 
-    private Scene view;
+    static Scene view;
     //private Names JavaFxProject;
 
-    public Scene getScene(String filename) {
+    public static Scene getScene(String filename) {
         try{
             URL fileUrl = HelloApplication.class.getResource(filename+".fxml");
             System.out.println(fileUrl);

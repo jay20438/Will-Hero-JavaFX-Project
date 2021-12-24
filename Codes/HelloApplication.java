@@ -13,17 +13,20 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("userLogin.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1017, 532);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("blank.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1518, 736);
+        //1017, 532
         staged = stage;
         stage.setTitle("");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        System.out.println("hiStart");
     }
 
     public static void main(String[] args) {
         launch();
+        System.out.println("hiMain");
     }
 
     public static void setDifferentScene(Scene scene){

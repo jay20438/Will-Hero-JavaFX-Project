@@ -1,7 +1,8 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
-import com.example.javafx2.GreenOrc;
-import com.example.javafx2.RedOrc;
+//import com.example.javafx2.GreenOrc;
+//import com.example.WillHero.RedOrc;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;

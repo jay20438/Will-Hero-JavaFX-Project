@@ -30,21 +30,10 @@ public class SettingsPageView
 //    @FXML
 //    private ImageView player;
     FxmlLoader fxmlLoader = new FxmlLoader();
-//
+
     public void goToHomePage(MouseEvent mouseEvent) {
         HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage"));
     }
 
 
-
-
-
-//    static FxmlLoader obj4 = new FxmlLoader();
-//    public static void goToSettings(MouseEvent mouseEvent) {
-//        scene4 = obj4.getScene("SettingsPageView");
-//        if(scene4==null){
-//            System.out.println("it is null");
-//        }
-//        HelloApplication.setDifferentScene(scene4);
-//    }
 }
