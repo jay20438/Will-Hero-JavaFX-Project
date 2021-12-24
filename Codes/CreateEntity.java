@@ -2,29 +2,34 @@ package com.example.willherojavafxproject;
 
 import javafx.concurrent.Task;
 import javafx.scene.Group;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.HashMap;
 import java.util.Random;
 
-public class CreateEntity{
-    private Group gpOperatingOn;
+public class CreateEntity {
+    private ImageView imageViewOperatingUpon;
     private Random random;
     private String[] entities;
     private int greenOrcMaxNo;
     public  int redOrcMaxNo;
     private int tntMaxNo;
     private int randNoLevel1;
+    private AnchorPane anchorPane;
     private int randNoLevel2;
     private int randNoLevel3;
     private blankController bk;
     private HashMap<String, Integer> widthOfEntities;
     private HashMap<String, Integer> heightOfEntities;
 
-    public CreateEntity(Group gp, blankController bk){
+    public CreateEntity(blankController bk, ImageView imageView, AnchorPane anchorPane){
+        this.anchorPane = anchorPane;
+        this.imageViewOperatingUpon = imageView;
         widthOfEntities = new HashMap<>();
         heightOfEntities = new HashMap<>();
         this.bk = bk;
-        this.gpOperatingOn = gp;
+//        this.gpOperatingOn = gp;
         random = new Random();
         entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire"};
         greenOrcMaxNo = 3;
@@ -48,19 +53,20 @@ public class CreateEntity{
 
     public void create() {
         boolean flag = true;
-        double depthOfBaseOfIslands =bk.getDepthOfBaseOfIsland(gpOperatingOn)+  gpOperatingOn.getBoundsInLocal().getMinY();
+       // double depthOfBaseOfIslands =bk.getDepthOfBaseOfIsland(gpOperatingOn)+  gpOperatingOn.getBoundsInLocal().getMinY();
+        double depthOfBaseOfIslands = bk.getDepthOfBaseOfIsland(imageViewOperatingUpon) + imageViewOperatingUpon.getBoundsInParent().getMinY();
         randNoLevel1 = random.nextInt(2);
         if(randNoLevel1 == 0){
         }else{
             randNoLevel2 = random.nextInt(5);
             double heightOfEntity = heightOfEntities.get(entities[randNoLevel2]);
             if(entities[randNoLevel2].equals("closedChest")){
-                ChestType chestType = new ChestType("closedChest", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + random.nextInt((int) gpOperatingOn.getBoundsInParent().getWidth()-40), depthOfBaseOfIslands - heightOfEntity + 30, heightOfEntities.get("closedChest"), widthOfEntities.get("closedChest"));
+                ChestType chestType = new ChestType("closedChest",  imageViewOperatingUpon.getBoundsInParent().getMinX() + random.nextInt((int) imageViewOperatingUpon.getBoundsInParent().getWidth()-40), depthOfBaseOfIslands - heightOfEntity + 30, heightOfEntities.get("closedChest"), widthOfEntities.get("closedChest"), anchorPane);
                 bk.setChestObjects(chestType);
                 System.out.println("closed chest c");
             }else{
                 randNoLevel3 = random.nextInt(3) + 1;
-                double length = gpOperatingOn.getBoundsInParent().getWidth();
+                double length = imageViewOperatingUpon.getBoundsInParent().getWidth();
                 double[] dist = new double[randNoLevel3+1];
                 double sum = length - randNoLevel3*widthOfEntities.get(entities[randNoLevel3]);
                 int maxPart = (int) sum/(randNoLevel3+1);
@@ -72,17 +78,20 @@ public class CreateEntity{
                     help4Sum += dist[i];
                     if (entities[randNoLevel2].equals("greenOrc")){
                         System.out.println("gOrc c");
-                        GreenOrc greenOrc = new GreenOrc("greenOrc", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("greenOrc"), widthOfEntities.get("greenOrc"));
+                        GreenOrc greenOrc = new GreenOrc("greenOrc", imageViewOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("greenOrc"), widthOfEntities.get("greenOrc"), anchorPane);
+                        bk.setGreenOrcObjects(greenOrc);
                     }else if(entities[randNoLevel2].equals("redOrc")){
                         System.out.println("rOrc c");
-                        RedOrc redOrc = new RedOrc("redOrc", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("redOrc"), widthOfEntities.get("redOrc"));
+                        RedOrc redOrc = new RedOrc("redOrc", imageViewOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("redOrc"), widthOfEntities.get("redOrc"), anchorPane);
+                        bk.setRedOrcObjects(redOrc);
                     }else if(entities[randNoLevel2].equals("coin")){
                         System.out.println("coin c");
-                        Coin coin = new Coin("coin", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), -70 + depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("coin"), widthOfEntities.get("coin"));
+                        Coin coin = new Coin("coin", imageViewOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), -70 + depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("coin"), widthOfEntities.get("coin"), anchorPane);
+                        bk.setCoinObjects(coin);
                     }else if(entities[randNoLevel2].equals("tnt")){
                         System.out.println("tnt c");
-                        TNT tnt = new TNT("tnt", gpOperatingOn, gpOperatingOn.getBoundsInLocal().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"));
-                        bk.setTntObjects(tnt);
+                        TNT tnt = new TNT("tnt", imageViewOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"), anchorPane);
+                       bk.setTntObjects(tnt);
                     }
                 }
             }

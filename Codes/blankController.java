@@ -5,13 +5,11 @@ import java.util.*;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.FileNotFoundException;
 
@@ -28,7 +26,10 @@ public class blankController implements Initializable {
     private FxmlLoader fxmlLoader;
     private ArrayList<ChestType> chestTypeObjects;
     private ArrayList<TNT> tntObjects;
-    private CreateEntity createEntityStandard;
+    private ArrayList<RedOrc> redOrcs;
+    private ArrayList<GreenOrc> greenOrcs;
+    private ArrayList<Coin> coins;
+    //private CreateEntityNg createEntityStandard;
 
     private final TranslateTransition translate2;
     private final TranslateTransition translate3;
@@ -37,6 +38,10 @@ public class blankController implements Initializable {
 
     public blankController(){
         tntObjects = new ArrayList<>();
+        redOrcs = new ArrayList<>();
+        greenOrcs = new ArrayList<>();
+        coins = new ArrayList<>();
+        chestTypeObjects = new ArrayList<>();
         fxmlLoader = new FxmlLoader();
         translate2 = new TranslateTransition();
         translate3 = new TranslateTransition();
@@ -95,25 +100,7 @@ public class blankController implements Initializable {
     private ImageView player;
 
     @FXML
-    private Group contIsland2;
-
-    @FXML
-    private Group contIsland1;
-
-    @FXML
-    private Group contIsland3;
-
-    @FXML
-    private Group contIsland4;
-
-    @FXML
-    private Group contIsland5;
-
-    @FXML
-    private Group contIsland6;
-
-    @FXML
-    private Group contPlayer;
+    private AnchorPane mainAnchorPane;
 
     @FXML
     private TextField tf1;
@@ -136,17 +123,6 @@ public class blankController implements Initializable {
     @FXML
     private ImageView tnt;
 
-    @FXML
-    private ImageView greenOrc1;
-
-    @FXML
-    private ImageView greenOrc2;
-
-    @FXML
-    private ImageView redOrc1;
-
-    @FXML
-    private ImageView redOrc2;
 
     private int randNo1;
     private int randNo2;
@@ -159,31 +135,24 @@ public class blankController implements Initializable {
             if(!playerFalls)
                 player.setLayoutX(player.getLayoutX() + 150);
         }else if(!playerFalls) {
-            contIsland1.setLayoutX(contIsland1.getLayoutX() - 150);
-            contIsland2.setLayoutX(contIsland2.getLayoutX() - 150);
-            contIsland3.setLayoutX(contIsland3.getLayoutX() - 150);
-            contIsland4.setLayoutX(contIsland4.getLayoutX() - 150);
-            contIsland5.setLayoutX(contIsland5.getLayoutX() - 150);
-            contIsland6.setLayoutX(contIsland6.getLayoutX() - 150);
-
-
-            if ((int) (contIsland3.getLayoutX() + island3.getFitWidth()) < 20) {
+            moveEntities();
+            if ((int) (island3.getBoundsInParent().getMaxX()) < 0) {
                 createIsland(1, island1, island2, island3);
-                createEntity = new CreateEntity(contIsland1, this);
+                createEntity = new CreateEntity( this, island1, mainAnchorPane);
                 createEntity.create();
-                createEntity = new CreateEntity(contIsland2, this);
+                createEntity = new CreateEntity(this, island2, mainAnchorPane);
                 createEntity.create();
-                createEntity = new CreateEntity(contIsland3, this);
+                createEntity = new CreateEntity(this, island3, mainAnchorPane);
                 createEntity.create();
             }
 
-            if ((int) (contIsland6.getLayoutX() + island6.getFitWidth()) < 20) {
-                 createIsland(4, island4, island5, island6);
-                createEntity = new CreateEntity(contIsland4, this);
+            if ((int) (island6.getBoundsInParent().getMaxX()) < 0) {
+                createIsland(4, island4, island5, island6);
+                createEntity = new CreateEntity(this, island4, mainAnchorPane);
                 createEntity.create();
-                createEntity = new CreateEntity(contIsland5, this);
+                createEntity = new CreateEntity(this, island5, mainAnchorPane);
                 createEntity.create();
-                createEntity = new CreateEntity(contIsland6, this);
+                createEntity = new CreateEntity(this, island6, mainAnchorPane);
                 createEntity.create();
             }
         }
@@ -206,52 +175,48 @@ public class blankController implements Initializable {
         imageView1.setFitHeight(heightOfIslands.get(namesOfIslands[randNo1]));
         imageView2.setFitHeight(heightOfIslands.get(namesOfIslands[randNo2]));
         imageView3.setFitHeight(heightOfIslands.get(namesOfIslands[randNo3]));
-        if(identifier==1){
+        if(identifier==1) {
             int count = 0;
             tf1.setText(namesOfIslands[randNo1]);
-            contIsland1.setLayoutX(contIsland6.getBoundsInParent().getMaxX() + 250);
+            island1.setLayoutX(island6.getBoundsInParent().getMaxX() + 250);
             tf2.setText(namesOfIslands[randNo2]);
-            contIsland2.setLayoutX(contIsland1.getBoundsInParent().getMaxX() + 300);
+            island2.setLayoutX(island1.getBoundsInParent().getMaxX() + 300);
             tf3.setText(namesOfIslands[randNo3]);
-            contIsland3.setLayoutX(contIsland2.getBoundsInParent().getMaxX() + 250);
-            this.deleteEntities(contIsland1, contIsland2, contIsland3);
-            //this.displayEntitiesInsideGroup(contIsland1, contIsland2, contIsland3);
-//            if(contIsland1.getChildren().size()!=2){
-//                contIsland1.getChildren().remove(2, contIsland1.getChildren().size()-1);
-//            }
-//            if(contIsland2.getChildren().size()!=2){
-//                contIsland2.getChildren().remove(2, contIsland2.getChildren().size()-1);
-//            }
-//            if(contIsland3.getChildren().size()!=2){
-//                contIsland3.getChildren().remove(2, contIsland3.getChildren().size()-1);
-//            }
-
+            island3.setLayoutX(island2.getBoundsInParent().getMaxX() + 250);
+//            this.deleteEntities(contIsland1, contIsland2, contIsland3);
+//            //this.displayEntitiesInsideGroup(contIsland1, contIsland2, contIsland3);
+////            if(contIsland1.getChildren().size()!=2){
+////                contIsland1.getChildren().remove(2, contIsland1.getChildren().size()-1);
+////            }
+////            if(contIsland2.getChildren().size()!=2){
+////                contIsland2.getChildren().remove(2, contIsland2.getChildren().size()-1);
+////            }
+////            if(contIsland3.getChildren().size()!=2){
+////                contIsland3.getChildren().remove(2, contIsland3.getChildren().size()-1);
+////            }
+//
         }else{
             tf4.setText(namesOfIslands[randNo1]);
-            contIsland4.setLayoutX(contIsland3.getBoundsInParent().getMaxX()  + 250);
+            island4.setLayoutX(island3.getBoundsInParent().getMaxX()  + 250);
             tf5.setText(namesOfIslands[randNo2]);
-            contIsland5.setLayoutX(contIsland4.getBoundsInParent().getMaxX() + 200);
+            island5.setLayoutX(island4.getBoundsInParent().getMaxX() + 200);
             tf6.setText(namesOfIslands[randNo3]);
-            contIsland6.setLayoutX(contIsland5.getBoundsInParent().getMaxX() + 250);
-//              if(contIsland4.getChildren().size()!=2){
-//                  contIsland4.getChildren().remove(2, contIsland4.getChildren().size()-1);
-//              }
-//              if (contIsland5.getChildren().size()!=2){
-//                  contIsland5.getChildren().remove(2, contIsland5.getChildren().size()-1);
-//              }
-//
-//            if(contIsland6.getChildren().size()!=2){
-//                contIsland6.getChildren().remove(2, contIsland6.getChildren().size()-1);
-//            }
-            this.deleteEntities(contIsland4, contIsland5, contIsland6);
+            island6.setLayoutX(island5.getBoundsInParent().getMaxX() + 250);
+////              if(contIsland4.getChildren().size()!=2){
+////                  contIsland4.getChildren().remove(2, contIsland4.getChildren().size()-1);
+////              }
+////              if (contIsland5.getChildren().size()!=2){
+////                  contIsland5.getChildren().remove(2, contIsland5.getChildren().size()-1);
+////              }
+////
+////            if(contIsland6.getChildren().size()!=2){
+////                contIsland6.getChildren().remove(2, contIsland6.getChildren().size()-1);
+////            }
+//            this.deleteEntities(contIsland4, contIsland5, contIsland6);
             //this.displayEntitiesInsideGroup(contIsland4, contIsland5, contIsland6);
 
         }
     }
-
-
-
-
 
 
     @Override
@@ -261,16 +226,16 @@ public class blankController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        chestTypeObjects = new ArrayList<>();
-        createEntity = new CreateEntity(contIsland2, this);
+        //chestTypeObjects = new ArrayList<>();
+        createEntity = new CreateEntity(this, island2, mainAnchorPane);
         createEntity.create();
-        createEntity = new CreateEntity(contIsland3, this);
+        createEntity = new CreateEntity(this, island3, mainAnchorPane);
         createEntity.create();
-        createEntity = new CreateEntity(contIsland4, this);
+        createEntity = new CreateEntity(this, island4, mainAnchorPane);
         createEntity.create();
-        createEntity = new CreateEntity(contIsland5, this);
+        createEntity = new CreateEntity(this, island5, mainAnchorPane);
         createEntity.create();
-        createEntity = new CreateEntity(contIsland6, this);
+        createEntity = new CreateEntity(this, island6, mainAnchorPane);
         createEntity.create();
         checkCollisionWithChestAndPlayer();
         checkCollisionOfPlayerWithTnt();
@@ -282,23 +247,23 @@ public class blankController implements Initializable {
             boolean flag = false;
             @Override
             public void run() {
-                double playerPosFront = contPlayer.getBoundsInParent().getMinX();
-                double playerPosLast = contPlayer.getBoundsInParent().getMaxX();
-                if(contPlayer.getBoundsInParent().getMaxY()>520){
+                double playerPosFront = player.getBoundsInParent().getMinX();
+                double playerPosLast =player.getBoundsInParent().getMaxX();
+                if(player.getBoundsInParent().getMaxY()>520){
                     playerFalls = true;
                 }else {
                     try {
-                        if (playerPosFront >= contIsland1.getBoundsInParent().getMinX() && playerPosFront <= contIsland1.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))) {
+                        if (playerPosFront >= island1.getBoundsInParent().getMinX() && playerPosFront <= island1.getBoundsInParent().getMaxX() && player.getBoundsInParent().getMaxY() > (island1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))) {
                             flag = true;
-                        } else if (playerPosFront >= contIsland2.getBoundsInParent().getMinX() && playerPosFront <= contIsland2.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))) {
+                        } else if (playerPosFront >= island2.getBoundsInParent().getMinX() && playerPosFront <= island2.getBoundsInParent().getMaxX() && player.getBoundsInParent().getMaxY() > (island2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))) {
                             flag = true;
-                        } else if (playerPosFront >= contIsland3.getBoundsInParent().getMinX() && playerPosFront <= contIsland3.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))) {
+                        } else if (playerPosFront >= island3.getBoundsInParent().getMinX() && playerPosFront <= island3.getBoundsInParent().getMaxX() && player.getBoundsInParent().getMaxY() > (island3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))) {
                             flag = true;
-                        } else if (playerPosFront >= contIsland4.getBoundsInParent().getMinX() && playerPosFront <= contIsland4.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))) {
+                        } else if (playerPosFront >= island4.getBoundsInParent().getMinX() && playerPosFront <= island4.getBoundsInParent().getMaxX() && player.getBoundsInParent().getMaxY() > (island4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))) {
                             flag = true;
-                        } else if (playerPosFront >= contIsland5.getBoundsInParent().getMinX() && playerPosFront <= contIsland5.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))) {
+                        } else if (playerPosFront >= island5.getBoundsInParent().getMinX() && playerPosFront <= island5.getBoundsInParent().getMaxX() && player.getBoundsInParent().getMaxY() > (island5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))) {
                             flag = true;
-                        } else if (playerPosFront >= contIsland6.getBoundsInParent().getMinX() && playerPosFront <= contIsland6.getBoundsInParent().getMaxX() && contPlayer.getBoundsInParent().getMaxY() > (contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText())) && contPlayer.getBoundsInParent().getMaxY() < (50 + contIsland6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))) {
+                        } else if (playerPosFront >= island6.getBoundsInParent().getMinX() && playerPosFront <= island6.getBoundsInParent().getMaxX() && player.getBoundsInParent().getMaxY() > (island6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))) {
                             flag = true;
                         }
                     }catch (IndexOutOfBoundsException e){
@@ -306,11 +271,11 @@ public class blankController implements Initializable {
                     }
                     if (flag) {
                         for (int i = 0; i < 10; i++) {
-                            contPlayer.setLayoutY(contPlayer.getBoundsInParent().getMinY() - 10);
+                            player.setLayoutY(player.getBoundsInParent().getMinY() - 10);
                         }
                     }
                 }
-                contPlayer.setLayoutY(contPlayer.getBoundsInParent().getMinY() + 10);
+                player.setLayoutY(player.getBoundsInParent().getMinY() + 10);
                 flag = false;
             }
         };
@@ -322,76 +287,130 @@ public class blankController implements Initializable {
     void goToSettings(MouseEvent event) {
         HelloApplication.setDifferentScene(fxmlLoader.getScene("SettingsPageView"));
     }
-
-    public void deleteEntities(Group gp1, Group gp2, Group gp3){
-        int a = gp1.getChildren().size();
-        int b = gp2.getChildren().size();
-        int c = gp3.getChildren().size();
-        if(a>2){
-            gp1.getChildren().remove(2, a);
-        }
-        if(b>2){
-            gp2.getChildren().remove(2, b);
-        }
-        if(c>2){
-            gp3.getChildren().remove(2, c);
-        }
-//        ListIterator<ChestType> listIterator = chestTypeObjects.listIterator();
-//        while (listIterator.hasNext()){
-//            ChestType chestType = listIterator.next();
-//            ImageView chestTypeImageView = chestType.getImageView();
-//            Group gp = (Group) chestTypeImageView.getParent();
-//            //double chestTypeImageViewXFront = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX();
-//            double chestTypeImageViewXLast = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX() + chestTypeImageView.getFitWidth();
-//            if(chestTypeImageViewXLast<0){
-//                chestTypeObjects.remove(chestType);
-//            }
+    //
+//    public void deleteEntities(Group gp1, Group gp2, Group gp3){
+//        int a = gp1.getChildren().size();
+//        int b = gp2.getChildren().size();
+//        int c = gp3.getChildren().size();
+//        if(a>2){
+//            gp1.getChildren().remove(2, a);
 //        }
-
-    }
-
-    public void deleteEntity(Group gp){
-        int a = gp.getChildren().size();
-//        int b = gp1.getChildren().size();
-//        int c = gp1.getChildren().size();
-        int i = 2;
-        ImageView imageView;
-        System.out.println("size:" + a);
-        if(a>2){
-            gp.getChildren().remove(2, a);
-        }
-    }
-
-//    public void displayEntitiesInsideGroup(Group gp){
+//        if(b>2){
+//            gp2.getChildren().remove(2, b);
+//        }
+//        if(c>2){
+//            gp3.getChildren().remove(2, c);
+//        }
+////        ListIterator<ChestType> listIterator = chestTypeObjects.listIterator();
+////        while (listIterator.hasNext()){
+////            ChestType chestType = listIterator.next();
+////            ImageView chestTypeImageView = chestType.getImageView();
+////            Group gp = (Group) chestTypeImageView.getParent();
+////            //double chestTypeImageViewXFront = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX();
+////            double chestTypeImageViewXLast = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX() + chestTypeImageView.getFitWidth();
+////            if(chestTypeImageViewXLast<0){
+////                chestTypeObjects.remove(chestType);
+////            }
+////        }
+//
+//    }
+//
+//    public void deleteEntity(Group gp){
 //        int a = gp.getChildren().size();
 ////        int b = gp1.getChildren().size();
 ////        int c = gp1.getChildren().size();
-//        int i = 0;
-//        Node n;
-//        while(i<a ){
-//            if(gp.getChildren().size()>i){
-//                n =  gp.getChildren().get(i);
-//                System.out.println(n);
-//            }
-////            if(gp2.getChildren().size()>i){
-////                n = (ImageView) gp2.getChildren().get(i);
-////                System.out.println(n);
-////            }
-////            if(gp3.getChildren().size()>i){
-////                n = (ImageView) gp3.getChildren().get(i);
-////                System.out.println(n);
-////            }
-//            i += 1;
+//        int i = 2;
+//        ImageView imageView;
+//        System.out.println("size:" + a);
+//        if(a>2){
+//            gp.getChildren().remove(2, a);
 //        }
 //    }
+//
+////    public void displayEntitiesInsideGroup(Group gp){
+////        int a = gp.getChildren().size();
+//////        int b = gp1.getChildren().size();
+//////        int c = gp1.getChildren().size();
+////        int i = 0;
+////        Node n;
+////        while(i<a ){
+////            if(gp.getChildren().size()>i){
+////                n =  gp.getChildren().get(i);
+////                System.out.println(n);
+////            }
+//////            if(gp2.getChildren().size()>i){
+//////                n = (ImageView) gp2.getChildren().get(i);
+//////                System.out.println(n);
+//////            }
+//////            if(gp3.getChildren().size()>i){
+//////                n = (ImageView) gp3.getChildren().get(i);
+//////                System.out.println(n);
+//////            }
+////            i += 1;
+////        }
+////    }
+//
+    public double getDepthOfBaseOfIsland(ImageView imageView){
+        String name  = imageView.getId();
+        if(name.equals("island1")){
+            return depthOfBaseOfIslands.get(tf1.getText());
+        }else if(name.equals("island2")){
+            return depthOfBaseOfIslands.get(tf2.getText());
+        }else if(name.equals("island3")){
+            return depthOfBaseOfIslands.get(tf3.getText());
+        }else if(name.equals("island4")){
+            return depthOfBaseOfIslands.get(tf4.getText());
+        }else if(name.equals("island5")){
+            return depthOfBaseOfIslands.get(tf5.getText());
+        }else if(name.equals("island6")){
+            return depthOfBaseOfIslands.get(tf6.getText());
+        }
+        System.out.println("no tf found");
+        return 0;
 
-    public double getDepthOfBaseOfIsland(Group gp){
-        //System.out.println("tf in the group:" + gp.getChildren().get(0).getId());
-        TextField tf = (TextField) gp.getChildren().get(0);
-        //System.out.println("name of tf:"+tf.getText());
-        return depthOfBaseOfIslands.get(tf.getText());
     }
 
+    public void moveEntities(){
+        island1.setLayoutX(island1.getLayoutX() - 150);
+        tf1.setLayoutX(tf1.getLayoutX() - 150);
+        island2.setLayoutX(island2.getLayoutX() - 150);
+        tf2.setLayoutX(tf2.getLayoutX() - 150);
+        island3.setLayoutX(island3.getLayoutX() - 150);
+        tf3.setLayoutX(tf3.getLayoutX() - 150);
+        island4.setLayoutX(island4.getLayoutX() - 150);
+        tf4.setLayoutX(tf4.getLayoutX() - 150);
+        island5.setLayoutX(island5.getLayoutX() - 150);
+        tf5.setLayoutX(tf5.getLayoutX() - 150);
+        island6.setLayoutX(island6.getLayoutX() - 150);
+        tf6.setLayoutX(tf6.getLayoutX() - 150);
+        ListIterator<TNT> listIterator1 = tntObjects.listIterator();
+        ListIterator<RedOrc> listIterator2 = redOrcs.listIterator();
+        ListIterator<GreenOrc> listIterator3 = greenOrcs.listIterator();
+        ListIterator<Coin> listIterator4 = coins.listIterator();
+        ListIterator<ChestType> listIterator5 = chestTypeObjects.listIterator();
+        while (listIterator1.hasNext()){
+            ImageView tnt = listIterator1.next().getImageView();
+            tnt.setLayoutX(tnt.getLayoutX()-150);
+        }
+        while (listIterator2.hasNext()){
+            ImageView redOrc = listIterator2.next().getImageView();
+            redOrc.setLayoutX(redOrc.getLayoutX()-150);
+        }
+        while (listIterator3.hasNext()){
+            ImageView greenOrc = listIterator3.next().getImageView();
+            greenOrc.setLayoutX(greenOrc.getLayoutX()-150);
+        }
+        while (listIterator4.hasNext()){
+            ImageView coin = listIterator4.next().getImageView();
+            coin.setLayoutX(coin.getLayoutX()-150);
+        }
+        while (listIterator5.hasNext()){
+            ImageView chest = listIterator5.next().getImageView();
+            chest.setLayoutX(chest.getLayoutX()-150);
+        }
+
+    }
+    //
     public void setChestObjects(ChestType chest){
         chestTypeObjects.add(chest);
     }
@@ -400,6 +419,18 @@ public class blankController implements Initializable {
         tntObjects.add(tnt);
     }
 
+    public void setCoinObjects(Coin coin){
+        coins.add(coin);
+    }
+
+    public void setRedOrcObjects(RedOrc redOrc){
+        redOrcs.add(redOrc);
+    }
+
+    public void setGreenOrcObjects(GreenOrc greenOrc){
+        greenOrcs.add(greenOrc);
+    }
+    //
     public void checkCollisionWithChestAndPlayer(){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -407,19 +438,18 @@ public class blankController implements Initializable {
             public void run() {
                 ArrayList<Integer> toDel = new ArrayList<>();
                 int index = 0;
-                double playerXFront = contPlayer.getBoundsInParent().getMinX();
-                double playerXLast = contPlayer.getBoundsInParent().getMaxX();
+                double playerXFront = player.getBoundsInParent().getMinX();
+                double playerXLast = player.getBoundsInParent().getMaxX();
                 if(chestTypeObjects.size()>0) {
                     ListIterator<ChestType> listIterator = chestTypeObjects.listIterator();
                     while (listIterator.hasNext()) {
                         ChestType chestType = listIterator.next();
                         ImageView chestTypeImageView = chestType.getImageView();
-                        Group gp = chestType.getGroupContainedIn();
-                        double chestTypeImageViewXFront = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX();
-                        double chestTypeImageViewXLast = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX() + chestTypeImageView.getFitWidth();
+                        double chestTypeImageViewXLast = chestTypeImageView.getBoundsInParent().getMaxX();
+                        double chestTypeImageViewXFront = chestTypeImageView.getBoundsInParent().getMinX();
                         if (playerXFront < chestTypeImageViewXLast) {
                             if (playerXLast > chestTypeImageViewXFront) {
-                                if (contPlayer.getBoundsInParent().getMaxY() > gp.getBoundsInParent().getMinY() + (-gp.getBoundsInLocal().getMinY() + chestTypeImageView.getLayoutY())) {
+                                if (player.getBoundsInParent().getMaxY() > chestTypeImageView.getBoundsInParent().getMinY()) {
                                     chestType.open();
                                     toDel.add(index);
                                 }
@@ -438,51 +468,46 @@ public class blankController implements Initializable {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 10);
+        timer.scheduleAtFixedRate(task, 0, 60);
     }
-
+    //
     public void checkCollisionOfPlayerWithTnt(){
-        Timer timer = new Timer();
+        Timer timer2 = new Timer();
         TimerTask task2 = new TimerTask() {
             @Override
             public void run() {
-                ArrayList<Integer> toDel = new ArrayList<>();
-                int index = 0;
-                double playerXFront = contPlayer.getBoundsInParent().getMinX();
-                double playerXLast = contPlayer.getBoundsInParent().getMaxX();
+                ArrayList<Integer> toDel2 = new ArrayList<>();
+                int index2 = 0;
+                double playerXFront = player.getBoundsInParent().getMinX();
+                double playerXLast = player.getBoundsInParent().getMaxX();
                 if(tntObjects.size()>0){
                     ListIterator<TNT> listIterator = tntObjects.listIterator();
                     while (listIterator.hasNext()) {
                         TNT tnt = listIterator.next();
                         ImageView tntImageView = tnt.getImageView();
-                        Group gp = tnt.getGroupContainedIn();
-                        double tntImageViewXFront = tntImageView.getParent().getBoundsInParent().getMinX() + tntImageView.getBoundsInParent().getMinX();
-                        double tntImageViewXLast = tntImageView.getParent().getBoundsInParent().getMinX() + tntImageView.getBoundsInParent().getMinX() + tntImageView.getFitWidth();
+                        double tntImageViewXFront = tntImageView.getBoundsInParent().getMinX();
+                        double tntImageViewXLast = tntImageView.getBoundsInParent().getMaxX();
                         if (playerXFront < tntImageViewXLast) {
                             if (playerXLast > tntImageViewXFront) {
-                                if (contPlayer.getBoundsInParent().getMaxY() > gp.getBoundsInParent().getMinY() + (-gp.getBoundsInLocal().getMinY() + tntImageView.getLayoutY())) {
+                                if (player.getBoundsInParent().getMaxY() > tntImageView.getBoundsInParent().getMinY() ) {
                                     tnt.initiate();
-//                                    try {
-//                                        wait(1000);
-//                                    } catch (InterruptedException e) {
-//                                        e.printStackTrace();
-//                                    }
-                                    toDel.add(index);
+                                    toDel2.add(index2);
                                 }
                             }
                         }else{
-                            toDel.add(index);
+                            toDel2.add(index2);
                         }
-                        index += 1;
+                        index2 += 1;
                     }
                 }
-                for (int i = 0; i < toDel.size(); i++) {
+                for (int i = 0; i < toDel2.size(); i++) {
+                    System.out.println("size of to del for tnt:" + toDel2.size());
                     System.out.println("pesent to del tnt");
-                    tntObjects.remove(toDel.get(i));
+                    tntObjects.remove(toDel2.get(i));
                 }
             }
         };
-        timer.scheduleAtFixedRate(task2, 0, 12);
+        timer2.scheduleAtFixedRate(task2, 0, 100);
     }
 
 

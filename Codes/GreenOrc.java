@@ -1,11 +1,12 @@
 package com.example.willherojavafxproject;
 
 import javafx.scene.Group;
+import javafx.scene.layout.AnchorPane;
 
 public class GreenOrc extends Enemy
 {
-    public GreenOrc(String imageName, Group gp, double x, double y, double height, double width){
-        super(imageName, gp, x, y, height, width);
+    public GreenOrc(String imageName,  double x, double y, double height, double width, AnchorPane anchorPane){
+        super(imageName, x, y, height, width, anchorPane);
 
     }
 }

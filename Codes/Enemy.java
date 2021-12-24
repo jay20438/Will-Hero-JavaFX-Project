@@ -3,6 +3,7 @@ package com.example.willherojavafxproject;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 public abstract class Enemy {
@@ -13,11 +14,13 @@ public abstract class Enemy {
     private double y;
     private double height;
     private double width;
+    private AnchorPane anchorPane;
 
-    public Enemy(String imageName, Group gp, double x, double y, double height, double width){
+    public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane){
+        this.anchorPane = anchorPane;
         imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        gp.getChildren().add(imageView);
         imageView.setPreserveRatio(true);
+        anchorPane.getChildren().add(imageView);
         this.jump();
     }
 
@@ -38,6 +41,9 @@ public abstract class Enemy {
 
     }
 
+    public ImageView getImageView(){
+        return imageView;
+    }
 
 
 }
