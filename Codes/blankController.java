@@ -1,4 +1,5 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
+
 import java.net.URL;
 import java.util.*;
 
@@ -228,6 +229,8 @@ public class blankController implements Initializable {
         createEntity.create();
         checkCollisionWithChestAndPlayer();
         checkCollisionOfPlayerWithTnt();
+        checkCollisionOfPlayerWithGreenOrc();
+        checkCollisionOfPlayerWithRedOrc();
     }
 
     public void detect() throws InterruptedException {
@@ -268,7 +271,7 @@ public class blankController implements Initializable {
                 flag = false;
             }
         };
-        timer1.scheduleAtFixedRate(task1, 0, 100);
+        timer1.scheduleAtFixedRate(task1, 500, 100);
 
     }
 
@@ -392,17 +395,15 @@ public class blankController implements Initializable {
                         index += 1;
                     }
                 }
-//                System.out.println("---in thread and index:"+index);
-//                System.out.println("@@in thread and toDel size:"+toDel.size());
-//                System.out.println("###in thread and chestTypeObjects size:"+chestTypeObjects.size());
+
                 for (int i = 0; i < toDel.size(); i++) {
                     chestTypeObjects.remove(toDel.get(i));
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 60);
+        timer.scheduleAtFixedRate(task, 1000, 60);
     }
-    //
+
     public void checkCollisionOfPlayerWithTnt(){
         Timer timer2 = new Timer();
         TimerTask task2 = new TimerTask() {
@@ -437,7 +438,7 @@ public class blankController implements Initializable {
                 }
             }
         };
-        timer2.scheduleAtFixedRate(task2, 0, 100);
+        timer2.scheduleAtFixedRate(task2, 1000, 100);
     }
 
     public void checkCollisionOfPlayerWithCoin(){
@@ -474,73 +475,80 @@ public class blankController implements Initializable {
                 }
             }
         };
-        timer3.scheduleAtFixedRate(task3, 0, 100);
+        timer3.scheduleAtFixedRate(task3, 1000, 100);
+    }
+
+    public void checkCollisionOfPlayerWithGreenOrc(){
+        Timer timer4 = new Timer();
+        TimerTask task4 = new TimerTask() {
+            @Override
+            public void run() {
+                ArrayList<Integer> toDel4 = new ArrayList<>();
+                int index = 0;
+                double playerXFront = player.getBoundsInParent().getMinX();
+                double playerXLast = player.getBoundsInParent().getMaxX();
+                if(chestTypeObjects.size()>0) {
+                    ListIterator<GreenOrc> listIterator4 = greenOrcs.listIterator();
+                    while (listIterator4.hasNext()) {
+                        GreenOrc gOrc = listIterator4.next();
+                        ImageView greenOrcImageView = gOrc.getImageView();
+                        double greenOrcImageViewXLast = greenOrcImageView.getBoundsInParent().getMaxX();
+                        double greenOrcImageViewXFront = greenOrcImageView.getBoundsInParent().getMinX();
+                        if (playerXFront <= greenOrcImageViewXLast) {
+                            if (playerXLast >= greenOrcImageViewXFront) {
+                                if (player.getBoundsInParent().getMaxY() >= greenOrcImageView.getBoundsInParent().getMinY()) {
+                                    gOrc.slide();
+                                    toDel4.add(index);
+                                }
+                            }
+                        }else{
+                            toDel4.add(index);
+                        }
+                        index += 1;
+                    }
+                }
+                for (int i = 0; i < toDel4.size(); i++) {
+                    greenOrcs.remove(toDel4.get(i));
+                }
+            }
+        };
+        timer4.scheduleAtFixedRate(task4, 1000, 100);
+    }
+
+    public void checkCollisionOfPlayerWithRedOrc(){
+        Timer timer5 = new Timer();
+        TimerTask task5 = new TimerTask() {
+            @Override
+            public void run() {
+                ArrayList<Integer> toDel5 = new ArrayList<>();
+                int index = 0;
+                double playerXFront = player.getBoundsInParent().getMinX();
+                double playerXLast = player.getBoundsInParent().getMaxX();
+                if(chestTypeObjects.size()>0) {
+                    ListIterator<RedOrc> listIterator4 = redOrcs.listIterator();
+                    while (listIterator4.hasNext()) {
+                        RedOrc rOrc = listIterator4.next();
+                        ImageView redOrcImageView = rOrc.getImageView();
+                        double redOrcImageViewXLast = redOrcImageView.getBoundsInParent().getMaxX();
+                        double redOrcImageViewXFront = redOrcImageView.getBoundsInParent().getMinX();
+                        if (playerXFront <= redOrcImageViewXLast) {
+                            if (playerXLast >= redOrcImageViewXFront) {
+                                if (player.getBoundsInParent().getMaxY() >= redOrcImageView.getBoundsInParent().getMinY()) {
+                                    rOrc.slide();
+                                    toDel5.add(index);
+                                }
+                            }
+                        }else{
+                            toDel5.add(index);
+                        }
+                        index += 1;
+                    }
+                }
+                for (int i = 0; i < toDel5.size(); i++) {
+                    redOrcs.remove(toDel5.get(i));
+                }
+            }
+        };
+        timer5.scheduleAtFixedRate(task5, 1000, 100);
     }
 }
-
-
-
-
-//
-//    public void deleteEntities(Group gp1, Group gp2, Group gp3){
-//        int a = gp1.getChildren().size();
-//        int b = gp2.getChildren().size();
-//        int c = gp3.getChildren().size();
-//        if(a>2){
-//            gp1.getChildren().remove(2, a);
-//        }
-//        if(b>2){
-//            gp2.getChildren().remove(2, b);
-//        }
-//        if(c>2){
-//            gp3.getChildren().remove(2, c);
-//        }
-////        ListIterator<ChestType> listIterator = chestTypeObjects.listIterator();
-////        while (listIterator.hasNext()){
-////            ChestType chestType = listIterator.next();
-////            ImageView chestTypeImageView = chestType.getImageView();
-////            Group gp = (Group) chestTypeImageView.getParent();
-////            //double chestTypeImageViewXFront = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX();
-////            double chestTypeImageViewXLast = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX() + chestTypeImageView.getFitWidth();
-////            if(chestTypeImageViewXLast<0){
-////                chestTypeObjects.remove(chestType);
-////            }
-////        }
-//
-//    }
-//
-//    public void deleteEntity(Group gp){
-//        int a = gp.getChildren().size();
-////        int b = gp1.getChildren().size();
-////        int c = gp1.getChildren().size();
-//        int i = 2;
-//        ImageView imageView;
-//        System.out.println("size:" + a);
-//        if(a>2){
-//            gp.getChildren().remove(2, a);
-//        }
-//    }
-//
-////    public void displayEntitiesInsideGroup(Group gp){
-////        int a = gp.getChildren().size();
-//////        int b = gp1.getChildren().size();
-//////        int c = gp1.getChildren().size();
-////        int i = 0;
-////        Node n;
-////        while(i<a ){
-////            if(gp.getChildren().size()>i){
-////                n =  gp.getChildren().get(i);
-////                System.out.println(n);
-////            }
-//////            if(gp2.getChildren().size()>i){
-//////                n = (ImageView) gp2.getChildren().get(i);
-//////                System.out.println(n);
-//////            }
-//////            if(gp3.getChildren().size()>i){
-//////                n = (ImageView) gp3.getChildren().get(i);
-//////                System.out.println(n);
-//////            }
-////            i += 1;
-////        }
-////    }
-//
