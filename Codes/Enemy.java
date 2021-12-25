@@ -1,6 +1,5 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 
-import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -8,16 +7,18 @@ import javafx.util.Duration;
 
 public abstract class Enemy {
 
-//    private Image image;
+    //    private Image image;
     private ImageView imageView;
     private double x;
     private double y;
     private double height;
     private double width;
+    private CreateEntity createEntity;
     private AnchorPane anchorPane;
 
     public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane){
         this.anchorPane = anchorPane;
+        createEntity = new CreateEntity(null, null, null);
         imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
         imageView.setPreserveRatio(true);
         anchorPane.getChildren().add(imageView);
@@ -34,11 +35,11 @@ public abstract class Enemy {
     }
 
     public void die(){
-       // CommonAnimations.replaceImageView("enemyBlood", imageView);
+        // CommonAnimations.replaceImageView("enemyBlood", imageView);
     }
 
-    public void slide(double change){
-
+    public void slide(){
+        CommonAnimations.setCoordinates(imageView, imageView.getBoundsInParent().getMinX()+90, imageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("greenOrc"), createEntity.getWidthOfEntity("greenOrc"));
     }
 
     public ImageView getImageView(){
