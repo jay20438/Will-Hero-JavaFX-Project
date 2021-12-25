@@ -505,10 +505,10 @@ public class blankController implements Initializable {
                                 }
                             }
                         }
-                       /* else if(playerYTop <= greenOrcImageViewYBottom)
+                        else if(playerYTop <= greenOrcImageViewYBottom)
                         {
                             gOrc.killPlayer(playerObj);
-                        }*/
+                        }
                         else{
                             toDel4.add(index);
                         }
@@ -532,6 +532,7 @@ public class blankController implements Initializable {
                 int index = 0;
                 double playerXFront = player.getBoundsInParent().getMinX();
                 double playerXLast = player.getBoundsInParent().getMaxX();
+                double playerYTop = player.getBoundsInParent().getMinY();
                 if(redOrcs.size()>0) {
                     ListIterator<RedOrc> listIterator4 = redOrcs.listIterator();
                     while (listIterator4.hasNext()) {
@@ -539,6 +540,7 @@ public class blankController implements Initializable {
                         ImageView redOrcImageView = rOrc.getImageView();
                         double redOrcImageViewXLast = redOrcImageView.getBoundsInParent().getMaxX();
                         double redOrcImageViewXFront = redOrcImageView.getBoundsInParent().getMinX();
+                        double redOrcImageViewYBottom = redOrcImageView.getBoundsInParent().getMaxY();
                         if (playerXFront <= redOrcImageViewXLast) {
                             if (playerXLast >= redOrcImageViewXFront) {
                                 if (player.getBoundsInParent().getMaxY() >= redOrcImageView.getBoundsInParent().getMinY()) {
@@ -546,7 +548,12 @@ public class blankController implements Initializable {
                                     toDel5.add(index);
                                 }
                             }
-                        }else{
+                        }
+                        else if(playerYTop <= redOrcImageViewYBottom)
+                        {
+                            rOrc.killPlayer(playerObj);
+                        }
+                        else{
                             toDel5.add(index);
                         }
                         index += 1;
