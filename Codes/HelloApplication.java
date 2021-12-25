@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         Image icon = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "WillHeroIcon.jpg"));
         stage.getIcons().add(icon);
         staged = stage;
-        stage.setTitle("");
+        stage.setTitle("WILL HERO");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
