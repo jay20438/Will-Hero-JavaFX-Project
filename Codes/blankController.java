@@ -487,13 +487,16 @@ public class blankController implements Initializable {
                 int index = 0;
                 double playerXFront = player.getBoundsInParent().getMinX();
                 double playerXLast = player.getBoundsInParent().getMaxX();
-                if(chestTypeObjects.size()>0) {
+                double playerYTop = player.getBoundsInParent().getMinY();
+                double playerYBottom = player.getBoundsInParent().getMaxY();
+                if(greenOrcs.size()>0) {
                     ListIterator<GreenOrc> listIterator4 = greenOrcs.listIterator();
                     while (listIterator4.hasNext()) {
                         GreenOrc gOrc = listIterator4.next();
                         ImageView greenOrcImageView = gOrc.getImageView();
                         double greenOrcImageViewXLast = greenOrcImageView.getBoundsInParent().getMaxX();
                         double greenOrcImageViewXFront = greenOrcImageView.getBoundsInParent().getMinX();
+                        double greenOrcImageViewYBottom = greenOrcImageView.getBoundsInParent().getMaxY();
                         if (playerXFront <= greenOrcImageViewXLast) {
                             if (playerXLast >= greenOrcImageViewXFront) {
                                 if (player.getBoundsInParent().getMaxY() >= greenOrcImageView.getBoundsInParent().getMinY()) {
@@ -501,7 +504,12 @@ public class blankController implements Initializable {
                                     toDel4.add(index);
                                 }
                             }
-                        }else{
+                        }
+                       /* else if(playerYTop <= greenOrcImageViewYBottom)
+                        {
+                            gOrc.killPlayer(playerObj);
+                        }*/
+                        else{
                             toDel4.add(index);
                         }
                         index += 1;
@@ -524,7 +532,7 @@ public class blankController implements Initializable {
                 int index = 0;
                 double playerXFront = player.getBoundsInParent().getMinX();
                 double playerXLast = player.getBoundsInParent().getMaxX();
-                if(chestTypeObjects.size()>0) {
+                if(redOrcs.size()>0) {
                     ListIterator<RedOrc> listIterator4 = redOrcs.listIterator();
                     while (listIterator4.hasNext()) {
                         RedOrc rOrc = listIterator4.next();
@@ -550,5 +558,47 @@ public class blankController implements Initializable {
             }
         };
         timer5.scheduleAtFixedRate(task5, 1000, 100);
+    }
+
+    public void checkCollisionOfOrcWithChestType(){
+        Timer timer6 = new Timer();
+        TimerTask task6 = new TimerTask() {
+            @Override
+            public void run() {
+                ArrayList<Integer> toDel6 = new ArrayList<>();
+                int index = 0;
+                double playerXFront = player.getBoundsInParent().getMinX();
+                double playerXLast = player.getBoundsInParent().getMaxX();
+                if(chestTypeObjects.size()>0 && ((greenOrcs.size()>0) || (redOrcs.size() > 0))) {
+                    ListIterator<GreenOrc> listIterator6 = greenOrcs.listIterator();
+                    ListIterator<RedOrc> listIterator7 = redOrcs.listIterator();
+                    while (listIterator6.hasNext() || listIterator7.hasNext()) {
+                        GreenOrc gOrc = listIterator6.next();
+                        RedOrc rOrc = listIterator7.next();
+                        ImageView greenOrcImageView = gOrc.getImageView();
+                        ImageView redOrcImageView = rOrc.getImageView();
+                        double greenOrcImageViewXLast = greenOrcImageView.getBoundsInParent().getMaxX();
+                        double redOrcImageViewXLast = greenOrcImageView.getBoundsInParent().getMaxX();
+                        double greenOrcImageViewXFront = greenOrcImageView.getBoundsInParent().getMinX();
+                        double redOrcImageViewXFront = greenOrcImageView.getBoundsInParent().getMinX();
+                        if (playerXFront <= greenOrcImageViewXLast) {
+                            if (playerXLast >= greenOrcImageViewXFront) {
+                                if (player.getBoundsInParent().getMaxY() >= greenOrcImageView.getBoundsInParent().getMinY()) {
+                                    gOrc.slide();
+                                    toDel6.add(index);
+                                }
+                            }
+                        }else{
+                            toDel6.add(index);
+                        }
+                        index += 1;
+                    }
+                }
+                for (int i = 0; i < toDel6.size(); i++) {
+                    greenOrcs.remove(toDel6.get(i));
+                }
+            }
+        };
+        timer6.scheduleAtFixedRate(task6, 1000, 100);
     }
 }
