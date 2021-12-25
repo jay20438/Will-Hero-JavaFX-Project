@@ -1,4 +1,4 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 
 import javafx.concurrent.Task;
 import javafx.scene.Group;
@@ -31,7 +31,7 @@ public class CreateEntity {
         this.bk = bk;
 //        this.gpOperatingOn = gp;
         random = new Random();
-        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire", "coins", "playerWithKnife", "playerWithMissile"};
+        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire", "coins", "playerWithKnife", "playerWithMissile","crushedPlayer","MissileFlying"};
         greenOrcMaxNo = 3;
         redOrcMaxNo = 3;
         tntMaxNo = 3;
@@ -55,11 +55,15 @@ public class CreateEntity {
         widthOfEntities.put("coin",32);
         heightOfEntities.put("tntFire", 150);
         widthOfEntities.put("tntFire", 200);
+        heightOfEntities.put("crushedPlayer",50);
+        widthOfEntities.put("crushedPlayer",50);
+        heightOfEntities.put("MissileFlying",200);
+        widthOfEntities.put("MissileFlying",200);
     }
 
     public void create() {
         boolean flag = true;
-       // double depthOfBaseOfIslands =bk.getDepthOfBaseOfIsland(gpOperatingOn)+  gpOperatingOn.getBoundsInLocal().getMinY();
+        // double depthOfBaseOfIslands =bk.getDepthOfBaseOfIsland(gpOperatingOn)+  gpOperatingOn.getBoundsInLocal().getMinY();
         double depthOfBaseOfIslands = bk.getDepthOfBaseOfIsland(imageViewOfIslandOperatingUpon) + imageViewOfIslandOperatingUpon.getBoundsInParent().getMinY();
         randNoLevel1 = random.nextInt(2);
         if(randNoLevel1 == 0){
@@ -97,7 +101,7 @@ public class CreateEntity {
                     }else if(entities[randNoLevel2].equals("tnt")){
                         System.out.println("tnt c");
                         TNT tnt = new TNT("tnt", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"), anchorPane);
-                       bk.setTntObjects(tnt);
+                        bk.setTntObjects(tnt);
                     }
                 }
             }
