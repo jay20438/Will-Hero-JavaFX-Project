@@ -42,7 +42,7 @@
                   <Image url="@WillHeroImages/4treesIsland.png" />
               </image>
           </ImageView>
-          <TextField fx:id="tf6" layoutX="2568.0" layoutY="356.0" text="LongIsland" />
+          <TextField fx:id="tf6" layoutX="2568.0" layoutY="356.0" text="LongIsland" visible="false" />
           <ImageView fx:id="island6" fitHeight="280.0" fitWidth="480.0" layoutX="2542.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
               <image>
                   <Image url="@WillHeroImages/LongIsland.png" />
@@ -53,12 +53,12 @@
                 <Image url="@WillHeroImages/SettingsButton-removebg-preview.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="53.0" fitWidth="54.0" layoutX="1298.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="coinSymbol" fitHeight="53.0" fitWidth="54.0" layoutX="1298.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@WillHeroImages/coin.png" />
             </image>
         </ImageView>
-      <TextField alignment="CENTER" layoutX="1242.0" layoutY="25.0" prefHeight="39.0" prefWidth="39.0" text="0" />
-      <TextField fx:id="nOfSteps" alignment="CENTER" layoutX="602.0" layoutY="22.0" prefHeight="32.0" prefWidth="54.0" text="0" />
+      <TextField fx:id="nOfSteps" alignment="CENTER" editable="false" layoutX="554.0" layoutY="29.0" prefHeight="32.0" prefWidth="54.0" />
+      <TextField fx:id="nOfCoins" alignment="CENTER" editable="false" layoutX="1249.0" layoutY="26.0" prefHeight="38.0" prefWidth="40.0" />
     </children>
 </AnchorPane>
