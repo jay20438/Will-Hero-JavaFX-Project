@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.FileNotFoundException;
 
 public class blankController implements Initializable {
+    private Player playerObj;
     private Random random;
     private HashMap<String, Integer> widthOfIslands;
     private HashMap<String, Integer> heightOfIslands;
@@ -29,14 +30,14 @@ public class blankController implements Initializable {
     private ArrayList<RedOrc> redOrcs;
     private ArrayList<GreenOrc> greenOrcs;
     private ArrayList<Coin> coins;
-    //private CreateEntityNg createEntityStandard;
-
+    private int nOfCoinsAmount;
     private final TranslateTransition translate2;
     private final TranslateTransition translate3;
     private final TranslateTransition translate4;
     private final TranslateTransition translate5;
 
     public blankController(){
+        nOfCoins = new TextField();
         tntObjects = new ArrayList<>();
         redOrcs = new ArrayList<>();
         greenOrcs = new ArrayList<>();
@@ -75,6 +76,15 @@ public class blankController implements Initializable {
     }
 
 
+
+    @FXML
+    private ImageView coinSymbol;
+
+    @FXML
+    private TextField nOfCoins;
+
+    @FXML
+    private TextField nOfSteps;
     @FXML
     private ImageView background;
 
@@ -183,18 +193,6 @@ public class blankController implements Initializable {
             island2.setLayoutX(island1.getBoundsInParent().getMaxX() + 300);
             tf3.setText(namesOfIslands[randNo3]);
             island3.setLayoutX(island2.getBoundsInParent().getMaxX() + 250);
-//            this.deleteEntities(contIsland1, contIsland2, contIsland3);
-//            //this.displayEntitiesInsideGroup(contIsland1, contIsland2, contIsland3);
-////            if(contIsland1.getChildren().size()!=2){
-////                contIsland1.getChildren().remove(2, contIsland1.getChildren().size()-1);
-////            }
-////            if(contIsland2.getChildren().size()!=2){
-////                contIsland2.getChildren().remove(2, contIsland2.getChildren().size()-1);
-////            }
-////            if(contIsland3.getChildren().size()!=2){
-////                contIsland3.getChildren().remove(2, contIsland3.getChildren().size()-1);
-////            }
-//
         }else{
             tf4.setText(namesOfIslands[randNo1]);
             island4.setLayoutX(island3.getBoundsInParent().getMaxX()  + 250);
@@ -202,18 +200,6 @@ public class blankController implements Initializable {
             island5.setLayoutX(island4.getBoundsInParent().getMaxX() + 200);
             tf6.setText(namesOfIslands[randNo3]);
             island6.setLayoutX(island5.getBoundsInParent().getMaxX() + 250);
-////              if(contIsland4.getChildren().size()!=2){
-////                  contIsland4.getChildren().remove(2, contIsland4.getChildren().size()-1);
-////              }
-////              if (contIsland5.getChildren().size()!=2){
-////                  contIsland5.getChildren().remove(2, contIsland5.getChildren().size()-1);
-////              }
-////
-////            if(contIsland6.getChildren().size()!=2){
-////                contIsland6.getChildren().remove(2, contIsland6.getChildren().size()-1);
-////            }
-//            this.deleteEntities(contIsland4, contIsland5, contIsland6);
-            //this.displayEntitiesInsideGroup(contIsland4, contIsland5, contIsland6);
 
         }
     }
@@ -221,6 +207,9 @@ public class blankController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        createEntity = new CreateEntity(this, island1, mainAnchorPane);
+        playerObj = createEntity.createPlayer();
+        player = playerObj.getMineImageView();
         try {
             detect();
         } catch (InterruptedException e) {
@@ -287,69 +276,7 @@ public class blankController implements Initializable {
     void goToSettings(MouseEvent event) {
         HelloApplication.setDifferentScene(fxmlLoader.getScene("SettingsPageView"));
     }
-    //
-//    public void deleteEntities(Group gp1, Group gp2, Group gp3){
-//        int a = gp1.getChildren().size();
-//        int b = gp2.getChildren().size();
-//        int c = gp3.getChildren().size();
-//        if(a>2){
-//            gp1.getChildren().remove(2, a);
-//        }
-//        if(b>2){
-//            gp2.getChildren().remove(2, b);
-//        }
-//        if(c>2){
-//            gp3.getChildren().remove(2, c);
-//        }
-////        ListIterator<ChestType> listIterator = chestTypeObjects.listIterator();
-////        while (listIterator.hasNext()){
-////            ChestType chestType = listIterator.next();
-////            ImageView chestTypeImageView = chestType.getImageView();
-////            Group gp = (Group) chestTypeImageView.getParent();
-////            //double chestTypeImageViewXFront = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX();
-////            double chestTypeImageViewXLast = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX() + chestTypeImageView.getFitWidth();
-////            if(chestTypeImageViewXLast<0){
-////                chestTypeObjects.remove(chestType);
-////            }
-////        }
-//
-//    }
-//
-//    public void deleteEntity(Group gp){
-//        int a = gp.getChildren().size();
-////        int b = gp1.getChildren().size();
-////        int c = gp1.getChildren().size();
-//        int i = 2;
-//        ImageView imageView;
-//        System.out.println("size:" + a);
-//        if(a>2){
-//            gp.getChildren().remove(2, a);
-//        }
-//    }
-//
-////    public void displayEntitiesInsideGroup(Group gp){
-////        int a = gp.getChildren().size();
-//////        int b = gp1.getChildren().size();
-//////        int c = gp1.getChildren().size();
-////        int i = 0;
-////        Node n;
-////        while(i<a ){
-////            if(gp.getChildren().size()>i){
-////                n =  gp.getChildren().get(i);
-////                System.out.println(n);
-////            }
-//////            if(gp2.getChildren().size()>i){
-//////                n = (ImageView) gp2.getChildren().get(i);
-//////                System.out.println(n);
-//////            }
-//////            if(gp3.getChildren().size()>i){
-//////                n = (ImageView) gp3.getChildren().get(i);
-//////                System.out.println(n);
-//////            }
-////            i += 1;
-////        }
-////    }
-//
+
     public double getDepthOfBaseOfIsland(ImageView imageView){
         String name  = imageView.getId();
         if(name.equals("island1")){
@@ -430,7 +357,12 @@ public class blankController implements Initializable {
     public void setGreenOrcObjects(GreenOrc greenOrc){
         greenOrcs.add(greenOrc);
     }
-    //
+
+    public void updateCoin(int change){
+        nOfCoinsAmount += change;
+        nOfCoins.setText(String.valueOf(nOfCoinsAmount));
+    }
+
     public void checkCollisionWithChestAndPlayer(){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -447,10 +379,10 @@ public class blankController implements Initializable {
                         ImageView chestTypeImageView = chestType.getImageView();
                         double chestTypeImageViewXLast = chestTypeImageView.getBoundsInParent().getMaxX();
                         double chestTypeImageViewXFront = chestTypeImageView.getBoundsInParent().getMinX();
-                        if (playerXFront < chestTypeImageViewXLast) {
-                            if (playerXLast > chestTypeImageViewXFront) {
-                                if (player.getBoundsInParent().getMaxY() > chestTypeImageView.getBoundsInParent().getMinY()) {
-                                    chestType.open();
+                        if (playerXFront <= chestTypeImageViewXLast) {
+                            if (playerXLast >= chestTypeImageViewXFront) {
+                                if (player.getBoundsInParent().getMaxY() >= chestTypeImageView.getBoundsInParent().getMinY()) {
+                                    chestType.open(playerObj);
                                     toDel.add(index);
                                 }
                             }
@@ -487,9 +419,9 @@ public class blankController implements Initializable {
                         ImageView tntImageView = tnt.getImageView();
                         double tntImageViewXFront = tntImageView.getBoundsInParent().getMinX();
                         double tntImageViewXLast = tntImageView.getBoundsInParent().getMaxX();
-                        if (playerXFront < tntImageViewXLast) {
-                            if (playerXLast > tntImageViewXFront) {
-                                if (player.getBoundsInParent().getMaxY() > tntImageView.getBoundsInParent().getMinY() ) {
+                        if (playerXFront <= tntImageViewXLast) {
+                            if (playerXLast >= tntImageViewXFront) {
+                                if (player.getBoundsInParent().getMaxY() >= tntImageView.getBoundsInParent().getMinY() ) {
                                     tnt.initiate();
                                     toDel2.add(index2);
                                 }
@@ -501,8 +433,6 @@ public class blankController implements Initializable {
                     }
                 }
                 for (int i = 0; i < toDel2.size(); i++) {
-                    System.out.println("size of to del for tnt:" + toDel2.size());
-                    System.out.println("pesent to del tnt");
                     tntObjects.remove(toDel2.get(i));
                 }
             }
@@ -510,5 +440,107 @@ public class blankController implements Initializable {
         timer2.scheduleAtFixedRate(task2, 0, 100);
     }
 
-
+    public void checkCollisionOfPlayerWithCoin(){
+        Timer timer3 = new Timer();
+        TimerTask task3 = new TimerTask() {
+            @Override
+            public void run() {
+                ArrayList<Integer> toDel3 = new ArrayList<>();
+                int index2 = 0;
+                double playerXFront = player.getBoundsInParent().getMinX();
+                double playerXLast = player.getBoundsInParent().getMaxX();
+                if(tntObjects.size()>0){
+                    ListIterator<Coin> listIterator = coins.listIterator();
+                    while (listIterator.hasNext()) {
+                        Coin coin = listIterator.next();
+                        ImageView coinImageView = coin.getImageView();
+                        double coinImageViewXFront = coinImageView.getBoundsInParent().getMinX();
+                        double coinImageViewXLast = coinImageView.getBoundsInParent().getMaxX();
+                        if (playerXFront < coinImageViewXLast) {
+                            if (playerXLast > coinImageViewXFront) {
+                                if (player.getBoundsInParent().getMaxY() >= coinImageView.getBoundsInParent().getMinY() && player.getBoundsInParent().getMinY()<=coinImageView.getBoundsInParent().getMaxY()) {
+//                                    coin.initiate();
+                                    toDel3.add(index2);
+                                }
+                            }
+                        }else{
+                            toDel3.add(index2);
+                        }
+                        index2 += 1;
+                    }
+                }
+                for (int i = 0; i < toDel3.size(); i++) {
+                    tntObjects.remove(toDel3.get(i));
+                }
+            }
+        };
+        timer3.scheduleAtFixedRate(task3, 0, 100);
+    }
 }
+
+
+
+
+//
+//    public void deleteEntities(Group gp1, Group gp2, Group gp3){
+//        int a = gp1.getChildren().size();
+//        int b = gp2.getChildren().size();
+//        int c = gp3.getChildren().size();
+//        if(a>2){
+//            gp1.getChildren().remove(2, a);
+//        }
+//        if(b>2){
+//            gp2.getChildren().remove(2, b);
+//        }
+//        if(c>2){
+//            gp3.getChildren().remove(2, c);
+//        }
+////        ListIterator<ChestType> listIterator = chestTypeObjects.listIterator();
+////        while (listIterator.hasNext()){
+////            ChestType chestType = listIterator.next();
+////            ImageView chestTypeImageView = chestType.getImageView();
+////            Group gp = (Group) chestTypeImageView.getParent();
+////            //double chestTypeImageViewXFront = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX();
+////            double chestTypeImageViewXLast = chestTypeImageView.getParent().getBoundsInParent().getMinX() + chestTypeImageView.getBoundsInParent().getMinX() + chestTypeImageView.getFitWidth();
+////            if(chestTypeImageViewXLast<0){
+////                chestTypeObjects.remove(chestType);
+////            }
+////        }
+//
+//    }
+//
+//    public void deleteEntity(Group gp){
+//        int a = gp.getChildren().size();
+////        int b = gp1.getChildren().size();
+////        int c = gp1.getChildren().size();
+//        int i = 2;
+//        ImageView imageView;
+//        System.out.println("size:" + a);
+//        if(a>2){
+//            gp.getChildren().remove(2, a);
+//        }
+//    }
+//
+////    public void displayEntitiesInsideGroup(Group gp){
+////        int a = gp.getChildren().size();
+//////        int b = gp1.getChildren().size();
+//////        int c = gp1.getChildren().size();
+////        int i = 0;
+////        Node n;
+////        while(i<a ){
+////            if(gp.getChildren().size()>i){
+////                n =  gp.getChildren().get(i);
+////                System.out.println(n);
+////            }
+//////            if(gp2.getChildren().size()>i){
+//////                n = (ImageView) gp2.getChildren().get(i);
+//////                System.out.println(n);
+//////            }
+//////            if(gp3.getChildren().size()>i){
+//////                n = (ImageView) gp3.getChildren().get(i);
+//////                System.out.println(n);
+//////            }
+////            i += 1;
+////        }
+////    }
+//

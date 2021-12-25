@@ -11,6 +11,8 @@ public class Coin {
     private AnchorPane anchorPane;
 
     public Coin(String imageName, double x, double y, double height, double width, AnchorPane anchorPane) {
+        this.height = height;
+        this.width = width;
         imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
         anchorPane.getChildren().add(imageView);
         imageView.setPreserveRatio(true);
