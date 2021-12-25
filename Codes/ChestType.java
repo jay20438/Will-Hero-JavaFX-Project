@@ -4,9 +4,6 @@ import javafx.animation.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.util.Random;
@@ -27,10 +24,12 @@ public class ChestType {
     private TranslateTransition translateTransition;
     private RotateTransition rotateTransition;
     private  FadeTransition fadeTransition;
+    private boolean collided;
 
     public ChestType(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk){
         this.bk = bk;
         random = new Random();
+        collided = false;
         this.anchorPane = anchorPane;
         createEntity = new CreateEntity(null, null, null);
         this.height = height;
@@ -54,10 +53,10 @@ public class ChestType {
     public void generateReward(Player player){
         int firstLevel = random.nextInt(2);
         if(firstLevel==0){
-            int randomCoins = random.nextInt(50);
+            Coin coinObj = new Coin(null, 0, 0, 0, 0, null);
+            int randomCoins = coinObj.generateCollection();
             player.getCoins(randomCoins);
             bk.updateCoin(randomCoins);
-            generateTransition();
         }else{
             int secondLevel = random.nextInt(2);
             if(secondLevel == 0){
@@ -66,11 +65,12 @@ public class ChestType {
                 player.getMissile(new Missile());
             }
         }
-        rotateTransition.pause();
+        //rotateTransition.pause();
     }
 
     public  void generateTransition(){
         ImageView tossedCoins  = CommonAnimations.makeImageAndSetCoord("coins", mineImageView.getLayoutX()+5, mineImageView.getLayoutY(), 46, 39);
+        anchorPane.getChildren().add(tossedCoins);
         translateTransition = new TranslateTransition();
         translateTransition.setNode(tossedCoins);
         translateTransition.setDuration(Duration.millis(1000));
@@ -79,16 +79,23 @@ public class ChestType {
         translateTransition.setAutoReverse(false);
         rotateTransition = new RotateTransition();
         rotateTransition.setNode(tossedCoins);
-        rotateTransition.setDuration(Duration.millis(500));
+        rotateTransition.setDuration(Duration.millis(1000));
         rotateTransition.setInterpolator(Interpolator.LINEAR);
         rotateTransition.setByAngle(360);
         fadeTransition = new FadeTransition();
         fadeTransition.setNode(tossedCoins);
         fadeTransition.setByValue(0);
-        fadeTransition.setDuration(Duration.millis(700));
+        fadeTransition.setDuration(Duration.millis(1000));
         translateTransition.play();
         rotateTransition.play();
         fadeTransition.play();
     }
 
+    public boolean isCollided(){
+        return collided;
+    }
+
+    public void setCollided(boolean flag){
+        collided = flag;
+    }
 }
