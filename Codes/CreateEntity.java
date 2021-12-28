@@ -1,7 +1,6 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
-import javafx.concurrent.Task;
-import javafx.scene.Group;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -31,7 +30,7 @@ public class CreateEntity {
         this.bk = bk;
 //        this.gpOperatingOn = gp;
         random = new Random();
-        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire", "coins", "playerWithKnife", "playerWithMissile","crushedPlayer","MissileFlying"};
+        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire", "coins", "playerWithKnife", "playerWithMissile", "crushedPlayer"};
         greenOrcMaxNo = 3;
         redOrcMaxNo = 3;
         tntMaxNo = 3;
@@ -57,13 +56,11 @@ public class CreateEntity {
         widthOfEntities.put("tntFire", 200);
         heightOfEntities.put("crushedPlayer",50);
         widthOfEntities.put("crushedPlayer",50);
-        heightOfEntities.put("MissileFlying",200);
-        widthOfEntities.put("MissileFlying",200);
     }
 
-    public void create() {
+    public void create() throws InterruptedException {
         boolean flag = true;
-        // double depthOfBaseOfIslands =bk.getDepthOfBaseOfIsland(gpOperatingOn)+  gpOperatingOn.getBoundsInLocal().getMinY();
+       // double depthOfBaseOfIslands =bk.getDepthOfBaseOfIsland(gpOperatingOn)+  gpOperatingOn.getBoundsInLocal().getMinY();
         double depthOfBaseOfIslands = bk.getDepthOfBaseOfIsland(imageViewOfIslandOperatingUpon) + imageViewOfIslandOperatingUpon.getBoundsInParent().getMinY();
         randNoLevel1 = random.nextInt(2);
         if(randNoLevel1 == 0){
@@ -73,7 +70,7 @@ public class CreateEntity {
             if(entities[randNoLevel2].equals("closedChest")){
                 ChestType chestType = new ChestType("closedChest",  imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + random.nextInt((int) imageViewOfIslandOperatingUpon.getBoundsInParent().getWidth()-40), depthOfBaseOfIslands - heightOfEntity + 30, heightOfEntities.get("closedChest"), widthOfEntities.get("closedChest"), anchorPane, bk);
                 bk.setChestObjects(chestType);
-                System.out.println("closed chest c");
+                //System.out.println("closed chest c");
             }else{
                 randNoLevel3 = random.nextInt(3) + 1;
                 double length = imageViewOfIslandOperatingUpon.getBoundsInParent().getWidth();
@@ -87,21 +84,21 @@ public class CreateEntity {
                 for (int i = 0; i < randNoLevel3; i++) {
                     help4Sum += dist[i];
                     if (entities[randNoLevel2].equals("greenOrc")){
-                        System.out.println("gOrc c");
-                        GreenOrc greenOrc = new GreenOrc("greenOrc", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("greenOrc"), widthOfEntities.get("greenOrc"), anchorPane);
+                        ///System.out.println("gOrc c");
+                        GreenOrc greenOrc = new GreenOrc("greenOrc", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("greenOrc"), widthOfEntities.get("greenOrc"), anchorPane, bk);
                         bk.setGreenOrcObjects(greenOrc);
                     }else if(entities[randNoLevel2].equals("redOrc")){
-                        System.out.println("rOrc c");
-                        RedOrc redOrc = new RedOrc("redOrc", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("redOrc"), widthOfEntities.get("redOrc"), anchorPane);
+                        //System.out.println("rOrc c");
+                        RedOrc redOrc = new RedOrc("redOrc", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("redOrc"), widthOfEntities.get("redOrc"), anchorPane, bk);
                         bk.setRedOrcObjects(redOrc);
                     }else if(entities[randNoLevel2].equals("coin")){
-                        System.out.println("coin c");
+                        //System.out.println("coin c");
                         Coin coin = new Coin("coin", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), -70 + depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("coin"), widthOfEntities.get("coin"), anchorPane);
                         bk.setCoinObjects(coin);
                     }else if(entities[randNoLevel2].equals("tnt")){
-                        System.out.println("tnt c");
-                        TNT tnt = new TNT("tnt", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"), anchorPane);
-                        bk.setTntObjects(tnt);
+                        //System.out.println("tnt c");
+                        TNT tnt = new TNT("tnt", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("tnt"), widthOfEntities.get("tnt"), anchorPane, this);
+                       bk.setTntObjects(tnt);
                     }
                 }
             }
@@ -116,7 +113,15 @@ public class CreateEntity {
         return widthOfEntities.get(name);
     }
 
-    public Player createPlayer(){
-        return new Player("PlayerNew", 144, 315, 93, 49, anchorPane, this);
+    public Player createPlayer() throws InterruptedException {
+        return new Player("PlayerNew", 144, 315, 93, 49, anchorPane, this, bk);
+    }
+
+    public void createPlatform4Boss(){
+
+    }
+
+    public blankController getBk(){
+        return bk;
     }
 }

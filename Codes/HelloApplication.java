@@ -1,4 +1,4 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +16,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("blank.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1518, 736);
         //1017, 532
-        Image icon = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "WillHeroIcon.jpg"));
-        stage.getIcons().add(icon);
         staged = stage;
-        stage.setTitle("WILL HERO");
+        stage.setTitle("");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

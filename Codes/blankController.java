@@ -252,8 +252,8 @@ public class blankController implements Initializable {
         checkCollisionWithChestAndPlayer();
         checkCollisionOfPlayerWithTnt();
         checkCollisionOfPlayerWithCoin();
-        //checkCollisionOfPlayerWithGreenOrc();
-        //checkCollisionOfPlayerWithRedOrc();
+        checkCollisionOfPlayerWithGreenOrc();
+        checkCollisionOfPlayerWithRedOrc();
     }
 //
 //    public void jump(ImageView imageView, int sub, int gainedUpHeight, boolean flag4Up) throws InterruptedException {
