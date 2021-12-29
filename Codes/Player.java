@@ -1,4 +1,4 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -134,5 +134,18 @@ public class Player {
         rotateTransition.setCycleCount(1);
         rotateTransition.play();
     }
+
+    //Still working
+    public void launchMissile()
+    {
+        missile.moveWeapon( 30, 120,  Duration.millis(1000)).play();
+    }
+
+    public void throwKnife()
+    {
+        ImageView imv2 = knife.getImageView();
+        knife.moveWeapon(30, 120,  Duration.millis(1000)).play();
+    }
+
 
 }

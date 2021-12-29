@@ -1,5 +1,64 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 
-public class Weapon {
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+
+public abstract class Weapon {
+
+    //    private Image image;
+    //private final TranslateTransition translate4;
+    private ImageView weaponImageView;
+    private double x;
+    private double y;
+    private double height;
+    private double width;
+    private CreateEntity createEntity;
+    private AnchorPane anchorPane;
+
+    public Weapon(String imageName, double x, double y, double height, double width, AnchorPane anchorPane){
+        this.anchorPane = anchorPane;
+        createEntity = new CreateEntity(null, null, null);
+        weaponImageView.setPreserveRatio(true);
+
+
+    }
+
+    public TranslateTransition moveWeapon(int from, int to, Duration duration)
+    {
+        weaponImageView = CommonAnimations.makeImageAndSetCoord("MissileFlying", 30, 120,50,150);
+        anchorPane.getChildren().add(weaponImageView);
+        TranslateTransition translateTransition = new TranslateTransition();
+        translateTransition.setNode(weaponImageView);
+        translateTransition.setDuration(duration);
+        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        translateTransition.setToX(to);
+        translateTransition.setFromX(from);
+        return translateTransition;
+    }
+
+
+
+    /*public void killEnemy(Enemy enemy){
+        //player.die();
+        FadeTransition fadeTransition3 = new FadeTransition();
+        CommonAnimations.replaceImageView("crushedPlayer", imageView);
+        CommonAnimations.setCoordinates(imageView, imageView.getBoundsInParent().getMinX(), imageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("crushedPlayer"), createEntity.getWidthOfEntity("crushedPlayer"));
+        fadeTransition3.setNode(imageView);
+        fadeTransition3.setDuration(Duration.millis(1500));
+        fadeTransition3.setToValue(0);
+        fadeTransition3.play();
+    }*/
+
+
+
+    public ImageView getImageView(){
+        return weaponImageView;
+    }
+
 
 }
+
