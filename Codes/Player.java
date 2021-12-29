@@ -1,4 +1,4 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -78,7 +78,6 @@ public class Player {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("living status and postiion:" + living+ " "+mineImageView.getLayoutY());
                 if(!living){
                     p.setFlag4Up(false);
                 }else {
@@ -135,7 +134,14 @@ public class Player {
         rotateTransition.play();
     }
 
-    //Still working
+    public void throwWeapon(){
+        if(knife!=null){
+            this.throwKnife();
+        }else if(missile!=null){
+            this.launchMissile();
+        }
+    }
+
     public void launchMissile()
     {
         missile.moveWeapon( 30, 120,  Duration.millis(1000)).play();
@@ -146,6 +152,5 @@ public class Player {
         ImageView imv2 = knife.getImageView();
         knife.moveWeapon(30, 120,  Duration.millis(1000)).play();
     }
-
 
 }

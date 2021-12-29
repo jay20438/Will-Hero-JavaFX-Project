@@ -1,6 +1,5 @@
 package com.example.willherojavafxproject;
 
-import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 
 public class GreenOrc extends Enemy

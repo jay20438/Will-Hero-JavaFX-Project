@@ -46,7 +46,7 @@ public class CommonAnimations {
         imageView.setFitWidth(width);
     }
 
-    static public void loadIamge(String imageName){
+    static public void loadImage(String imageName){
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.willherojavafxproject;
 
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -22,7 +23,7 @@ public class CreateEntity {
     private HashMap<String, Integer> widthOfEntities;
     private HashMap<String, Integer> heightOfEntities;
 
-    public CreateEntity(blankController bk, ImageView imageViewOfIslandOperatingUpon, AnchorPane anchorPane){
+    public CreateEntity(blankController bk, AnchorPane anchorPane){
         this.anchorPane = anchorPane;
         this.imageViewOfIslandOperatingUpon = imageViewOfIslandOperatingUpon;
         widthOfEntities = new HashMap<>();
@@ -58,7 +59,7 @@ public class CreateEntity {
         widthOfEntities.put("crushedPlayer",50);
     }
 
-    public void create() throws InterruptedException {
+    public void create(ImageView imageViewOfIslandOperatingUpon) throws InterruptedException {
         boolean flag = true;
        // double depthOfBaseOfIslands =bk.getDepthOfBaseOfIsland(gpOperatingOn)+  gpOperatingOn.getBoundsInLocal().getMinY();
         double depthOfBaseOfIslands = bk.getDepthOfBaseOfIsland(imageViewOfIslandOperatingUpon) + imageViewOfIslandOperatingUpon.getBoundsInParent().getMinY();
@@ -68,7 +69,7 @@ public class CreateEntity {
             randNoLevel2 = random.nextInt(5);
             double heightOfEntity = heightOfEntities.get(entities[randNoLevel2]);
             if(entities[randNoLevel2].equals("closedChest")){
-                ChestType chestType = new ChestType("closedChest",  imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + random.nextInt((int) imageViewOfIslandOperatingUpon.getBoundsInParent().getWidth()-40), depthOfBaseOfIslands - heightOfEntity + 30, heightOfEntities.get("closedChest"), widthOfEntities.get("closedChest"), anchorPane, bk);
+                ChestType chestType = new ChestType("closedChest",  imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + random.nextInt((int) imageViewOfIslandOperatingUpon.getBoundsInParent().getWidth()-40), depthOfBaseOfIslands - heightOfEntity + 30, heightOfEntities.get("closedChest"), widthOfEntities.get("closedChest"), anchorPane, bk, false);
                 bk.setChestObjects(chestType);
                 //System.out.println("closed chest c");
             }else{
@@ -117,8 +118,22 @@ public class CreateEntity {
         return new Player("PlayerNew", 144, 315, 93, 49, anchorPane, this, bk);
     }
 
-    public void createPlatform4Boss(){
-
+    public void createScene4Boss(ImageView i1, ImageView i2, ImageView i3, ImageView i6){
+        CommonAnimations.replaceImageView("smallestFloatingIsland", i1);
+        i1.setLayoutX(i6.getBoundsInParent().getMaxX()+47);
+        i1.setLayoutY(352);
+        i1.setFitWidth(bk.getWidthOfIslands("smallestFloatingIsland"));
+        i1.setFitHeight(bk.getHeightOfIslands("smallestFloatingIsland"));
+        CommonAnimations.replaceImageView("platform4Boss", i2);
+        i2.setLayoutX(i1.getBoundsInParent().getMaxX()+60);
+        i2.setLayoutY(279);
+        i2.setFitWidth(bk.getWidthOfIslands("platform4Boss"));
+        i2.setFitHeight(bk.getHeightOfIslands("platform4Boss"));
+        CommonAnimations.replaceImageView("mediumFloatingIsland", i3);
+        i3.setLayoutX(i2.getBoundsInParent().getMaxX()+47);
+        i3.setLayoutY(352);
+        i3.setFitWidth(bk.getWidthOfIslands("mediumFloatingIsland"));
+        i3.setFitHeight(bk.getHeightOfIslands("mediumFloatingIsland"));
     }
 
     public blankController getBk(){

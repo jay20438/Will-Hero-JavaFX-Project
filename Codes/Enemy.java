@@ -26,13 +26,13 @@ public abstract class Enemy {
         e = this;
         collided = false;
         flag4Up = false;
-        living = false;
+        living = true;
         gainedUpHeight = 0;
         this.anchorPane = anchorPane;
         imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
         imageView.setPreserveRatio(true);
         anchorPane.getChildren().add(imageView);
-        createEntity = new CreateEntity(null, null, null);
+        createEntity = new CreateEntity(null, null);
         this.jump();
     }
 

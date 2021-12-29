@@ -39,6 +39,7 @@ public class blankController implements Initializable {
     private Timer timer2;
     private Timer timer3;
     private Timer timer0;
+    boolean flagToStopCreating = true;
 
     public blankController(){
         //nOfCoins = new TextField();
@@ -154,9 +155,11 @@ public class blankController implements Initializable {
 
     @FXML
     void moveContent(MouseEvent event) throws FileNotFoundException, InterruptedException {
+
         nOfClick += 1;
         nOfSteps.setText(String.valueOf(nOfClick));
-        if(nOfClick>120 && island6.getBoundsInParent().getMaxX()<1407){
+        playerObj.throwWeapon();
+        if(nOfClick>120 && island6.getBoundsInParent().getMaxX()<1408){
             if(!playerFalls)
                 createEntity = new CreateEntity(this, mainAnchorPane);
                 if (player.getBoundsInParent().getMaxX()>island4.getBoundsInParent().getMinX()+20);
@@ -164,31 +167,34 @@ public class blankController implements Initializable {
                 player.setLayoutX(player.getLayoutX() + 150);
         }else if(!playerFalls && playerObj.isLiving()) {
             moveEntities();
-            if(nOfClick>112){
-                createEntity = new CreateEntity(this, mainAnchorPane);
-                createEntity.createScene4Boss(island4, island5, island6, island3);
-                tf4.setText("smallFloatingIsland");
-                tf5.setText("platform4Boss");
-                tf6.setText("mediumFloatingIsland");
-            }else {
-                if ((int) (island3.getBoundsInParent().getMaxX()) < 0) {
-                    createIsland(1, island1, island2, island3);
+            if(flagToStopCreating) {
+                if (nOfClick > 112) {
                     createEntity = new CreateEntity(this, mainAnchorPane);
-                    createEntity.create( island1);
-                    createEntity = new CreateEntity(this, mainAnchorPane);
-                    createEntity.create(island2);
-                    createEntity = new CreateEntity(this, mainAnchorPane);
-                    createEntity.create(island3);
-                }
+                    createEntity.createScene4Boss(island4, island5, island6, island3);
+                    tf4.setText("smallestFloatingIsland");
+                    tf5.setText("platform4Boss");
+                    tf6.setText("mediumFloatingIsland");
+                    flagToStopCreating = false;
+                } else {
+                    if ((int) (island3.getBoundsInParent().getMaxX()) < 0) {
+                        createIsland(1, island1, island2, island3);
+                        createEntity = new CreateEntity(this, mainAnchorPane);
+                        createEntity.create(island1);
+                        createEntity = new CreateEntity(this, mainAnchorPane);
+                        createEntity.create(island2);
+                        createEntity = new CreateEntity(this, mainAnchorPane);
+                        createEntity.create(island3);
+                    }
 
-                if ((int) (island6.getBoundsInParent().getMaxX()) < 0) {
-                    createIsland(4, island4, island5, island6);
-                    createEntity = new CreateEntity(this, mainAnchorPane);
-                    createEntity.create(island4);
-                    createEntity = new CreateEntity(this, mainAnchorPane);
-                    createEntity.create(island5);
-                    createEntity = new CreateEntity(this, mainAnchorPane);
-                    createEntity.create(island6);
+                    if ((int) (island6.getBoundsInParent().getMaxX()) < 0) {
+                        createIsland(4, island4, island5, island6);
+                        createEntity = new CreateEntity(this, mainAnchorPane);
+                        createEntity.create(island4);
+                        createEntity = new CreateEntity(this, mainAnchorPane);
+                        createEntity.create(island5);
+                        createEntity = new CreateEntity(this, mainAnchorPane);
+                        createEntity.create(island6);
+                    }
                 }
             }
         }
@@ -257,8 +263,8 @@ public class blankController implements Initializable {
         checkCollisionWithChestAndPlayer();
         checkCollisionOfPlayerWithTnt();
         checkCollisionOfPlayerWithCoin();
-        //checkCollisionOfPlayerWithGreenOrc();
-        //checkCollisionOfPlayerWithRedOrc();
+        checkCollisionOfPlayerWithGreenOrc();
+        checkCollisionOfPlayerWithRedOrc();
     }
 
 
@@ -268,7 +274,7 @@ public class blankController implements Initializable {
             double imageViewPosFront = imageView.getBoundsInParent().getMinX();
             double imageViewPosLast = imageView.getBoundsInParent().getMaxX();
             if(!(obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc")) && imageView.getBoundsInParent().getMinX()>1500){
-                gameOver();
+                //gameOver();
             }
             if(imageView.getBoundsInParent().getMaxY()>520){
                 if(obj.getClass().getName().equals("Player")){

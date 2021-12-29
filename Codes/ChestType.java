@@ -25,13 +25,15 @@ public class ChestType {
     private RotateTransition rotateTransition;
     private  FadeTransition fadeTransition;
     private boolean collided;
+    boolean flagOnlyForCoins;
 
-    public ChestType(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk){
+    public ChestType(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk, boolean flagOnlyForCoins){
+        this.flagOnlyForCoins = flagOnlyForCoins;
         this.bk = bk;
         random = new Random();
         collided = false;
         this.anchorPane = anchorPane;
-        createEntity = new CreateEntity(null, null, null);
+        createEntity = new CreateEntity(null, null);
         this.height = height;
         this.width  = width;
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);;
@@ -51,19 +53,24 @@ public class ChestType {
     }
 
     public void generateReward(Player player){
-        int firstLevel = random.nextInt(2);
-        if(firstLevel==0){
-            Coin coinObj = new Coin(null, 0, 0, 0, 0, null);
-            int randomCoins = coinObj.generateCollection();
-            player.getCoins(randomCoins);
-            bk.updateCoin(randomCoins);
-        }else{
-            int secondLevel = random.nextInt(2);
-            if(secondLevel == 0){
-                player.getKnife(new Knife());
-            }else{
-                player.getMissile(new Missile());
+        if(!flagOnlyForCoins) {
+            int firstLevel = random.nextInt(2);
+            if (firstLevel == 0) {
+                Coin coinObj = new Coin(null, 0, 0, 0, 0, null);
+                int randomCoins = coinObj.generateCollection();
+                player.getCoins(randomCoins);
+                bk.updateCoin(randomCoins);
+            } else {
+                int secondLevel = random.nextInt(2);
+                if (secondLevel == 0) {
+                    player.getKnife(new Knife(anchorPane));
+                } else {
+                    player.getMissile(new Missile(anchorPane));
+                }
             }
+        }else{
+            bk.updateCoin(100);
+            player.getCoins(100);
         }
         //rotateTransition.pause();
     }

@@ -1,5 +1,4 @@
-package com.example.javafx2;
-
+package com.example.willherojavafxproject;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
@@ -19,17 +18,13 @@ public abstract class Weapon {
     private CreateEntity createEntity;
     private AnchorPane anchorPane;
 
-    public Weapon(String imageName, double x, double y, double height, double width, AnchorPane anchorPane){
+    public Weapon(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
-        createEntity = new CreateEntity(null, null, null);
-        weaponImageView.setPreserveRatio(true);
-
-
+        createEntity = new CreateEntity(null, null);
     }
 
-    public TranslateTransition moveWeapon(int from, int to, Duration duration)
-    {
-        weaponImageView = CommonAnimations.makeImageAndSetCoord("MissileFlying", 30, 120,50,150);
+    public TranslateTransition moveWeapon(int from, int to, Duration duration) {
+        weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying", 30, 120, 50, 150);
         anchorPane.getChildren().add(weaponImageView);
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setNode(weaponImageView);
@@ -54,11 +49,7 @@ public abstract class Weapon {
     }*/
 
 
-
-    public ImageView getImageView(){
+    public ImageView getImageView() {
         return weaponImageView;
     }
-
-
 }
-
