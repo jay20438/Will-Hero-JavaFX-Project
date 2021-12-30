@@ -1,5 +1,6 @@
 package com.example.javafx2;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,6 +31,15 @@ public class Knife extends Weapon{
         translateTransition.setToX(to);
         translateTransition.setFromX(from);
         return translateTransition;
+    }
+
+    public void fade() {
+        FadeTransition fadeTransition3 = new FadeTransition();
+        CommonAnimations.replaceImageView(null, weaponImageView);
+        fadeTransition3.setNode(weaponImageView);
+        fadeTransition3.setDuration(Duration.millis(1500));
+        fadeTransition3.setToValue(0);
+        fadeTransition3.play();
     }
 
     public ImageView getImageView() {

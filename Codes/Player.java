@@ -1,4 +1,4 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -144,13 +144,27 @@ public class Player {
 
     public void launchMissile()
     {
-        missile.moveWeapon( 30, 120,  Duration.millis(1000)).play();
+        double xPosition = mineImageView.getBoundsInParent().getMaxX();
+        double temp = xPosition+40;
+        double yPosition = mineImageView.getBoundsInParent().getMaxY();
+        missile.moveWeapon( xPosition, xPosition + 40,yPosition,  1000).play();
+        if(temp == xPosition)
+        {
+            missile.fade();
+        }
     }
 
     public void throwKnife()
     {
-        ImageView imv2 = knife.getImageView();
-        knife.moveWeapon(30, 120,  Duration.millis(1000)).play();
+        double xPosition = mineImageView.getBoundsInParent().getMaxX();
+        double temp = xPosition+40;
+        double yPosition = mineImageView.getBoundsInParent().getMaxY();
+        knife.moveWeapon(xPosition, temp,yPosition,  1000).play();
+
+        if(temp == xPosition)
+        {
+            knife.fade();
+        }
     }
 
 }
