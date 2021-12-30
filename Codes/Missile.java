@@ -16,16 +16,17 @@ public class Missile extends Weapon{
     private AnchorPane anchorPane;
     public Missile(AnchorPane anchorPane) {
         super(anchorPane);
+        this.anchorPane = anchorPane;
     }
 
     @Override
-    public TranslateTransition moveWeapon(int from, int to, Duration duration) {
-        weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying", 30, 120, 50, 150);
+    public TranslateTransition moveWeapon(int from, int to, double duration) {
+        weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying", 10, 10, 50, 150);
         anchorPane.getChildren().add(weaponImageView);
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setNode(weaponImageView);
-        translateTransition.setDuration(duration);
-        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        translateTransition.setDuration(Duration.millis(duration));
+        translateTransition.setCycleCount(1);
         translateTransition.setToX(to);
         translateTransition.setFromX(from);
         return translateTransition;

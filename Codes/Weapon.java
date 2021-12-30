@@ -23,7 +23,7 @@ public abstract class Weapon {
         createEntity = new CreateEntity(null, null);
     }
 
-    abstract TranslateTransition moveWeapon(int from, int to, Duration duration);
+    abstract TranslateTransition moveWeapon(int from, int to, double duration);
 
 
     /*public void killEnemy(Enemy enemy){

@@ -16,16 +16,17 @@ public class Knife extends Weapon{
     private AnchorPane anchorPane;
     public Knife(AnchorPane anchorPane) {
         super(anchorPane);
+        this.anchorPane = anchorPane;
     }
 
     @Override
-    public TranslateTransition moveWeapon(int from, int to, Duration duration) {
-        weaponImageView = CommonAnimations.makeImageAndSetCoord("knife", 30, 40, 50, 300);
+    public TranslateTransition moveWeapon(int from, int to, double duration) {
+        weaponImageView = CommonAnimations.makeImageAndSetCoord("knifeInAir", -30, -40, 200, 300);
         anchorPane.getChildren().add(weaponImageView);
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setNode(weaponImageView);
-        translateTransition.setDuration(duration);
-        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+        translateTransition.setDuration(Duration.millis(duration));
+        translateTransition.setCycleCount(1);
         translateTransition.setToX(to);
         translateTransition.setFromX(from);
         return translateTransition;
