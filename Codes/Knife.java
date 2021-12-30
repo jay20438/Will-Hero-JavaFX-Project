@@ -20,8 +20,8 @@ public class Knife extends Weapon{
     }
 
     @Override
-    public TranslateTransition moveWeapon(int from, int to, double duration) {
-        weaponImageView = CommonAnimations.makeImageAndSetCoord("knifeInAir", -30, -40, 200, 300);
+    public TranslateTransition moveWeapon(double from, double to,double yPosition, double duration) {
+        weaponImageView = CommonAnimations.makeImageAndSetCoord("knifeInAir",from, yPosition, 200, 300);
         anchorPane.getChildren().add(weaponImageView);
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setNode(weaponImageView);

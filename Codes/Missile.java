@@ -20,8 +20,8 @@ public class Missile extends Weapon{
     }
 
     @Override
-    public TranslateTransition moveWeapon(int from, int to, double duration) {
-        weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying", 10, 10, 50, 150);
+    public TranslateTransition moveWeapon(double from, double to,double yPosition, double duration) {
+        weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying",from, yPosition, 50, 150);
         anchorPane.getChildren().add(weaponImageView);
         TranslateTransition translateTransition = new TranslateTransition();
         translateTransition.setNode(weaponImageView);
