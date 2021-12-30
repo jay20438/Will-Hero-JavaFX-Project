@@ -88,7 +88,6 @@ public class Player {
                         p.setGainedUpHeight(0);
                     }
                 }
-                //ystem.out.println("gained heoght:" + p.getGainedUpHeight());
                 try {
                     bk.jump(mineImageView, p, 10, p.getFlag4Up(), p.isLiving());
                 } catch (InterruptedException ex) {
@@ -96,7 +95,7 @@ public class Player {
                 }
             }
         };
-        timer.scheduleAtFixedRate(timerTask, 280, 100);
+        timer.scheduleAtFixedRate(timerTask, 280, 110);
     }
 
     public boolean  isLiving(){

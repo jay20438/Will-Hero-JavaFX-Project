@@ -40,9 +40,11 @@ public class blankController implements Initializable {
     private Timer timer3;
     private Timer timer0;
     boolean flagToStopCreating = true;
+    private boolean flagForBossLoaded;
 
     public blankController(){
         //nOfCoins = new TextField();
+        flagForBossLoaded = false;
         nOfCoinsAmount = 0;
         tntObjects = new ArrayList<>();
         redOrcs = new ArrayList<>();
@@ -159,12 +161,17 @@ public class blankController implements Initializable {
         nOfClick += 1;
         nOfSteps.setText(String.valueOf(nOfClick));
         playerObj.throwWeapon();
+        //createEntity.createBoss(500);
         if(nOfClick>120 && island6.getBoundsInParent().getMaxX()<1408){
             if(!playerFalls)
                 createEntity = new CreateEntity(this, mainAnchorPane);
-                if (player.getBoundsInParent().getMaxX()>island4.getBoundsInParent().getMinX()+20);
-                //createEntity.loadBoss();
+//                if (player.getBoundsInParent().getMaxX()>island4.getBoundsInParent().getMinX()+20);
+//                //createEntity.loadBoss();
                 player.setLayoutX(player.getLayoutX() + 150);
+                if(player.getBoundsInParent().getMaxX()>island5.getLayoutX() && !flagForBossLoaded){
+                    flagForBossLoaded = true;
+                    //createEntity.createBoss((int) (island5.getLayoutX()+200 + random.nextInt((int)island5.getFitWidth()-200-171)));
+                }
         }else if(!playerFalls && playerObj.isLiving()) {
             moveEntities();
             if(flagToStopCreating) {
@@ -259,20 +266,22 @@ public class blankController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("in intiialize");
 
-        checkCollisionWithChestAndPlayer();
-        checkCollisionOfPlayerWithTnt();
-        checkCollisionOfPlayerWithCoin();
-        checkCollisionOfPlayerWithGreenOrc();
-        checkCollisionOfPlayerWithRedOrc();
+//        checkCollisionWithChestAndPlayer();
+//        checkCollisionOfPlayerWithTnt();
+//        checkCollisionOfPlayerWithCoin();
+//        checkCollisionOfPlayerWithGreenOrc();
+//        checkCollisionOfPlayerWithRedOrc();
     }
 
 
-    synchronized public void  jump(ImageView imageView, Object obj, int sub, boolean flag4Up, boolean living) throws InterruptedException {
+      synchronized public void  jump(ImageView imageView, Object obj, int sub, boolean flag4Up, boolean living) throws InterruptedException {
         boolean flag = false;
         try {
             double imageViewPosFront = imageView.getBoundsInParent().getMinX();
             double imageViewPosLast = imageView.getBoundsInParent().getMaxX();
+            System.out.println(obj.getClass().getName());
             if(!(obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc")) && imageView.getBoundsInParent().getMinX()>1500){
                 //gameOver();
             }
@@ -312,7 +321,7 @@ public class blankController implements Initializable {
                 if(flag && !living){
                     p.terminateJump();
                 }
-            }else if(obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc")){
+            }else if(obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.Boss")){
                 Enemy e = (Enemy) obj;
                 if(living){
                     e.setGainedUpHeight(e.getGainedUpHeight()+sub);
@@ -372,6 +381,10 @@ public class blankController implements Initializable {
         System.out.println("no tf found");
         return 0;
 
+    }
+
+    public int getDepthOfBaseOfIsland(String name){
+        return (int)depthOfBaseOfIslands.get(name);
     }
 
     public void moveEntities(){
@@ -498,8 +511,12 @@ public class blankController implements Initializable {
         return widthOfIslands.get(imageName);
     }
 
-     public void checkCollisionWithChestAndPlayer(){
-        System.out.println("in chestp");
+    public int getXOfPlatformForBoss(){
+        return (int)island5.getLayoutX();
+    }
+
+      public void checkCollisionWithChestAndPlayer(){
+
         timer1 = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -529,10 +546,10 @@ public class blankController implements Initializable {
                 }
             }
         };
-        timer1.scheduleAtFixedRate(task, 1500, 50);
+        timer1.scheduleAtFixedRate(task, 1500, 100);
     }
 
-    public void checkCollisionOfPlayerWithTnt(){
+     public void checkCollisionOfPlayerWithTnt(){
         System.out.println("in pt");
         timer2 = new Timer();
         TimerTask task2 = new TimerTask() {
@@ -563,7 +580,7 @@ public class blankController implements Initializable {
 
             }
         };
-        timer2.scheduleAtFixedRate(task2, 2000, 50);
+        timer2.scheduleAtFixedRate(task2, 2000, 100);
     }
 
       public void checkCollisionOfPlayerWithCoin(){
@@ -598,7 +615,7 @@ public class blankController implements Initializable {
                 }
             }
         };
-        timer3.scheduleAtFixedRate(task3, 500, 60);
+        timer3.scheduleAtFixedRate(task3, 500, 100);
     }
 
      public void checkCollisionOfPlayerWithGreenOrc(){
@@ -651,7 +668,7 @@ public class blankController implements Initializable {
         timer4.scheduleAtFixedRate(task4, 1000, 100);
     }
 
-     public void checkCollisionOfPlayerWithRedOrc(){
+      public void checkCollisionOfPlayerWithRedOrc(){
         System.out.println("in red p");
         Timer timer5 = new Timer();
         TimerTask task5 = new TimerTask() {
@@ -699,11 +716,11 @@ public class blankController implements Initializable {
                 }
             }
         };
-        timer5.scheduleAtFixedRate(task5, 1000, 50);
+        timer5.scheduleAtFixedRate(task5, 1000, 100);
 
     }
 
-     public void checkCollisionOfEntitiesAndFire(ImageView imageView) {
+      public void checkCollisionOfEntitiesAndFire(ImageView imageView) {
          System.out.println("ion e and F");
 //        while (imageView.getOpacity()!=0){
          if (player.getBoundsInParent().getMaxX() > imageView.getBoundsInParent().getMinX() && player.getBoundsInParent().getMinX() < imageView.getBoundsInParent().getMaxX()

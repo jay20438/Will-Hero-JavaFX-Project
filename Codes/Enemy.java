@@ -1,7 +1,5 @@
 package com.example.willherojavafxproject;
-
-import javafx.scene.Group;
-import javafx.scene.image.Image;
+import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -20,8 +18,13 @@ public abstract class Enemy {
     private boolean flag4Up;
     private Enemy e;
     private boolean living;
+    private int maxHeight;
+    private int yChange;
 
-    public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk) throws InterruptedException {
+
+    public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk, int maxHeight, int yChange) throws InterruptedException {
+        this.maxHeight = maxHeight;
+        this.yChange = yChange;
         this.bk = bk;
         e = this;
         collided = false;
@@ -33,7 +36,9 @@ public abstract class Enemy {
         imageView.setPreserveRatio(true);
         anchorPane.getChildren().add(imageView);
         createEntity = new CreateEntity(null, null);
-        this.jump();
+        if(imageName.equals("boss"))
+            this.bringDownBoss();
+        //this.jump();
     }
 
 
@@ -50,7 +55,7 @@ public abstract class Enemy {
                 if(!living){
                     e.setFlag4Up(false);
                 }else {
-                    if (e.getGainedUpHeight() > 0 && e.getGainedUpHeight() < 100) {
+                    if (e.getGainedUpHeight() > 0 && e.getGainedUpHeight() < e.getMaxHeight()) {
                         e.setFlag4Up(true);
                     } else {
                         e.setFlag4Up(false);
@@ -58,13 +63,27 @@ public abstract class Enemy {
                     }
                 }
                 try {
-                    bk.jump(imageView, e, 10, e.getFlag4Up(), e.isLiving());
+                    bk.jump(imageView, e, e.getyChange(), e.getFlag4Up(), e.isLiving());
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
             }
         };
-        timer1.scheduleAtFixedRate(timerTask1, 500, 150);
+        timer1.scheduleAtFixedRate(timerTask1, 2000, 150);
+    }
+
+    public void bringDownBoss(){
+        TranslateTransition translateTransition = new TranslateTransition();
+        translateTransition.setNode(imageView);
+        translateTransition.setDuration(Duration.millis(400));
+        translateTransition.setCycleCount(1);
+        translateTransition.setAutoReverse(false);
+        translateTransition.setByY(bk.getDepthOfBaseOfIsland("platform4Boss")+279-imageView.getFitHeight()+200);
+        translateTransition.play();
+        int i = 0;
+        while(i<700){
+            i ++;
+        }
     }
 
     public void terminateJump(){
@@ -80,9 +99,18 @@ public abstract class Enemy {
 
     }
 
+    public void setyChange(int value){
+        yChange = value;
+    }
+
+    public void setMaxHeight(int value){
+        maxHeight = value;
+    }
+
     public ImageView getImageView(){
         return imageView;
     }
+
     public boolean isCollided(){
         return collided;
     }
@@ -94,8 +122,9 @@ public abstract class Enemy {
 
     public void slide(){
         //CommonAnimations.setCoordinates(imageView, imageView.getBoundsInParent().getMinX()+90, imageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("greenOrc"), createEntity.getWidthOfEntity("greenOrc"));
-        imageView.setLayoutX(imageView.getLayoutX()+200);
+        imageView.setLayoutX(imageView.getLayoutX()+300);
     }
+
 
     public void  endTimer(){
         timer1.cancel();
@@ -115,6 +144,14 @@ public abstract class Enemy {
 
     public boolean getFlag4Up(){
         return flag4Up;
+    }
+
+    public int getMaxHeight(){
+        return maxHeight;
+    }
+
+    public int getyChange(){
+        return yChange;
     }
 
     public void burnt(){
