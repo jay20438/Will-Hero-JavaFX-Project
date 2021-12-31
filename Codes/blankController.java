@@ -39,6 +39,9 @@ public class blankController implements Initializable {
     private Timer timer2;
     private Timer timer3;
     private Timer timer0;
+    private Timer timer4;
+    private Timer timer5;
+    private Timer timer6;
     boolean flagToStopCreating = true;
     private boolean flagForBossLoaded;
     private int noOfFramesCreated;
@@ -163,22 +166,25 @@ public class blankController implements Initializable {
         nOfClick += 1;
         nOfSteps.setText(String.valueOf(nOfClick));
         playerObj.throwWeapon();
-        //boss = createEntity.createBoss(500);
-        //boss.jump();
-        //boss.move();
+//        if(nOfClick==1) {
+//            boss = createEntity.createBoss(700, 0, island6.getBoundsInParent().getMaxX() - 10);
+//            boss.bringDownBoss((double) island5.getLayoutY());
+//            checkCollisionOfPlayerAndBoss();
+//        }
         if(nOfClick>120 && island6.getBoundsInParent().getMaxX()<1408){
             if(!playerFalls)
                 createEntity = new CreateEntity(this, mainAnchorPane);
                 player.setLayoutX(player.getLayoutX() + 150);
                 if(player.getBoundsInParent().getMaxX()>island5.getLayoutX() && !flagForBossLoaded){
                     flagForBossLoaded = true;
-                    boss = createEntity.createBoss((int) (island5.getLayoutX()+200 + random.nextInt((int)island5.getFitWidth()-200-171)));
-                    boss.bringDownBoss((double)island5.getLayoutY());
+//                    boss = createEntity.createBoss((int) (island5.getLayoutX()+200 + random.nextInt((int)island5.getFitWidth()-200-171)), island5.getLayoutY()+20, island6.getBoundsInParent().getMaxX()-10);
+//                    boss.bringDownBoss((double)island5.getLayoutY());
+//                    checkCollisionOfPlayerAndBoss();
                 }
         }else if(!playerFalls && playerObj.isLiving()) {
             moveEntities();
             if(flagToStopCreating) {
-                if (nOfClick > 112) {
+                if (nOfClick > 114) {
                     createEntity = new CreateEntity(this, mainAnchorPane);
                     createEntity.createScene4Boss(island4, island5, island6, island3);
                     tf4.setText("smallestFloatingIsland");
@@ -272,85 +278,83 @@ public class blankController implements Initializable {
             e.printStackTrace();
         }
         System.out.println("in intiialize");
-
-        checkCollisionWithChestAndPlayer();
-        checkCollisionOfPlayerWithTnt();
         checkCollisionOfPlayerWithCoin();
-       checkCollisionOfPlayerWithGreenOrc();
+        checkCollisionWithChestAndPlayer();
         checkCollisionOfPlayerWithRedOrc();
+        checkCollisionOfPlayerWithGreenOrc();
+        checkCollisionOfPlayerWithTnt();
     }
 
 
       synchronized public void  jump(ImageView imageView, Object obj, int sub, boolean flag4Up, boolean living) throws InterruptedException {
         boolean flag = false;
-        try {
-            double imageViewPosFront = imageView.getBoundsInParent().getMinX();
-            double imageViewPosLast = imageView.getBoundsInParent().getMaxX();
-            if(!(obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc")) && imageView.getBoundsInParent().getMinX()>1500){
-                //gameOver();
-            }
-            if(imageView.getBoundsInParent().getMaxY()>520){
-                if(obj.getClass().getName().equals("Player")){
-                    if(player.getLayoutY()>739){
-                        gameOver();
-                    }else{
-                        playerFalls = true;
+            try {
+                if (imageView.getBoundsInParent().getMaxY() > 520) {
+                    if (obj.getClass().getName().equals("Player")) {
+                        if (player.getLayoutY() > 739) {
+                            gameOver();
+                        } else {
+                            playerFalls = true;
+                        }
+                    }
+                } else if (!flag4Up) {
+                    if (imageView.getBoundsInParent().getMaxX() >= island1.getBoundsInParent().getMinX() && imageView.getBoundsInParent().getMinX() <= island1.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))) {
+                        flag = true;
+                    } else if (imageView.getBoundsInParent().getMaxX() >= island2.getBoundsInParent().getMinX() && imageView.getBoundsInParent().getMinX() <= island2.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))) {
+                        flag = true;
+                    } else if (imageView.getBoundsInParent().getMaxX() >= island3.getBoundsInParent().getMinX() && imageView.getBoundsInParent().getMinX() <= island3.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))) {
+                        flag = true;
+                    } else if (imageView.getBoundsInParent().getMaxX() >= island4.getBoundsInParent().getMinX() && imageView.getBoundsInParent().getMinX() <= island4.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))) {
+                        flag = true;
+                    } else if (imageView.getBoundsInParent().getMaxX() >= island5.getBoundsInParent().getMinX() && imageView.getBoundsInParent().getMinX() <= island5.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))) {
+                        flag = true;
+                    } else if (imageView.getBoundsInParent().getMaxX() >= island6.getBoundsInParent().getMinX() && imageView.getBoundsInParent().getMinX() <= island6.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))) {
+                        flag = true;
                     }
                 }
-            }else if(!flag4Up) {
-                if (imageViewPosLast >= island1.getBoundsInParent().getMinX() && imageViewPosFront <= island1.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island1.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf1.getText()))) {
-                    flag = true;
-                } else if (imageViewPosLast >= island2.getBoundsInParent().getMinX() && imageViewPosFront <= island2.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island2.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf2.getText()))) {
-                    flag = true;
-                } else if (imageViewPosLast >= island3.getBoundsInParent().getMinX() && imageViewPosFront <= island3.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island3.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf3.getText()))) {
-                    flag = true;
-                } else if (imageViewPosLast >= island4.getBoundsInParent().getMinX() && imageViewPosFront <= island4.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island4.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf4.getText()))) {
-                    flag = true;
-                } else if (imageViewPosLast >= island5.getBoundsInParent().getMinX() && imageViewPosFront <= island5.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island5.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf5.getText()))) {
-                    flag = true;
-                } else if (imageViewPosLast >= island6.getBoundsInParent().getMinX() && imageViewPosFront <= island6.getBoundsInParent().getMaxX() && imageView.getBoundsInParent().getMaxY() > (island6.getBoundsInParent().getMinY() + depthOfBaseOfIslands.get(tf6.getText()))) {
-                    flag = true;
+            }catch(IndexOutOfBoundsException e){
+                System.out.println("catched");
+            }
+            if (flag || flag4Up) {
+                flag4Up = true;
+                if (obj.getClass().getName().equals("com.example.willherojavafxproject.Player")) {
+                    Player p = (Player) obj;
+                    if (living) {
+                        p.setGainedUpHeight(p.getGainedUpHeight() + sub);
+                    }
+                    if (flag && !living) {
+                        p.terminateJump();
+                    }
+                } else if (obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.Boss")) {
+                    Enemy e = (Enemy) obj;
+                    if (living) {
+                        e.setGainedUpHeight(e.getGainedUpHeight() + sub);
+                    }
+                    if (flag && !living) {
+                        e.terminateJump();
+                    }
+                }
+                if (living) {
+                    imageView.setLayoutY(imageView.getBoundsInParent().getMinY() - sub);
                 }
             }
-        }catch (IndexOutOfBoundsException e){
-            System.out.println("catched");
-        }
-        if(flag || flag4Up){
-            flag4Up = true;
-            if(obj.getClass().getName().equals("com.example.willherojavafxproject.Player")){
-                Player p = (Player) obj;
-                if(living){
-                    p.setGainedUpHeight(p.getGainedUpHeight()+sub);
-                }
-                if(flag && !living){
-                    p.terminateJump();
-                }
-            }else if(obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.Boss")){
-                Enemy e = (Enemy) obj;
-                if(living){
-                    e.setGainedUpHeight(e.getGainedUpHeight()+sub);
-                }
-                if(flag && !living){
-                    e.terminateJump();
-                }
+            if (!flag4Up) {
+                imageView.setLayoutY(imageView.getBoundsInParent().getMinY() + sub);
             }
-            if(living) {
-                imageView.setLayoutY(imageView.getBoundsInParent().getMinY() - sub);
-            }
-        }
-        if(!flag4Up){
-            imageView.setLayoutY(imageView.getBoundsInParent().getMinY() + sub);
-        }
     }
 
 
 
 
 
-    private void gameOver() throws InterruptedException {
+    public void gameOver() throws InterruptedException {
         timer0.cancel();
         timer1.cancel();
         timer2.cancel();
+        timer3.cancel();
+        timer4.cancel();
+        timer5.cancel();
+        timer6.cancel();
         System.out.println("game over");
     }
 
@@ -388,12 +392,17 @@ public class blankController implements Initializable {
         return (int)depthOfBaseOfIslands.get(name);
     }
 
+    public void stopBossMoving(){
+        boss.terminateMoveLeft();
+    }
+
     public void moveEntities(){
         int index1 = -1;
         int index2 = -1;
         int index3 = -1;
         int index4 = -1;
         int index5 = -1;
+        player.setLayoutX(160);
         island1.setLayoutX(island1.getLayoutX() - 170);
         tf1.setLayoutX(tf1.getLayoutX() - 170);
         island2.setLayoutX(island2.getLayoutX() - 170);
@@ -534,16 +543,11 @@ public class blankController implements Initializable {
                         ChestType chestType = listIterator.next();
                         if(!chestType.isCollided()) {
                             ImageView chestTypeImageView = chestType.getImageView();
-                            //double chestTypeImageView.getBoundsInParent().getMaxX() = chestTypeImageView.getBoundsInParent().getMaxX();
-                            //double chestTypeImageView.getBoundsInParent().getMinX() = chestTypeImageView.getBoundsInParent().getMinX();
-                            if (player.getBoundsInParent().getMaxX() >= chestTypeImageView.getBoundsInParent().getMinX()) {
-                                if (player.getBoundsInParent().getMinX() <= chestTypeImageView.getBoundsInParent().getMaxX()) {
+                            if (player.getBoundsInParent().getMaxX() >= chestTypeImageView.getLayoutX() && player.getLayoutX() <= chestTypeImageView.getBoundsInParent().getMaxX()) {
                                     if (player.getBoundsInParent().getMaxY() >= chestTypeImageView.getBoundsInParent().getMinY() && player.getBoundsInParent().getMinY() <= chestTypeImageView.getBoundsInParent().getMaxY()) {
                                         chestType.setCollided(true);
                                         chestType.open(playerObj);
-                                        //loadImage(chestType);
                                     }
-                                }
                             }
                         }
                     }
@@ -559,9 +563,6 @@ public class blankController implements Initializable {
         TimerTask task2 = new TimerTask() {
             @Override
             public void run() {
-                int index2 = 0;
-                //double player.getBoundsInParent().getMinX() = player.getBoundsInParent().getMinX();
-                //double player.getBoundsInParent().getMaxX() = player.getBoundsInParent().getMaxX();
                 if(tntObjects.size()>0){
                     System.out.println("size of tnt:"+tntObjects.size());
                     ListIterator<TNT> listIterator = tntObjects.listIterator();
@@ -569,15 +570,11 @@ public class blankController implements Initializable {
                         TNT tnt = listIterator.next();
                         if(!tnt.isCollided()) {
                             ImageView tntImageView = tnt.getImageView();
-                            //double tntImageView.getBoundsInParent().getMinX() = tntImageView.getBoundsInParent().getMinX();
-                            //double tntImageView.getBoundsInParent().getMaxX() = tntImageView.getBoundsInParent().getMaxX();
-                            if (player.getBoundsInParent().getMaxX() >= tntImageView.getBoundsInParent().getMinX()) {
-                                if (player.getBoundsInParent().getMinX() <= tntImageView.getBoundsInParent().getMaxX()) {
-                                    if (player.getBoundsInParent().getMaxY() >= tntImageView.getBoundsInParent().getMinY() && player.getBoundsInParent().getMinY() <= tntImageView.getBoundsInParent().getMaxY()) {
+                            if (player.getBoundsInParent().getMaxX() >= tntImageView.getLayoutX() && player.getLayoutX() <= tntImageView.getBoundsInParent().getMaxX()) {
+                                    if (player.getBoundsInParent().getMaxY() >= tntImageView.getLayoutY() && player.getLayoutY() <= tntImageView.getBoundsInParent().getMaxY()) {
                                         tnt.setCollided(true);
                                         tnt.initiate();
                                     }
-                                }
                             }
                         }
                     }
@@ -593,32 +590,25 @@ public class blankController implements Initializable {
 
 
     public void checkCollisionOfPlayerWithCoin(){
-        System.out.println("in pc");
         timer3 = new Timer();
         TimerTask task3 = new TimerTask() {
             @Override
             public void run() {
                 int index2 = 0;
-                //double player.getBoundsInParent().getMinX() = player.getBoundsInParent().getMinX();
-                //double player.getBoundsInParent().getMaxX() = player.getBoundsInParent().getMaxX();
                 if(tntObjects.size()>0){
                     System.out.println("size of coins:"+coins.size());
                     ListIterator<Coin> listIterator = coins.listIterator();
                     while (listIterator.hasNext()) {
                         Coin coin = listIterator.next();
                         ImageView coinImageView = coin.getImageView();
-                        //double coinImageView.getBoundsInParent().getMinX() = coinImageView.getBoundsInParent().getMinX();
-                        //double coinImageView.getBoundsInParent().getMaxX() = coinImageView.getBoundsInParent().getMaxX();
                         if(!coin.isCollided()) {
-                            if (player.getBoundsInParent().getMaxX() >= coinImageView.getBoundsInParent().getMinX()) {
-                                if (player.getBoundsInParent().getMinX() <= coinImageView.getBoundsInParent().getMaxX()) {
+                            if (player.getBoundsInParent().getMaxX() >= coinImageView.getBoundsInParent().getMinX() && player.getBoundsInParent().getMinX() <= coinImageView.getBoundsInParent().getMaxX()) {
                                     if (player.getBoundsInParent().getMaxY() >= coinImageView.getBoundsInParent().getMinY() && player.getBoundsInParent().getMinY() <= coinImageView.getBoundsInParent().getMaxY()) {
                                         coin.setCollided(true);
                                         updateCoin(1);
                                         playerObj.getCoins(1);
                                         coin.fade();
                                     }
-                                }
                             }
                         }
                     }
@@ -631,7 +621,7 @@ public class blankController implements Initializable {
 
      public void checkCollisionOfPlayerWithGreenOrc(){
         System.out.println("in green p");
-        Timer timer4 = new Timer();
+        timer4 = new Timer();
         TimerTask task4 = new TimerTask() {
             @Override
             public void run() {
@@ -644,28 +634,16 @@ public class blankController implements Initializable {
                         GreenOrc gOrc = listIterator4.next();
                         if (!gOrc.isCollided()) {
                             ImageView greenOrcImageView = gOrc.getImageView();
-
-                            if (player.getBoundsInParent().getMinX() <= greenOrcImageView.getBoundsInParent().getMaxX()) {
-                                if (player.getBoundsInParent().getMaxX() >= greenOrcImageView.getBoundsInParent().getMinX()) {
-                                    if (player.getBoundsInParent().getMaxY() >= greenOrcImageView.getBoundsInParent().getMinY()) {
-                                        gOrc.slide();
-                                        gOrc.setCollided(true);
-                                    }
+                            if(player.getBoundsInParent().getMaxX()>=greenOrcImageView.getLayoutX() && player.getLayoutX()<greenOrcImageView.getBoundsInParent().getMaxX()){
+                                if(player.getBoundsInParent().getMinY()>=greenOrcImageView.getBoundsInParent().getMaxY()-5){
+                                    gOrc.killPlayer(playerObj);
+                                }else if(player.getBoundsInParent().getMaxY()>greenOrcImageView.getLayoutY()){
+                                    int x = (int)greenOrcImageView.getLayoutX();
+                                    playerObj.setCoordinatesAfterCollision(x-25);
+                                    gOrc.slide(300);
                                 }
-                            } else if (player.getBoundsInParent().getMinY() <= greenOrcImageView.getBoundsInParent().getMaxY()) {
-                                gOrc.killPlayer(playerObj);
                                 gOrc.setCollided(true);
                             }
-//                            if (playerXLast >= greenOrcImageViewXFront && playerXFront <= greenOrcImageViewXLast) {
-//                                if (playerXLast < greenOrcImageViewXFront + 10) {
-//                                    if ((playerYTop >= greenOrcImageView.getBoundsInParent().getMinY() && player.getBoundsInParent().getMaxY() <= greenOrcImageViewYBottom) || (playerYTop <= greenOrcImageViewYTop && playerYBottom >= greenOrcImageViewYBottom)) {
-//                                        gOrc.slide();
-//                                    }
-//                                } else if (playerYTop <= greenOrcImageViewYBottom && playerYBottom >= greenOrcImageViewYTop) {
-//                                    gOrc.killPlayer(playerObj);
-//                                }
-//                                gOrc.setCollided(true);
-//                            }
                         }
                     }
                 }
@@ -675,39 +653,28 @@ public class blankController implements Initializable {
     }
 
     public void checkCollisionOfPlayerWithRedOrc(){
-        Timer timer5 = new Timer();
+        timer5 = new Timer();
         TimerTask task5 = new TimerTask() {
             @Override
             public void run() {
                 int index = 0;
                 if(redOrcs.size()>0) {
                     ListIterator<RedOrc> listIterator4 = redOrcs.listIterator();
-                    System.out.println("size of gOrc:"+redOrcs.size());
                     while (listIterator4.hasNext()) {
                         RedOrc rOrc = listIterator4.next();
                         if (!rOrc.isCollided()) {
                             ImageView redOrcImageView = rOrc.getImageView();
-                            if (player.getBoundsInParent().getMinX() <= redOrcImageView.getBoundsInParent().getMaxX()) {
-                                if (player.getBoundsInParent().getMaxX() >= redOrcImageView.getBoundsInParent().getMinX()) {
-                                    if (player.getBoundsInParent().getMaxY() >= redOrcImageView.getBoundsInParent().getMinY()) {
-                                        rOrc.slide();
-                                        rOrc.setCollided(true);
-                                    }
+                            if(player.getBoundsInParent().getMaxX()>=redOrcImageView.getLayoutX() && player.getLayoutX()<redOrcImageView.getBoundsInParent().getMaxX()){
+                                // not setting the is collided flag because it is not needed as we don't have any array list
+                                if(player.getBoundsInParent().getMinY()>=redOrcImageView.getBoundsInParent().getMaxY()-5){
+                                    rOrc.killPlayer(playerObj);
+                                }else if(player.getBoundsInParent().getMaxY()>redOrcImageView.getLayoutY()){
+                                    int x = (int)redOrcImageView.getLayoutX();
+                                    playerObj.setCoordinatesAfterCollision(x-30);
+                                    rOrc.slide(200);
                                 }
-                            } else if (player.getBoundsInParent().getMinY() <= redOrcImageView.getBoundsInParent().getMaxY()) {
-                                rOrc.killPlayer(playerObj);
                                 rOrc.setCollided(true);
                             }
-//                            if (playerXLast >= greenOrcImageViewXFront && playerXFront <= greenOrcImageViewXLast) {
-//                                if (playerXLast < greenOrcImageViewXFront + 10) {
-//                                    if ((playerYTop >= greenOrcImageView.getBoundsInParent().getMinY() && player.getBoundsInParent().getMaxY() <= greenOrcImageViewYBottom) || (playerYTop <= greenOrcImageViewYTop && playerYBottom >= greenOrcImageViewYBottom)) {
-//                                        gOrc.slide();
-//                                    }
-//                                } else if (playerYTop <= greenOrcImageViewYBottom && playerYBottom >= greenOrcImageViewYTop) {
-//                                    gOrc.killPlayer(playerObj);
-//                                }
-//                                gOrc.setCollided(true);
-//                            }
                         }
                     }
                 }
@@ -744,6 +711,27 @@ public class blankController implements Initializable {
              }
          }
 //     }
+    }
+
+    public void checkCollisionOfPlayerAndBoss(){
+        timer6 = new Timer();
+        TimerTask timerTask  = new TimerTask() {
+            @Override
+            public void run() {
+                ImageView bossImageView = boss.getImageView();
+                if(player.getBoundsInParent().getMaxX()>=bossImageView.getLayoutX() && player.getLayoutX()<bossImageView.getBoundsInParent().getMaxX()){
+                    // not setting the is collided flag because it is not needed as we don't have any array list
+                    if(player.getBoundsInParent().getMinY()>=bossImageView.getBoundsInParent().getMaxY()-10){
+                        boss.killPlayer(playerObj);
+                    }else if(player.getBoundsInParent().getMaxY()>bossImageView.getLayoutY()){
+                        int x = (int)bossImageView.getLayoutX();
+                        playerObj.setCoordinatesAfterCollision(x-100);
+                        boss.slide(50);
+                    }
+                }
+            }
+        };
+        timer6.scheduleAtFixedRate(timerTask, 100, 100);
     }
 
 
