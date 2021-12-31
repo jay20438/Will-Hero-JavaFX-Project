@@ -78,6 +78,14 @@ public class Player {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
+                if (!living && p.gainedUpHeight==0){
+                    try {
+                        bk.gameOver();
+                        bk.stopBossMoving();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if(!living){
                     p.setFlag4Up(false);
                 }else {
@@ -150,6 +158,13 @@ public class Player {
     {
         ImageView imv2 = knife.getImageView();
         knife.moveWeapon(30, 120,  Duration.millis(1000)).play();
+    }
+
+//    public void jerk(int amount){
+//        mineImageView.setLayoutX(mineImageView.getLayoutX()-amount);
+//    }
+    public void setCoordinatesAfterCollision(int value){
+        mineImageView.setLayoutX(value);
     }
 
 }

@@ -1,9 +1,8 @@
 package com.example.willherojavafxproject;
-import javafx.animation.TranslateTransition;
+
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -57,7 +56,7 @@ public abstract class Enemy {
                 if(!living){
                     e.setFlag4Up(false);
                 }else {
-                    if (e.getGainedUpHeight() > 0 && e.getGainedUpHeight() < e.getMaxHeight()) {
+                    if (e.getGainedUpHeight() > 0 && e.getGainedUpHeight() <= e.getMaxHeight()) {
                         e.setFlag4Up(true);
                     } else {
                         e.setFlag4Up(false);
@@ -71,7 +70,7 @@ public abstract class Enemy {
                 }
             }
         };
-        timer1.scheduleAtFixedRate(timerTask1, 2000, 150);
+        timer1.scheduleAtFixedRate(timerTask1, 300, 150);
     }
 
 
@@ -87,9 +86,6 @@ public abstract class Enemy {
        // CommonAnimations.replaceImageView("enemyBlood", imageView);
     }
 
-    public void slide(double change){
-
-    }
 
     public void setyChange(int value){
         yChange = value;
@@ -112,9 +108,9 @@ public abstract class Enemy {
     }
 
 
-    public void slide(){
+    public void slide(int amount){
         //CommonAnimations.setCoordinates(imageView, imageView.getBoundsInParent().getMinX()+90, imageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("greenOrc"), createEntity.getWidthOfEntity("greenOrc"));
-        imageView.setLayoutX(imageView.getLayoutX()+300);
+        imageView.setLayoutX(imageView.getLayoutX()+amount);
     }
 
 

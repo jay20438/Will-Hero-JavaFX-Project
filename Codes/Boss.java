@@ -1,9 +1,9 @@
 package com.example.willherojavafxproject;
 
-import javafx.animation.TranslateTransition;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,8 +12,13 @@ public class Boss extends Enemy{
     private Timer timer;
     private blankController bk;
     private ImageView mineImageView;
-    public Boss(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk) throws InterruptedException {
-        super(imageName, x, y, height, width, anchorPane, bk, 50, 10);
+    private double boundLeft;
+    private double boundRight;
+
+    public Boss(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk, double boundLeft, double boundRight) throws InterruptedException {
+        super(imageName, x, y, height, width, anchorPane, bk, 80, 20);
+        this.boundLeft = boundLeft;
+        this.boundRight = boundRight;
         this.bk = bk;
         mineImageView = super.getImageView();
         this.moveLeft();
@@ -26,7 +31,7 @@ public class Boss extends Enemy{
     }
 
     public void bringDownBoss(double islandY){
-        mineImageView.setLayoutY(bk.getDepthOfBaseOfIsland("platform4Boss")+islandY-mineImageView.getFitHeight()+20);
+        mineImageView.setLayoutY(bk.getDepthOfBaseOfIsland("platform4Boss")+islandY-mineImageView.getFitHeight());
         callJumpAfterDelay();
     }
 
@@ -53,11 +58,15 @@ public class Boss extends Enemy{
             @Override
             public void run() {
                 System.out.println("from run"+mineImageView.getLayoutX());
-                if(mineImageView.getLayoutX()>20)
+                if(mineImageView.getLayoutX()>=boundLeft && mineImageView.getBoundsInParent().getMaxX()<=boundRight)
                     mineImageView.setLayoutX(mineImageView.getLayoutX()-50);
             }
         };
-        timer.scheduleAtFixedRate(timerTask, 300, 900);
+        timer.scheduleAtFixedRate(timerTask, 400, 900);
+    }
+
+    public void terminateMoveLeft(){
+        timer.cancel();
     }
 
 }

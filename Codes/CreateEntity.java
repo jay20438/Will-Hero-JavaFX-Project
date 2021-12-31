@@ -43,10 +43,10 @@ public class CreateEntity {
         widthOfEntities.put("playerWithKnife", 75);
         heightOfEntities.put("playerWithMissile", 72);
         widthOfEntities.put("playerWithMissile", 63);
-        heightOfEntities.put("greenOrc",62);
-        widthOfEntities.put("greenOrc",61);
-        heightOfEntities.put("redOrc",62);
-        widthOfEntities.put("redOrc",61);
+        heightOfEntities.put("greenOrc",81);
+        widthOfEntities.put("greenOrc",83);
+        heightOfEntities.put("redOrc",92);
+        widthOfEntities.put("redOrc",85);
         heightOfEntities.put("tnt",56);
         widthOfEntities.put("tnt",60);
         heightOfEntities.put("closedChest",80);
@@ -59,8 +59,8 @@ public class CreateEntity {
         widthOfEntities.put("tntFire", 200);
         heightOfEntities.put("crushedPlayer",50);
         widthOfEntities.put("crushedPlayer",50);
-        heightOfEntities.put("boss", 184);
-        widthOfEntities.put("boss", 171);
+        heightOfEntities.put("boss", 190);
+        widthOfEntities.put("boss", 190);
     }
 
     public void create(ImageView imageViewOfIslandOperatingUpon) throws InterruptedException {
@@ -121,21 +121,16 @@ public class CreateEntity {
     }
 
     public Player createPlayer() throws InterruptedException {
-        return new Player("PlayerNew", 144, 315, 93, 49, anchorPane, this, bk);
+        return new Player("PlayerNew", 160, 315, 93, 49, anchorPane, this, bk);
     }
 
-    public Boss createBoss(int x) throws InterruptedException {
-        return new Boss("boss", x, -200, heightOfEntities.get("boss"), widthOfEntities.get("boss"), anchorPane, bk);
+    public Boss createBoss(int x, double boundLeft, double boundRight) throws InterruptedException {
+        return new Boss("boss", x, -200, heightOfEntities.get("boss"), widthOfEntities.get("boss"), anchorPane, bk, boundLeft, boundRight);
     }
 
     public void createScene4Boss(ImageView i1, ImageView i2, ImageView i3, ImageView i6){
-        CommonAnimations.replaceImageView("smallestFloatingIsland", i1);
-        i1.setLayoutX(i6.getBoundsInParent().getMaxX()+47);
-        i1.setFitWidth(bk.getWidthOfIslands("smallestFloatingIsland"));
-        i1.setFitHeight(bk.getHeightOfIslands("smallestFloatingIsland"));
-        i1.setLayoutY(352);
         CommonAnimations.replaceImageView("platform4Boss", i2);
-        i2.setLayoutX(i1.getBoundsInParent().getMaxX()+60);
+        i2.setLayoutX(i6.getBoundsInParent().getMaxX()+700);
         i2.setFitWidth(bk.getWidthOfIslands("platform4Boss"));
         i2.setFitHeight(bk.getHeightOfIslands("platform4Boss"));
         i2.setLayoutY(279);
@@ -143,7 +138,7 @@ public class CreateEntity {
         i3.setLayoutX(i2.getBoundsInParent().getMaxX()+47);
         i3.setFitWidth(bk.getWidthOfIslands("mediumFloatingIsland"));
         i3.setFitHeight(bk.getHeightOfIslands("mediumFloatingIsland"));
-        i3.setLayoutY(352);
+        i3.setLayoutY(279);
     }
 
     public blankController getBk(){
