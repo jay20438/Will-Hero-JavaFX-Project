@@ -22,6 +22,8 @@ public class CreateEntity {
     private blankController bk;
     private HashMap<String, Integer> widthOfEntities;
     private HashMap<String, Integer> heightOfEntities;
+    int rOrcNo = 0;
+    int gOrcNo = 0;
 
     public CreateEntity(blankController bk, AnchorPane anchorPane){
         this.anchorPane = anchorPane;
@@ -31,7 +33,7 @@ public class CreateEntity {
         this.bk = bk;
 //        this.gpOperatingOn = gp;
         random = new Random();
-        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire", "coins", "playerWithKnife", "playerWithMissile", "crushedPlayer"};
+        entities = new String[]{"greenOrc", "redOrc", "tnt", "closedChest", "coin", "tntFire", "coins", "playerWithKnife", "playerWithMissile", "crushedPlayer", "boss"};
         greenOrcMaxNo = 3;
         redOrcMaxNo = 3;
         tntMaxNo = 3;
@@ -57,6 +59,8 @@ public class CreateEntity {
         widthOfEntities.put("tntFire", 200);
         heightOfEntities.put("crushedPlayer",50);
         widthOfEntities.put("crushedPlayer",50);
+        heightOfEntities.put("boss", 184);
+        widthOfEntities.put("boss", 171);
     }
 
     public void create(ImageView imageViewOfIslandOperatingUpon) throws InterruptedException {
@@ -85,11 +89,13 @@ public class CreateEntity {
                 for (int i = 0; i < randNoLevel3; i++) {
                     help4Sum += dist[i];
                     if (entities[randNoLevel2].equals("greenOrc")){
-                        ///System.out.println("gOrc c");
+                        gOrcNo += 1;
+                        System.out.println("gOrc c");
                         GreenOrc greenOrc = new GreenOrc("greenOrc", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("greenOrc"), widthOfEntities.get("greenOrc"), anchorPane, bk);
                         bk.setGreenOrcObjects(greenOrc);
                     }else if(entities[randNoLevel2].equals("redOrc")){
-                        //System.out.println("rOrc c");
+                        rOrcNo += 1;
+                        System.out.println("rOrc c");
                         RedOrc redOrc = new RedOrc("redOrc", imageViewOfIslandOperatingUpon.getBoundsInParent().getMinX() + help4Sum + i*widthOfEntities.get(entities[randNoLevel2]), depthOfBaseOfIslands - heightOfEntity, heightOfEntities.get("redOrc"), widthOfEntities.get("redOrc"), anchorPane, bk);
                         bk.setRedOrcObjects(redOrc);
                     }else if(entities[randNoLevel2].equals("coin")){
@@ -118,22 +124,26 @@ public class CreateEntity {
         return new Player("PlayerNew", 144, 315, 93, 49, anchorPane, this, bk);
     }
 
+    public Boss createBoss(int x) throws InterruptedException {
+        return new Boss("boss", x, -200, heightOfEntities.get("boss"), widthOfEntities.get("boss"), anchorPane, bk);
+    }
+
     public void createScene4Boss(ImageView i1, ImageView i2, ImageView i3, ImageView i6){
         CommonAnimations.replaceImageView("smallestFloatingIsland", i1);
         i1.setLayoutX(i6.getBoundsInParent().getMaxX()+47);
-        i1.setLayoutY(352);
         i1.setFitWidth(bk.getWidthOfIslands("smallestFloatingIsland"));
         i1.setFitHeight(bk.getHeightOfIslands("smallestFloatingIsland"));
+        i1.setLayoutY(352);
         CommonAnimations.replaceImageView("platform4Boss", i2);
         i2.setLayoutX(i1.getBoundsInParent().getMaxX()+60);
-        i2.setLayoutY(279);
         i2.setFitWidth(bk.getWidthOfIslands("platform4Boss"));
         i2.setFitHeight(bk.getHeightOfIslands("platform4Boss"));
+        i2.setLayoutY(279);
         CommonAnimations.replaceImageView("mediumFloatingIsland", i3);
         i3.setLayoutX(i2.getBoundsInParent().getMaxX()+47);
-        i3.setLayoutY(352);
         i3.setFitWidth(bk.getWidthOfIslands("mediumFloatingIsland"));
         i3.setFitHeight(bk.getHeightOfIslands("mediumFloatingIsland"));
+        i3.setLayoutY(352);
     }
 
     public blankController getBk(){

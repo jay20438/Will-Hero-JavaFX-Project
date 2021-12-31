@@ -22,6 +22,7 @@ public abstract class Enemy {
     private int yChange;
 
 
+
     public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk, int maxHeight, int yChange) throws InterruptedException {
         this.maxHeight = maxHeight;
         this.yChange = yChange;
@@ -36,9 +37,11 @@ public abstract class Enemy {
         imageView.setPreserveRatio(true);
         anchorPane.getChildren().add(imageView);
         createEntity = new CreateEntity(null, null);
-        if(imageName.equals("boss"))
-            this.bringDownBoss();
-        //this.jump();
+        System.out.println(imageView.getLayoutY());
+        if(!imageName.equals("boss")){
+            this.jump();
+        }
+
     }
 
 
@@ -47,7 +50,6 @@ public abstract class Enemy {
     }
 
     public void jump() throws InterruptedException {
-        //CommonAnimations.makeYTranslationalObj(imageView, (int)imageView.getLayoutY(), (int)imageView.getLayoutY()-70, true, Duration.millis(1000)).play();
         timer1 = new Timer();
         TimerTask timerTask1 = new TimerTask() {
             @Override
@@ -72,19 +74,9 @@ public abstract class Enemy {
         timer1.scheduleAtFixedRate(timerTask1, 2000, 150);
     }
 
-    public void bringDownBoss(){
-        TranslateTransition translateTransition = new TranslateTransition();
-        translateTransition.setNode(imageView);
-        translateTransition.setDuration(Duration.millis(400));
-        translateTransition.setCycleCount(1);
-        translateTransition.setAutoReverse(false);
-        translateTransition.setByY(bk.getDepthOfBaseOfIsland("platform4Boss")+279-imageView.getFitHeight()+200);
-        translateTransition.play();
-        int i = 0;
-        while(i<700){
-            i ++;
-        }
-    }
+
+
+
 
     public void terminateJump(){
         timer1.cancel();
