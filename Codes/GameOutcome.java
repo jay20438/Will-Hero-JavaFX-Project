@@ -1,6 +1,7 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,10 +10,9 @@ import javafx.scene.layout.AnchorPane;
 
 public class GameOutcome {
     private Scene scene2;
-    private blankController bk;
 
     @FXML
-    private AnchorPane myAnchorPane;
+    private transient AnchorPane myAnchorPane;
 
     @FXML
     private transient Label gameOutcomeLabel;
@@ -23,21 +23,36 @@ public class GameOutcome {
     @FXML
     private transient TextField mySteps;
 
+    private Homepage homepage;
 
-    FxmlLoader obj1 = new FxmlLoader();
+    private FxmlLoader fxmlLoader;
 
-    GameOutcome(String status,String nOfSteps,String nOfCoinsAmount)
-    {
+    private String status;
+
+    private String nOfCoinsAmount;
+
+    private String nOfSteps;
+
+
+
+    GameOutcome(String status,String nOfSteps,String nOfCoinsAmount, Homepage homepage)
+    {;
+        this.homepage = homepage;
+        fxmlLoader = new FxmlLoader();
+        this.status = status;
+        this.nOfSteps = nOfSteps;
+        this.nOfCoinsAmount = nOfCoinsAmount;
+        this.displayItems();
+
+    }
+
+    public void goToHomePage(MouseEvent mouseEvent) {
+        HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage", homepage, "Homepage"));
+    }
+    public void displayItems(){
         gameOutcomeLabel.setText(status);
         mySteps.setText(nOfSteps);
         myCoins.setText(nOfCoinsAmount);
     }
 
-    public void goToHomePage(MouseEvent mouseEvent) {
-        scene2 = obj1.getScene("homepage");
-        if(scene2==null){
-            System.out.println("it is null");
-        }
-        HelloApplication.setDifferentScene(scene2);
-    }
 }

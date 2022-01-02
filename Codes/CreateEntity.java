@@ -129,12 +129,12 @@ public class CreateEntity implements Serializable {
 
     public void createScene4Boss(ImageView i1, ImageView i2, ImageView i3, ImageView i6){
         CommonAnimations.replaceImageView("platform4Boss", i2);
-        i2.setLayoutX(i6.getBoundsInParent().getMaxX()+400);
+        i2.setLayoutX(i6.getBoundsInParent().getMaxX()+700);
         i2.setFitWidth(bk.getWidthOfIslands("platform4Boss"));
         i2.setFitHeight(bk.getHeightOfIslands("platform4Boss"));
         i2.setLayoutY(279);
         CommonAnimations.replaceImageView("mediumFloatingIsland", i3);
-        i3.setLayoutX(i2.getBoundsInParent().getMaxX()+300);
+        i3.setLayoutX(i2.getBoundsInParent().getMaxX()+47);
         i3.setFitWidth(bk.getWidthOfIslands("mediumFloatingIsland"));
         i3.setFitHeight(bk.getHeightOfIslands("mediumFloatingIsland"));
         i3.setLayoutY(279);

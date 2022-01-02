@@ -69,7 +69,7 @@ public abstract class Weapon implements Serializable {
             @Override
             public void run() {
                 System.out.println("moving the weapon");
-                if(weaponImageView.getLayoutX() < from + 700) {
+                if(weaponImageView.getLayoutX() < from + 500) {
                     weaponImageView.setLayoutX(weaponImageView.getLayoutX() + 50);
                 }
                 else

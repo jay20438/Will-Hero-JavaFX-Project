@@ -15,8 +15,8 @@ import java.util.TimerTask;
 public class Player implements Serializable {
     private transient ImageView mineImageView;
     private int nOfCoins;
-    private Knife knife;
-    private Missile missile;
+    private Knife knifeStandard;
+    private Missile missileStandard;
     private CreateEntity createEntity;
     private Position bk;
     private transient Timer timer;
@@ -31,10 +31,12 @@ public class Player implements Serializable {
     private double height;
     private double width;
     private transient AnchorPane anchorPane;
+    private boolean gameStatusWin;
 
     public Player(String name){
         System.out.println("my name:" + name);
         this.userName = name;
+        gameStatusWin = false;
     }
 
 
@@ -45,10 +47,10 @@ public class Player implements Serializable {
         this.createEntity = createEntity;
         this.bk = bk;
         gainedUpHeight = 0;
-        knife = null;
+        knifeStandard = null;
         p = this;
         flag4Up = false;
-        missile = null;
+        missileStandard = null;
         nOfCoins = 0;
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
         anchorPane.getChildren().add(mineImageView);
@@ -66,15 +68,15 @@ public class Player implements Serializable {
         nOfCoins += change;
     }
 
-    public void getKnife(Knife knife){
-        this.knife = knife;
+    public void getKnife(Knife knifeStandard){
+        this.knifeStandard = knifeStandard;
         imageName = "playerWithKnife";
         CommonAnimations.replaceImageView("playerWithKnife", mineImageView);
         CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX(), mineImageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("playerWithKnife"), createEntity.getWidthOfEntity("playerWithKnife"));
     }
 
-    public void getMissile(Missile missile){
-        this.missile = missile;
+    public void getMissile(Missile missileStandard){
+        this.missileStandard = missileStandard;
         imageName = "playerWithMissile";
         CommonAnimations.replaceImageView("playerWithMissile", mineImageView);
         CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX(), mineImageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("playerWithMissile"), createEntity.getWidthOfEntity("playerWithMissile"));
@@ -130,6 +132,14 @@ public class Player implements Serializable {
 
     public boolean  isLiving(){
         return living;
+    }
+
+    public void changeGameStatusWin(boolean value){
+        gameStatusWin = value;
+    }
+
+    public boolean getGameStatusWin(){
+        return gameStatusWin;
     }
 
     public void changeStatusOfLiving(boolean val){
@@ -196,16 +206,17 @@ public class Player implements Serializable {
 
 
     public void throwWeapon(){
-        if(knife!=null){
+        if(knifeStandard!=null){
             this.throwKnife();
         }
-        else if(missile!=null){
+        else if(missileStandard!=null){
             this.launchMissile();
         }
     }
 
     public void launchMissile()
     {
+        Missile missile = new Missile(anchorPane);
         ImageView imageView = missile.formImageView(mineImageView.getBoundsInParent().getMaxX()-80, mineImageView.getBoundsInParent().getMaxX()+200,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
         missile.moveWeapon(mineImageView.getBoundsInParent().getMaxX()-80, imageView,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
         startCheckingCollision(imageView);
@@ -213,6 +224,7 @@ public class Player implements Serializable {
 
     public void throwKnife()
     {
+        Knife knife = new Knife(anchorPane);
         ImageView imageView = knife.formImageView(mineImageView.getBoundsInParent().getMaxX()-80, mineImageView.getBoundsInParent().getMaxX()+200,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
         knife.moveWeapon( mineImageView.getBoundsInParent().getMaxX()-80, imageView,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
         startCheckingCollision(imageView);
@@ -225,7 +237,11 @@ public class Player implements Serializable {
         TimerTask timerTask2 = new TimerTask() {
             @Override
             public void run() {
-                bk.checkCollisionOfOrcAndWeapon(imageView);
+                try {
+                    bk.checkCollisionOfOrcAndWeapon(imageView);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         };
         timer2.scheduleAtFixedRate(timerTask2, 100, 100);

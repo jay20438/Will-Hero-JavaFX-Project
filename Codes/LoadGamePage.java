@@ -23,12 +23,6 @@ public class LoadGamePage implements Initializable, Serializable {
     private Homepage homepage;
     private FxmlLoader fxmlLoader;
 
-    public LoadGamePage(ArrayList<Game> playerSavedGames, Homepage homepage){
-        fxmlLoader = new FxmlLoader();
-        this.playerSavedGames = playerSavedGames;
-        this.homepage = homepage;
-    }
-
     @FXML
     private transient Label myLabel;
 
@@ -41,6 +35,14 @@ public class LoadGamePage implements Initializable, Serializable {
 
     @FXML
     private transient ImageView homepageButton;
+
+    public LoadGamePage(ArrayList<Game> playerSavedGames, Homepage homepage){
+        fxmlLoader = new FxmlLoader();
+        this.playerSavedGames = playerSavedGames;
+        this.homepage = homepage;
+    }
+
+
 
 
     @FXML

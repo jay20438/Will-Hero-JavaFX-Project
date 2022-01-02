@@ -5,6 +5,7 @@ import java.util.*;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -249,7 +250,6 @@ public class Position implements Initializable, Serializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        if(!homepage.getGame().getResumedGame()) {
             if (!homepage.getGame().getLoadedGame() && !homepage.getGame().getResumedGame()) {
                 createEntity = new CreateEntity(this, mainAnchorPane);
                 try {
@@ -296,14 +296,10 @@ public class Position implements Initializable, Serializable {
       synchronized public void  jump(ImageView imageView, Object obj, int sub, boolean flag4Up, boolean living) throws InterruptedException {
         boolean flag = false;
             try {
-                if(obj.getClass().getName().equals("com.example.willherojavafxproject.Player")){
-                    System.out.println("coordinates of player:"+player.getLayoutX() + " and y:"+player.getLayoutY());
-                }
                 if (imageView.getBoundsInParent().getMaxY() > 520) {
                     if (obj.getClass().getName().equals("com.example.willherojavafxproject.Player")) {
                         if (player.getLayoutY() > 736) {
                             playerObj.changeStatusOfLiving(false);
-                            System.out.println("calling game over");
                             gameOver();
                         } else {
                             playerFalls = true;
@@ -336,6 +332,7 @@ public class Position implements Initializable, Serializable {
                     }
                     if (flag && !living) {
                         p.terminateJump();
+                        gameOver();
                     }
                 } else if (obj.getClass().getName().equals("com.example.willherojavafxproject.RedOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.GreenOrc") || obj.getClass().getName().equals("com.example.willherojavafxproject.Boss")) {
                     Enemy e = (Enemy) obj;
@@ -358,21 +355,21 @@ public class Position implements Initializable, Serializable {
 
 
     public void gameOver() throws InterruptedException {
-//        timer1.cancel();
-//        timer2.cancel();
-//        timer3.cancel();
-//        timer4.cancel();
-//        timer5.cancel();
         if(playerObj.isLiving()) {
             terminateJumpOfAllOrcs();
             if(boss!=null){
                 boss.terminateJump();
-                //timer6.cancel();
             }
         }
-        System.out.println("in game over");
         playerObj.terminateJump();
-        System.out.println("game over");
+        FxmlLoader fxmlLoader = new FxmlLoader();
+        GameOutcome gm = null;
+        if(playerObj.getGameStatusWin()){
+            gm = new GameOutcome("You win the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
+        }else{
+            gm = new GameOutcome("You loose the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
+        }
+        HelloApplication.setDifferentScene(fxmlLoader.getScene("gameOutcome", gm, "GameOutcome"));
     }
 
     public void terminateJumpOfAllOrcs(){
@@ -394,32 +391,9 @@ public class Position implements Initializable, Serializable {
         homepage.getGame().pauseGame(event);
     }
 
-//    public void makeAllOrcsJumpWait(){
-//        ListIterator<RedOrc> listIterator1 = redOrcs.listIterator();
-//        ListIterator<GreenOrc> listIterator2 = greenOrcs.listIterator();
-//        while (listIterator1.hasNext()){
-//            RedOrc redOrc = listIterator1.next();
-//            redOrc.jumpWait();
-//        }
-//
-//        while (listIterator2.hasNext()){
-//            GreenOrc  greenOrc = listIterator2.next();
-//            greenOrc.jumpWait();
-//        }
-//    }
+
 
     public void startJumpsOfAllOrcs() throws InterruptedException {
-//        ListIterator<RedOrc> listIterator1 = redOrcs.listIterator();
-//        ListIterator<GreenOrc> listIterator2 = greenOrcs.listIterator();
-//        while (listIterator1.hasNext()){
-//            RedOrc redOrc = listIterator1.next();
-//            redOrc.notifyJump();
-//        }
-//
-//        while (listIterator2.hasNext()){
-//            GreenOrc  greenOrc = listIterator2.next();
-//            greenOrc.notifyJump();
-//        }
         ListIterator<RedOrc> listIterator1 = redOrcs.listIterator();
         ListIterator<GreenOrc> listIterator2 = greenOrcs.listIterator();
         while (listIterator1.hasNext()){
@@ -434,7 +408,6 @@ public class Position implements Initializable, Serializable {
     }
 
     public void makeAllTimerCancel() throws InterruptedException {
-        System.out.println("cancelling all timers############");
         try {
             timer1.cancel();
             timer2.cancel();
@@ -451,36 +424,7 @@ public class Position implements Initializable, Serializable {
         }catch (NullPointerException e){}
     }
 
-//    public void startAllTimers(){
-//        System.out.println("starting all timers@@@@@@@@@@@@@");
-//        try {
-//
-////            timer1.notify();
-////            timer2.notify();
-////            timer3.notify();
-////            timer4.notify();
-////            timer5.notify();
-//            checkCollisionOfPlayerWithCoin();
-//            checkCollisionWithChestAndPlayer();
-//            checkCollisionOfPlayerWithRedOrc();
-//            checkCollisionOfPlayerWithGreenOrc();
-//            checkCollisionOfPlayerWithTnt();
-//
-//            if (boss != null){
-//                checkCollisionOfPlayerAndBoss();
-//                boss.jump();
-//                boss.moveLeft();
-//            }
-//            startJumpsOfAllOrcs();
-//            playerObj.jump();
-//        }catch(Exception e){}
-//
-////        checkCollisionOfPlayerWithCoin();
-////        checkCollisionWithChestAndPlayer();
-////        checkCollisionOfPlayerWithRedOrc();
-////        checkCollisionOfPlayerWithGreenOrc();
-////        checkCollisionOfPlayerWithTnt();
-//    }
+
 
     public double getDepthOfBaseOfIsland(ImageView imageView){
         System.out.println("in getDepthOf island");
@@ -598,11 +542,11 @@ public class Position implements Initializable, Serializable {
     }
 
     public void storeIslandsCoordinatesInformation(){
-        System.out.println("coord i1 before storing:x:"+island1.getLayoutX() + " y:"+island1.getLayoutY());
+
         islandsCoordinateInfo.put("island1", new String[]{tf1.getText(), String.valueOf(island1.getLayoutX()), String.valueOf(island1.getLayoutY()), String.valueOf(island1.getFitHeight()), String.valueOf(island1.getFitWidth())});
-        System.out.println("coord i2 before storing:x:"+island2.getLayoutX() + " y:"+island2.getLayoutY());
+
         islandsCoordinateInfo.put("island2", new String[]{tf2.getText(), String.valueOf(island2.getLayoutX()), String.valueOf(island2.getLayoutY()), String.valueOf(island2.getFitHeight()), String.valueOf(island2.getFitWidth())});
-        System.out.println("coord i3 before storing:x:"+island3.getLayoutX() + " y:"+island3.getLayoutY());
+
         islandsCoordinateInfo.put("island3", new String[]{tf3.getText(), String.valueOf(island3.getLayoutX()), String.valueOf(island3.getLayoutY()), String.valueOf(island3.getFitHeight()), String.valueOf(island3.getFitWidth())});
         System.out.println("coord i4 before storing:x:"+island3.getLayoutX() + " y:"+island3.getLayoutY());
         islandsCoordinateInfo.put("island4", new String[]{tf4.getText(), String.valueOf(island4.getLayoutX()), String.valueOf(island4.getLayoutY()), String.valueOf(island4.getFitHeight()), String.valueOf(island4.getFitWidth())});
@@ -1007,7 +951,7 @@ public class Position implements Initializable, Serializable {
         timer6.scheduleAtFixedRate(timerTask, 100, 100);
     }
 
-    public void checkCollisionOfOrcAndWeapon(ImageView imageView) {
+    public void checkCollisionOfOrcAndWeapon(ImageView imageView) throws InterruptedException {
         ListIterator<GreenOrc> listIterator8 = greenOrcs.listIterator();
         while (listIterator8.hasNext()) {
             GreenOrc greenOrc = listIterator8.next();
@@ -1025,6 +969,17 @@ public class Position implements Initializable, Serializable {
             if (temp.getBoundsInParent().getMaxX() > imageView.getBoundsInParent().getMinX() && temp.getBoundsInParent().getMinX() < imageView.getBoundsInParent().getMaxX()
                     && temp.getBoundsInParent().getMaxY() > imageView.getBoundsInParent().getMinY() && temp.getBoundsInParent().getMinY() < imageView.getBoundsInParent().getMaxY()) {
                 redOrc.die();
+            }
+        }
+
+        if(boss!=null){
+            ImageView bossImageView = boss.getImageView();
+            if(imageView.getBoundsInParent().getMaxX()>bossImageView.getLayoutX() && (imageView.getLayoutX()+100)<bossImageView.getBoundsInParent().getMaxX()){
+                if(imageView.getBoundsInParent().getMaxX()>bossImageView.getLayoutY() && imageView.getLayoutY()<bossImageView.getBoundsInParent().getMaxY()){
+                    boss.die();
+                    playerObj.changeGameStatusWin(true);
+                    gameOver();
+                }
             }
         }
     }

@@ -50,6 +50,8 @@ public class FxmlLoader implements Serializable {
                 fxmlLoader.setController((SettingsPageView)obj);
             }else if(className.equals("LoadGamePage")){
                 fxmlLoader.setController((LoadGamePage)obj);
+            }else if(className.equals("GameOutcome")){
+                fxmlLoader.setController((GameOutcome)obj);
             }
             System.out.println("toper");
             view  = new Scene(fxmlLoader.load());
