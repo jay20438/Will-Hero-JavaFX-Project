@@ -189,6 +189,7 @@ public class Player implements Serializable {
 
     public void revive(AnchorPane anchorPane)  {
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        this.anchorPane = anchorPane;
         anchorPane.getChildren().add(mineImageView);
         try {
             this.jump();

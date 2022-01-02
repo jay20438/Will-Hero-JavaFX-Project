@@ -111,10 +111,8 @@ public class TNT implements Serializable
     }
 
     public void store(){
-        System.out.println("tnt before store x:"+mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
          x = mineImageView.getLayoutX();
          y = mineImageView.getLayoutY();
-         System.out.println("tnt height and width before storing:" + mineImageView.getFitHeight()+" "+mineImageView.getFitWidth());
          height = mineImageView.getFitHeight();
          width = mineImageView.getFitWidth();
     }
@@ -122,8 +120,6 @@ public class TNT implements Serializable
 
     public void revive(AnchorPane anchorPane) throws InterruptedException {
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        System.out.println("tnt after revive x:" + mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
-        System.out.println("tnt height and width after storing:" + mineImageView.getFitHeight()+" "+mineImageView.getFitWidth());
         anchorPane.getChildren().add(mineImageView);
         if(imageName.equals("tntFire")){
             FadeTransition fadeTransition2 = new FadeTransition();

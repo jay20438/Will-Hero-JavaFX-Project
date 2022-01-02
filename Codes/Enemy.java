@@ -1,6 +1,5 @@
 package com.example.willherojavafxproject;
 
-
 import javafx.animation.FadeTransition;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -29,8 +28,6 @@ public abstract class Enemy implements Serializable {
     private double height;
     private double width;
 
-
-
     public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, Position bk, int maxHeight, int yChange) throws InterruptedException {
         this.maxHeight = maxHeight;
         this.yChange = yChange;
@@ -45,7 +42,6 @@ public abstract class Enemy implements Serializable {
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
         anchorPane.getChildren().add(mineImageView);
         createEntity = new CreateEntity(null, null);
-        System.out.println("i am orc and mine before coordinates before saving:x:" + mineImageView.getLayoutX()+" y:"+mineImageView.getLayoutY());
         if(!imageName.equals("boss")){
             this.jump();
         }
@@ -176,11 +172,11 @@ public abstract class Enemy implements Serializable {
 
 
     public void revive(AnchorPane anchorPane) throws InterruptedException {
-        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        anchorPane.getChildren().add(mineImageView);
-        //if(!imageName.equals("boss")){
+        if(living){
+            mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+            anchorPane.getChildren().add(mineImageView);
             this.jump();
-        //}
+        }
     }
 
     public void die(){
@@ -191,12 +187,17 @@ public abstract class Enemy implements Serializable {
         CommonAnimations.replaceImageView("enemyBlood", mineImageView);
         CommonAnimations.setCoordinates(mineImageView, xCoordinate, yCoordinate-60, createEntity.getHeightOfEntity("enemyBlood"), createEntity.getWidthOfEntity("enemyBlood"));
         this.fade();
+        this.terminateJump();
     }
 
     public void fade() {
         FadeTransition fadeTransition4 = new FadeTransition();
         fadeTransition4.setNode(mineImageView);
-        fadeTransition4.setDuration(Duration.millis(5000));
+        if(imageName.equals("boss")){
+            fadeTransition4.setDuration(Duration.millis(800));
+        }else{
+            fadeTransition4.setDuration(Duration.millis(500));
+        }
         fadeTransition4.setToValue(0);
         fadeTransition4.play();
     }

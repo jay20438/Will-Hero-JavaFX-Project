@@ -68,7 +68,6 @@ public class SettingsPageView implements Serializable
     FxmlLoader fxmlLoader = new FxmlLoader();
 
     public void goToHomePage(MouseEvent mouseEvent) {
-        System.out.println("present in goToHomePage in SettingsPageView");
         HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage", homepage, "Homepage"));
     }
 

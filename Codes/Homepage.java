@@ -168,4 +168,8 @@ public class Homepage implements Initializable, Serializable {
         return game;
     }
 
+    public interface Movement{
+        public void move();
+    }
+
 }

@@ -3,7 +3,6 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.*;
 
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.FileNotFoundException;
 
-public class Position implements Initializable, Serializable {
+public class Position implements Initializable, Serializable, Homepage.Movement {
     private String[] namesOfIslands;
     private double[] coordinatesOfAnchorPane;
     private double[] coordinatesOfbG;
@@ -164,104 +163,110 @@ public class Position implements Initializable, Serializable {
 
     @FXML
     void moveContent(MouseEvent event) throws FileNotFoundException, InterruptedException {
-        if(playerObj.isLiving() && !playerFalls){
-            nOfClick += 1;
-            nOfSteps.setText(String.valueOf(nOfClick));
-            playerObj.throwWeapon();
-        }
-
-        if(nOfClick>120 && island6.getBoundsInParent().getMaxX()<1408){
-            if(!playerFalls)
-                createEntity = new CreateEntity(this, mainAnchorPane);
-                player.setLayoutX(player.getLayoutX() + 150);
-                if(player.getBoundsInParent().getMaxX()>island5.getLayoutX() && !flagForBossLoaded){
-                    flagForBossLoaded = true;
-                    boss = createEntity.createBoss((int) (island5.getLayoutX()+200 + random.nextInt((int)island5.getFitWidth()-200-171)), island5.getLayoutY()+20, island6.getBoundsInParent().getMaxX()-10);
-                    boss.bringDownBoss((double)island5.getLayoutY());
+        try {
+            if (!gameOver) {
+                if (playerObj.isLiving() && !playerFalls) {
+                    nOfClick += 1;
+                    nOfSteps.setText(String.valueOf(nOfClick));
+                    playerObj.throwWeapon();
                 }
-        }else if(!playerFalls && playerObj.isLiving()) {
-            moveEntities();
-            if(flagToStopCreating) {
-                if (nOfClick > 114) {
-                    createEntity = new CreateEntity(this, mainAnchorPane);
-                    createEntity.createScene4Boss(island4, island5, island6, island3);
-                    tf4.setText("smallestFloatingIsland");
-                    tf5.setText("platform4Boss");
-                    tf6.setText("mediumFloatingIsland");
-                    flagToStopCreating = false;
-                } else if(noOfFramesCreated<9) {
-                    if ((int) (island3.getBoundsInParent().getMaxX()) < 0) {
-                        createIsland(1, island1, island2, island3);
-                        createEntity = new CreateEntity(this, mainAnchorPane);
-                        //bcreateEntity.create(island1);
-                        createEntity = new CreateEntity(this, mainAnchorPane);
-                        createEntity.create(island2);
-                        createEntity = new CreateEntity(this, mainAnchorPane);
-                        createEntity.create(island3);
-                        noOfFramesCreated += 1;
-                    }
 
-                    if ((int) (island6.getBoundsInParent().getMaxX()) < 0) {
-                        createIsland(4, island4, island5, island6);
+                if (nOfClick > 120 && island6.getBoundsInParent().getMaxX() < 1408) {
+                    if (!playerFalls)
                         createEntity = new CreateEntity(this, mainAnchorPane);
-                        createEntity.create(island4);
-                        createEntity = new CreateEntity(this, mainAnchorPane);
-                        createEntity.create(island5);
-                        createEntity = new CreateEntity(this, mainAnchorPane);
-                        createEntity.create(island6);
-                        noOfFramesCreated += 1;
+                    player.setLayoutX(player.getLayoutX() + 150);
+                    if (player.getBoundsInParent().getMaxX() > island5.getLayoutX() && !flagForBossLoaded) {
+                        flagForBossLoaded = true;
+                        boss = createEntity.createBoss((int) (island5.getLayoutX() + 200 + random.nextInt((int) island5.getFitWidth() - 200 - 171)), island5.getLayoutY() + 20, island6.getBoundsInParent().getMaxX() - 10);
+                        boss.bringDownBoss((double) island5.getLayoutY());
                     }
+                } else if (!playerFalls && playerObj.isLiving()) {
+                    move();
+                    if (flagToStopCreating) {
+                        if (nOfClick > 114) {
+                            createEntity = new CreateEntity(this, mainAnchorPane);
+                            createEntity.createScene4Boss(island4, island5, island6, island3);
+                            tf4.setText("smallestFloatingIsland");
+                            tf5.setText("platform4Boss");
+                            tf6.setText("mediumFloatingIsland");
+                            flagToStopCreating = false;
+                        } else if (noOfFramesCreated < 9) {
+                            if ((int) (island3.getBoundsInParent().getMaxX()) < 0) {
+                                createIsland(1, island1, island2, island3);
+                                createEntity = new CreateEntity(this, mainAnchorPane);
+                                //bcreateEntity.create(island1);
+                                createEntity = new CreateEntity(this, mainAnchorPane);
+                                createEntity.create(island2);
+                                createEntity = new CreateEntity(this, mainAnchorPane);
+                                createEntity.create(island3);
+                                noOfFramesCreated += 1;
+                            }
+
+                            if ((int) (island6.getBoundsInParent().getMaxX()) < 0) {
+                                createIsland(4, island4, island5, island6);
+                                createEntity = new CreateEntity(this, mainAnchorPane);
+                                createEntity.create(island4);
+                                createEntity = new CreateEntity(this, mainAnchorPane);
+                                createEntity.create(island5);
+                                createEntity = new CreateEntity(this, mainAnchorPane);
+                                createEntity.create(island6);
+                                noOfFramesCreated += 1;
+                            }
+                        }
+                    }
+                } else {
+                    FxmlLoader fxmlLoader = new FxmlLoader();
+                    GameOutcome gm = null;
+                    if (playerObj.getGameStatusWin()) {
+                        gm = new GameOutcome("You won the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
+                    } else {
+                        gm = new GameOutcome("You lost the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
+                    }
+                    HelloApplication.setDifferentScene(fxmlLoader.getScene("gameOutcome", gm, "GameOutcome"));
                 }
             }
-        }
-        if (gameOver) {
-            FxmlLoader fxmlLoader = new FxmlLoader();
-            GameOutcome gm = null;
-            if (playerObj.getGameStatusWin()) {
-                gm = new GameOutcome("You win the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
-            } else {
-                gm = new GameOutcome("You loose the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
-            }
-            HelloApplication.setDifferentScene(fxmlLoader.getScene("gameOutcome", gm, "GameOutcome"));
-        }
+        }catch(Exception e){}
     }
 
     public void createIsland(int identifier, ImageView imageView1, ImageView imageView2, ImageView imageView3) throws FileNotFoundException {
-        int randNo1 = random.nextInt(6);
-        int randNo2 = random.nextInt( 6);
-        int randNo3 = random.nextInt( 6);
-        Image image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo1] +".png"));
-        Image image2 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo2] +".png"));
-        Image image3 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ namesOfIslands[randNo3] +".png"));
-        imageView1.setImage(image1);
-        imageView2.setImage(image2);
-        imageView3.setImage(image3);
-        imageView1.setFitWidth(widthOfIslands.get(namesOfIslands[randNo1]));
-        imageView2.setFitWidth(widthOfIslands.get(namesOfIslands[randNo2]));
-        imageView3.setFitWidth(widthOfIslands.get(namesOfIslands[randNo3]));
-        imageView1.setFitHeight(heightOfIslands.get(namesOfIslands[randNo1]));
-        imageView2.setFitHeight(heightOfIslands.get(namesOfIslands[randNo2]));
-        imageView3.setFitHeight(heightOfIslands.get(namesOfIslands[randNo3]));
-        if(identifier==1) {
-            tf1.setText(namesOfIslands[randNo1]);
-            island1.setLayoutX(island6.getBoundsInParent().getMaxX() + 250);
-            tf2.setText(namesOfIslands[randNo2]);
-            island2.setLayoutX(island1.getBoundsInParent().getMaxX() + 300);
-            tf3.setText(namesOfIslands[randNo3]);
-            island3.setLayoutX(island2.getBoundsInParent().getMaxX() + 250);
-        }else{
-            tf4.setText(namesOfIslands[randNo1]);
-            island4.setLayoutX(island3.getBoundsInParent().getMaxX()  + 250);
-            tf5.setText(namesOfIslands[randNo2]);
-            island5.setLayoutX(island4.getBoundsInParent().getMaxX() + 200);
-            tf6.setText(namesOfIslands[randNo3]);
-            island6.setLayoutX(island5.getBoundsInParent().getMaxX() + 250);
-        }
+        try {
+            int randNo1 = random.nextInt(6);
+            int randNo2 = random.nextInt(6);
+            int randNo3 = random.nextInt(6);
+            Image image1 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/" + namesOfIslands[randNo1] + ".png"));
+            Image image2 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/" + namesOfIslands[randNo2] + ".png"));
+            Image image3 = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/" + namesOfIslands[randNo3] + ".png"));
+            imageView1.setImage(image1);
+            imageView2.setImage(image2);
+            imageView3.setImage(image3);
+            imageView1.setFitWidth(widthOfIslands.get(namesOfIslands[randNo1]));
+            imageView2.setFitWidth(widthOfIslands.get(namesOfIslands[randNo2]));
+            imageView3.setFitWidth(widthOfIslands.get(namesOfIslands[randNo3]));
+            imageView1.setFitHeight(heightOfIslands.get(namesOfIslands[randNo1]));
+            imageView2.setFitHeight(heightOfIslands.get(namesOfIslands[randNo2]));
+            imageView3.setFitHeight(heightOfIslands.get(namesOfIslands[randNo3]));
+            if (identifier == 1) {
+                tf1.setText(namesOfIslands[randNo1]);
+                island1.setLayoutX(island6.getBoundsInParent().getMaxX() + 250);
+                tf2.setText(namesOfIslands[randNo2]);
+                island2.setLayoutX(island1.getBoundsInParent().getMaxX() + 300);
+                tf3.setText(namesOfIslands[randNo3]);
+                island3.setLayoutX(island2.getBoundsInParent().getMaxX() + 250);
+            } else {
+                tf4.setText(namesOfIslands[randNo1]);
+                island4.setLayoutX(island3.getBoundsInParent().getMaxX() + 250);
+                tf5.setText(namesOfIslands[randNo2]);
+                island5.setLayoutX(island4.getBoundsInParent().getMaxX() + 200);
+                tf6.setText(namesOfIslands[randNo3]);
+                island6.setLayoutX(island5.getBoundsInParent().getMaxX() + 250);
+            }
+        }catch(Exception e){}
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
             if (!homepage.getGame().getLoadedGame() && !homepage.getGame().getResumedGame()) {
                 createEntity = new CreateEntity(this, mainAnchorPane);
                 try {
@@ -301,6 +306,7 @@ public class Position implements Initializable, Serializable {
             checkCollisionOfPlayerWithGreenOrc();
             checkCollisionOfPlayerWithTnt();
 //        }
+        }catch (Exception e){}
     }
 
 
@@ -311,9 +317,16 @@ public class Position implements Initializable, Serializable {
                     if (obj.getClass().getName().equals("com.example.willherojavafxproject.Player")) {
                         if (player.getLayoutY() > 736) {
                             playerObj.changeStatusOfLiving(false);
+                            gameOver = true;
                             gameOver();
                         } else {
                             playerFalls = true;
+                        }
+                    }else{
+                        if(imageView.getClass().getName().equals("com.example.willherojavafxproject.Boss")){
+                            boss.setBossFalls(true);
+                            gameOver = true;
+                            boss.changeStatusOfLiving(false);
                         }
                     }
                 } else if (!flag4Up) {
@@ -374,7 +387,6 @@ public class Position implements Initializable, Serializable {
             gameOver = true;
         }
         playerObj.terminateJump();
-
     }
 
     public void terminateJumpOfAllOrcs(){
@@ -422,7 +434,7 @@ public class Position implements Initializable, Serializable {
             if (boss != null) {
                 timer6.cancel();
                 boss.terminateJump();
-                boss.terminateMoveLeft();
+                boss.terminateMove();
             }
             terminateJumpOfAllOrcs();
             playerObj.terminateJump();
@@ -432,115 +444,124 @@ public class Position implements Initializable, Serializable {
 
 
     public double getDepthOfBaseOfIsland(ImageView imageView){
-        String name  = imageView.getId();
-        if(name.equals("island1")){
-            return depthOfBaseOfIslands.get(tf1.getText());
-        }else if(name.equals("island2")){
-            return depthOfBaseOfIslands.get(tf2.getText());
-        }else if(name.equals("island3")){
-            return depthOfBaseOfIslands.get(tf3.getText());
-        }else if(name.equals("island4")){
-            return depthOfBaseOfIslands.get(tf4.getText());
-        }else if(name.equals("island5")){
-            return depthOfBaseOfIslands.get(tf5.getText());
-        }else if(name.equals("island6")){
-            return depthOfBaseOfIslands.get(tf6.getText());
+        try {
+            String name = imageView.getId();
+            if (name.equals("island1")) {
+                return depthOfBaseOfIslands.get(tf1.getText());
+            } else if (name.equals("island2")) {
+                return depthOfBaseOfIslands.get(tf2.getText());
+            } else if (name.equals("island3")) {
+                return depthOfBaseOfIslands.get(tf3.getText());
+            } else if (name.equals("island4")) {
+                return depthOfBaseOfIslands.get(tf4.getText());
+            } else if (name.equals("island5")) {
+                return depthOfBaseOfIslands.get(tf5.getText());
+            } else if (name.equals("island6")) {
+                return depthOfBaseOfIslands.get(tf6.getText());
+            }
+
+        }catch (Exception e){
         }
         return 0;
 
     }
 
     public int getDepthOfBaseOfIsland(String name){
-        return (int)depthOfBaseOfIslands.get(name);
+
+            return (int) depthOfBaseOfIslands.get(name);
+
     }
 
     public void stopBossMoving(){
-        boss.terminateMoveLeft();
+        boss.terminateMove();
     }
 
-    public void moveEntities(){
-        int index1 = -1;
-        int index2 = -1;
-        int index3 = -1;
-        int index4 = -1;
-        int index5 = -1;
-        player.setLayoutX(160);
-        island1.setLayoutX(island1.getLayoutX() - 170);
-        island2.setLayoutX(island2.getLayoutX() - 170);
-        island3.setLayoutX(island3.getLayoutX() - 170);
-        island4.setLayoutX(island4.getLayoutX() - 170);
-        island5.setLayoutX(island5.getLayoutX() - 170);
-        island6.setLayoutX(island6.getLayoutX() - 170);
-        ListIterator<TNT> listIterator1 = tntObjects.listIterator();
-        ListIterator<RedOrc> listIterator2 = redOrcs.listIterator();
-        ListIterator<GreenOrc> listIterator3 = greenOrcs.listIterator();
-        ListIterator<Coin> listIterator4 = coins.listIterator();
-        ListIterator<ChestType> listIterator5 = chestTypeObjects.listIterator();
-        while (listIterator1.hasNext()){
-            TNT tnt = listIterator1.next();
-            ImageView tntImageView = tnt.getImageView();
-            if(tntImageView.getBoundsInParent().getMaxX()<0){
-                index1 += 1;
-            }else {
-                tntImageView.setLayoutX(tntImageView.getLayoutX() - 170);
+    @Override
+    public void move(){
+        try {
+            int index1 = -1;
+            int index2 = -1;
+            int index3 = -1;
+            int index4 = -1;
+            int index5 = -1;
+            player.setLayoutX(160);
+            island1.setLayoutX(island1.getLayoutX() - 170);
+            island2.setLayoutX(island2.getLayoutX() - 170);
+            island3.setLayoutX(island3.getLayoutX() - 170);
+            island4.setLayoutX(island4.getLayoutX() - 170);
+            island5.setLayoutX(island5.getLayoutX() - 170);
+            island6.setLayoutX(island6.getLayoutX() - 170);
+            ListIterator<TNT> listIterator1 = tntObjects.listIterator();
+            ListIterator<RedOrc> listIterator2 = redOrcs.listIterator();
+            ListIterator<GreenOrc> listIterator3 = greenOrcs.listIterator();
+            ListIterator<Coin> listIterator4 = coins.listIterator();
+            ListIterator<ChestType> listIterator5 = chestTypeObjects.listIterator();
+            while (listIterator1.hasNext()) {
+                TNT tnt = listIterator1.next();
+                ImageView tntImageView = tnt.getImageView();
+                if (tntImageView.getBoundsInParent().getMaxX() < 0) {
+                    index1 += 1;
+                } else {
+                    tntImageView.setLayoutX(tntImageView.getLayoutX() - 170);
+                }
             }
-        }
-        while (listIterator2.hasNext()){
-            RedOrc redOrc = listIterator2.next();
-            ImageView redOrcImageView = redOrc.getImageView();
-            if (redOrcImageView.getBoundsInParent().getMaxX()<0){
-                index2 += 1;
-            }else {
-                redOrcImageView.setLayoutX(redOrcImageView.getLayoutX() - 170);
+            while (listIterator2.hasNext()) {
+                RedOrc redOrc = listIterator2.next();
+                ImageView redOrcImageView = redOrc.getImageView();
+                if (redOrcImageView.getBoundsInParent().getMaxX() < 0) {
+                    index2 += 1;
+                } else {
+                    redOrcImageView.setLayoutX(redOrcImageView.getLayoutX() - 170);
+                }
             }
-        }
-        while (listIterator3.hasNext()){
-            GreenOrc  greenOrc = listIterator3.next();
-            ImageView greenOrcImageView = greenOrc.getImageView();
-            if(greenOrcImageView.getBoundsInParent().getMaxX()<0){
-                index3 += 1;
-            }else {
-                greenOrcImageView.setLayoutX(greenOrcImageView.getLayoutX() - 170);
-            }
-        }
-
-        while (listIterator4.hasNext()){
-            Coin coin = listIterator4.next();
-            ImageView coinImageView = coin.getImageView();
-            if(coinImageView.getBoundsInParent().getMaxX()<0){
-                index4 += 1;
-            }else{
-                coinImageView.setLayoutX(coinImageView.getLayoutX()-170);
+            while (listIterator3.hasNext()) {
+                GreenOrc greenOrc = listIterator3.next();
+                ImageView greenOrcImageView = greenOrc.getImageView();
+                if (greenOrcImageView.getBoundsInParent().getMaxX() < 0) {
+                    index3 += 1;
+                } else {
+                    greenOrcImageView.setLayoutX(greenOrcImageView.getLayoutX() - 170);
+                }
             }
 
-        }
+            while (listIterator4.hasNext()) {
+                Coin coin = listIterator4.next();
+                ImageView coinImageView = coin.getImageView();
+                if (coinImageView.getBoundsInParent().getMaxX() < 0) {
+                    index4 += 1;
+                } else {
+                    coinImageView.setLayoutX(coinImageView.getLayoutX() - 170);
+                }
 
-        while (listIterator5.hasNext()){
-            ChestType chest = listIterator5.next();
-            ImageView chestImageView = chest.getImageView();
-            if(chestImageView.getBoundsInParent().getMaxX()<0){
-                index5 += 1;
-            }else {
-                chestImageView.setLayoutX(chestImageView.getLayoutX() - 170);
             }
-        }
-        for (int i = 0; i < index1; i++) {
-            tntObjects.remove(0);
-        }
-        for (int i = 0; i < index2; i++) {
-            redOrcs.get(0).terminateJump();
-            redOrcs.remove(0);
-        }
-        for (int i = 0; i < index3; i++) {
-            greenOrcs.get(0).terminateJump();
-            greenOrcs.remove(0);
-        }
-        for (int i = 0; i < index4; i++) {
-            coins.remove(0);
-        }
-        for (int i = 0; i < index5; i++) {
-            chestTypeObjects.remove(0);
-        }
+
+            while (listIterator5.hasNext()) {
+                ChestType chest = listIterator5.next();
+                ImageView chestImageView = chest.getImageView();
+                if (chestImageView.getBoundsInParent().getMaxX() < 0) {
+                    index5 += 1;
+                } else {
+                    chestImageView.setLayoutX(chestImageView.getLayoutX() - 170);
+                }
+            }
+            for (int i = 0; i < index1; i++) {
+                tntObjects.remove(0);
+            }
+            for (int i = 0; i < index2; i++) {
+                redOrcs.get(0).terminateJump();
+                redOrcs.remove(0);
+            }
+            for (int i = 0; i < index3; i++) {
+                greenOrcs.get(0).terminateJump();
+                greenOrcs.remove(0);
+            }
+            for (int i = 0; i < index4; i++) {
+                coins.remove(0);
+            }
+            for (int i = 0; i < index5; i++) {
+                chestTypeObjects.remove(0);
+            }
+        }catch (Exception e){}
     }
 
     public void storeIslandsCoordinatesInformation(){
@@ -839,7 +860,7 @@ public class Position implements Initializable, Serializable {
                         if (!gOrc.isCollided()) {
                             ImageView greenOrcImageView = gOrc.getImageView();
                             if(player.getBoundsInParent().getMaxX()>=greenOrcImageView.getLayoutX() && player.getLayoutX()<greenOrcImageView.getBoundsInParent().getMaxX()){
-                                if(player.getBoundsInParent().getMinY()>=(greenOrcImageView.getBoundsInParent().getMaxY()-7) && player.getLayoutY()<=greenOrcImageView.getBoundsInParent().getMaxY()){
+                                if(player.getBoundsInParent().getMinY()>=(greenOrcImageView.getBoundsInParent().getMaxY()-17) && player.getLayoutY()<=greenOrcImageView.getBoundsInParent().getMaxY()){
                                     gOrc.killPlayer(playerObj);
                                 }else if(player.getBoundsInParent().getMaxY()>=greenOrcImageView.getLayoutY() && player.getBoundsInParent().getMinY()<= greenOrcImageView.getBoundsInParent().getMaxY()){
                                     int x = (int)greenOrcImageView.getLayoutX();
@@ -869,7 +890,7 @@ public class Position implements Initializable, Serializable {
                             ImageView redOrcImageView = rOrc.getImageView();
                             if(player.getBoundsInParent().getMaxX()>=redOrcImageView.getLayoutX() && player.getLayoutX()<redOrcImageView.getBoundsInParent().getMaxX()){
                                 // not setting the is collided flag because it is not needed as we don't have any array list
-                                if((player.getBoundsInParent().getMinY()>=redOrcImageView.getBoundsInParent().getMaxY()-7) && player.getLayoutY()<=redOrcImageView.getBoundsInParent().getMaxY()){
+                                if((player.getBoundsInParent().getMinY()>=redOrcImageView.getBoundsInParent().getMaxY()-15) && player.getLayoutY()<=redOrcImageView.getBoundsInParent().getMaxY()){
                                     rOrc.killPlayer(playerObj);
                                 }else if(player.getBoundsInParent().getMaxY()>redOrcImageView.getLayoutY() && player.getBoundsInParent().getMinY()<= redOrcImageView.getBoundsInParent().getMaxY()){
                                     int x = (int)redOrcImageView.getLayoutX();
@@ -963,7 +984,9 @@ public class Position implements Initializable, Serializable {
             if(imageView.getBoundsInParent().getMaxX()>bossImageView.getLayoutX() && (imageView.getLayoutX()+100)<bossImageView.getBoundsInParent().getMaxX()){
                 if(imageView.getBoundsInParent().getMaxX()>bossImageView.getLayoutY() && imageView.getLayoutY()<bossImageView.getBoundsInParent().getMaxY()){
                     boss.die();
+                    boss.terminateMove();
                     playerObj.changeGameStatusWin(true);
+                    gameOver = true;
                     gameOver();
                 }
             }
