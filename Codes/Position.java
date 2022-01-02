@@ -47,8 +47,10 @@ public class Position implements Initializable, Serializable {
     private Player playerObj;
     private boolean flagForBossLoaded;
     private Homepage homepage;
+    private boolean gameOver;
 
     public Position(Player player, Homepage homepage){
+        gameOver = false;
         this.homepage = homepage;
         playerObj = player;
         tntObjects = new ArrayList<>();
@@ -212,6 +214,16 @@ public class Position implements Initializable, Serializable {
                 }
             }
         }
+        if (gameOver) {
+            FxmlLoader fxmlLoader = new FxmlLoader();
+            GameOutcome gm = null;
+            if (playerObj.getGameStatusWin()) {
+                gm = new GameOutcome("You win the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
+            } else {
+                gm = new GameOutcome("You loose the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
+            }
+            HelloApplication.setDifferentScene(fxmlLoader.getScene("gameOutcome", gm, "GameOutcome"));
+        }
     }
 
     public void createIsland(int identifier, ImageView imageView1, ImageView imageView2, ImageView imageView3) throws FileNotFoundException {
@@ -361,15 +373,12 @@ public class Position implements Initializable, Serializable {
                 boss.terminateJump();
             }
         }
-        playerObj.terminateJump();
-        FxmlLoader fxmlLoader = new FxmlLoader();
-        GameOutcome gm = null;
-        if(playerObj.getGameStatusWin()){
-            gm = new GameOutcome("You win the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
-        }else{
-            gm = new GameOutcome("You loose the Game!!", String.valueOf(nOfClick), String.valueOf(nOfCoinsAmount), homepage);
+        if(!playerObj.isLiving()){
+            gameOver = true;
         }
-        HelloApplication.setDifferentScene(fxmlLoader.getScene("gameOutcome", gm, "GameOutcome"));
+        playerObj.terminateJump();
+
+
     }
 
     public void terminateJumpOfAllOrcs(){
@@ -633,8 +642,8 @@ public class Position implements Initializable, Serializable {
         }catch (InterruptedException e){
             System.out.println("got interrupted exception");
         }
-        mainAnchorPane.getChildren().removeAll();
-        mainAnchorPane = null;
+        //mainAnchorPane.getChildren().removeAll();
+        //mainAnchorPane = null;
     }
 
     public void reviveEverything() {

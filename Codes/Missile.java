@@ -21,7 +21,7 @@ public class Missile extends Weapon{
 
     public ImageView formImageView(double from, double to,double yPosition, double duration)
     {
-        //System.out.println("formed the imageView of missile");
+        System.out.println("formed the imageView of missile");
         ImageView weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying",from, yPosition, 50, 150);
         super.getAnchorPane().getChildren().add(weaponImageView);
         return weaponImageView;

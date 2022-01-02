@@ -42,7 +42,7 @@ public class Boss extends Enemy{
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                //System.out.println(mineImageView.getLayoutX());
+                System.out.println(mineImageView.getLayoutX());
                 try {
                     Boss.super.jump();
                 } catch (InterruptedException ex) {
@@ -59,7 +59,7 @@ public class Boss extends Enemy{
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                //System.out.println("from run"+mineImageView.getLayoutX());
+                System.out.println("from run"+mineImageView.getLayoutX());
                 if(mineImageView.getLayoutX()>=boundLeft && mineImageView.getBoundsInParent().getMaxX()<=boundRight)
                     mineImageView.setLayoutX(mineImageView.getLayoutX()-50);
             }
