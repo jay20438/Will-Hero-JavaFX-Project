@@ -33,7 +33,7 @@
       </ImageView>
       <ImageView fitHeight="54.0" fitWidth="75.0" layoutX="634.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@WillHeroImages/TNT.png" />
+            <Image url="@WillHeroImages/tnt.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="51.0" fitWidth="44.0" layoutX="881.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">

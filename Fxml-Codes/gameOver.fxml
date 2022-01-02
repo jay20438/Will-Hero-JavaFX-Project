@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx2.SettingsPageView">
-   <children>
-      <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
-         <image>
-            <Image url="@WillHeroImages/backGround.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="233.0" fitWidth="698.0" layoutX="182.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@WillHeroImages/gameOver.png" />
-         </image>
-      </ImageView>
-   </children>
+    <children>
+        <ImageView fitHeight="611.0" fitWidth="1098.0" layoutX="-1.0">
+            <image>
+                <Image url="@WillHeroImages/backGround.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="233.0" fitWidth="698.0" layoutX="182.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@WillHeroImages/gameOver.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>

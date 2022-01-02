@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="762.0" prefWidth="1696.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.TestController">
+   <children>
+      <ImageView fx:id="bg" fitHeight="858.0" fitWidth="1715.0" onMouseClicked="#move" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/backGround.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="gp" layoutX="716.0" layoutY="450.0">
+         <children>
+            <ImageView fx:id="island" fitHeight="248.0" fitWidth="238.0" layoutX="-31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/4treesIsland3.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="75.0" fitWidth="86.0" layoutX="60.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/openChest.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="gp2" layoutX="35.0" layoutY="357.0">
+         <children>
+            <ImageView fx:id="island2" fitHeight="241.0" fitWidth="286.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/4treesIsland.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="contPlayer" layoutX="152.0" layoutY="75.0">
+         <children>
+            <ImageView fitHeight="314.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player" fitHeight="282.0" fitWidth="40.0" layoutX="2.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@WillHeroImages/PlayerNew.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
