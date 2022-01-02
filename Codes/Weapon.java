@@ -68,7 +68,7 @@ public abstract class Weapon implements Serializable {
         TimerTask timerTask3 = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("moving the weapon");
+                //System.out.println("moving the weapon");
                 if(weaponImageView.getLayoutX() < from + 500) {
                     weaponImageView.setLayoutX(weaponImageView.getLayoutX() + 50);
                 }
