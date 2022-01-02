@@ -6,17 +6,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public abstract class Weapon {
+import java.io.Serializable;
+
+public abstract class Weapon implements Serializable {
 
     //    private Image image;
     //private final TranslateTransition translate4;
-    private ImageView weaponImageView;
+    private transient ImageView weaponImageView;
     private double x;
     private double y;
     private double height;
     private double width;
     private CreateEntity createEntity;
-    private AnchorPane anchorPane;
+    private transient AnchorPane anchorPane;
 
     public Weapon(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
@@ -52,4 +54,6 @@ public abstract class Weapon {
     public ImageView getImageView() {
         return weaponImageView;
     }
+
+
 }

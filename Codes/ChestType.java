@@ -6,30 +6,32 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class ChestType {
+public class ChestType implements Serializable {
     private Object typeOfReward;
-    private Image image;
-    private ImageView mineImageView;
+    private transient ImageView mineImageView;
     private double x;
     private double y;
     private double height;
     private double width;
+    private String imageName;
     private int open;
     private CreateEntity createEntity;
-    private AnchorPane anchorPane;
+    private transient AnchorPane anchorPane;
     private Random random;
-    private blankController bk;
-    private TranslateTransition translateTransition;
-    private RotateTransition rotateTransition;
-    private  FadeTransition fadeTransition;
+    private Position bk;
+    private transient TranslateTransition translateTransition;
+    private transient RotateTransition rotateTransition;
+    private  transient FadeTransition fadeTransition;
     private boolean collided;
     boolean flagOnlyForCoins;
 
-    public ChestType(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk, boolean flagOnlyForCoins){
+    public ChestType(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, Position bk, boolean flagOnlyForCoins){
         this.flagOnlyForCoins = flagOnlyForCoins;
         this.bk = bk;
+        this.imageName = imageName;
         random = new Random();
         collided = false;
         this.anchorPane = anchorPane;
@@ -56,7 +58,7 @@ public class ChestType {
         if(!flagOnlyForCoins) {
             int firstLevel = random.nextInt(2);
             if (firstLevel == 0) {
-                Coin coinObj = new Coin(null, 0, 0, 0, 0, null);
+                Coin coinObj = new Coin(null, 0, 0, 0, 0, null, bk);
                 int randomCoins = coinObj.generateCollection();
                 player.getCoins(randomCoins);
                 bk.updateCoin(randomCoins);
@@ -105,4 +107,20 @@ public class ChestType {
     public void setCollided(boolean flag){
         collided = flag;
     }
+
+    public void store(){
+        System.out.println("chest before store x:"+mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
+         x = mineImageView.getLayoutX();
+         y = mineImageView.getLayoutY();
+         height = mineImageView.getFitHeight();
+         width = mineImageView.getFitWidth();
+    }
+
+
+    public void revive(AnchorPane anchorPane){
+        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        System.out.println("chest after revive x:" + mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
+        anchorPane.getChildren().add(mineImageView);
+    }
+
 }

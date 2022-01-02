@@ -3,43 +3,79 @@ package com.example.willherojavafxproject;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
+import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 
-public class Homepage implements Initializable {
+public class Homepage implements Initializable, Serializable {
     private FxmlLoader fxmlLoader;
-    private FadeTransition fadeTransition1;
-    private FadeTransition fadeTransition2;
-    private FadeTransition fadeTransition3;
+    private transient FadeTransition fadeTransition1;
+    private transient FadeTransition fadeTransition2;
+    private transient FadeTransition fadeTransition3;
+    private ArrayList<String> playerName;
+    private HashMap<String, ArrayList<Game>> allPlayersSavedGames;
+    private Player player;
+    private File f;
 
-    public  Homepage() {
+    private Game game;
+
+    public  Homepage(Player player) throws IOException {
+        f = new File("SavedGames.txt");
+        f.createNewFile();
+        System.out.println("in homepage constructor");
+        allPlayersSavedGames = new HashMap<>();
+        this.player = player;
+        playerName = new ArrayList<>();
         fadeTransition1 = new FadeTransition();
         fadeTransition2 = new FadeTransition();
         fadeTransition3 = new FadeTransition();
+        game = new Game(player, this);
         fxmlLoader = new FxmlLoader();
     }
 
     @FXML
-    private ImageView playButton;
+    private  transient ImageView playButton;
 
     @FXML
-    private ImageView settingsButton;
+    private  transient ImageView settingsButton;
 
     @FXML
-    private ImageView viewRank;
+    private  transient ImageView viewRank;
+
+    @FXML
+    private  transient ImageView loadGame;
+
+    @FXML
+    private  transient Label myLabel;
+
+    @FXML
+    private  transient ListView<?> myList;
+
+    @FXML
+    private  transient Button myLoadButton;
 
     @FXML
     void playTheGame(MouseEvent event) {
-        HelloApplication.setDifferentScene(fxmlLoader.getScene("blank"));
+        game.playGame();
     }
+
 
     @FXML
     void goToSettings(MouseEvent event) {
-        HelloApplication.setDifferentScene(fxmlLoader.getScene("SettingsPageView"));
+        SettingsPageView settingsPageView = new SettingsPageView(this);
+        HelloApplication.setDifferentScene(fxmlLoader.getScene("SettingsPageView", settingsPageView, "SettingsPageView"));
     }
 
     @FXML
@@ -49,6 +85,9 @@ public class Homepage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fadeTransition1 = new FadeTransition();
+        fadeTransition2 = new FadeTransition();
+        fadeTransition3 = new FadeTransition();
         fadeTransition1.setDuration(Duration.millis(1000));
         fadeTransition1.setToValue(1);
         fadeTransition1.setNode(playButton);
@@ -62,4 +101,78 @@ public class Homepage implements Initializable {
         fadeTransition2.play();
         fadeTransition3.play();
     }
+
+
+    @FXML
+    void loadGamePage(MouseEvent event) throws IOException {
+        this.fetchData();
+        //System.out.println("present in load game page and size of hash map:" + allPlayersSavedGames.size());
+        //System.out.println("size of playerSavedGames:" + allPlayersSavedGames.get(player.getMyName()).size() + " date:" + allPlayersSavedGames.get(player.getMyName()).get(0).getDateOfGamePlayed());
+        LoadGamePage loadGamePage = new LoadGamePage(allPlayersSavedGames.get(player.getMyName()), this);
+        HelloApplication.setDifferentScene(fxmlLoader.getScene("loadGame", loadGamePage, "LoadGamePage"));
+
+    }
+
+    @FXML
+    void callForGameLoad(MouseEvent event) {
+
+    }
+
+    public void save() throws IOException, ClassNotFoundException {
+        this.fetchData();
+        game.askPositionToStoreCoordinates();
+        if(allPlayersSavedGames.get(player.getMyName())==null){
+            System.out.println("added the game for the player with no initial data");
+            ArrayList<Game> arrayList = new ArrayList<>();
+            arrayList.add(game);
+            allPlayersSavedGames.put(player.getMyName(), arrayList);
+        }else{
+            System.out.println("added the game for the player with some inital data!");
+            allPlayersSavedGames.get(player.getMyName()).add(game);
+        }
+        FileOutputStream fileOutputStream = new FileOutputStream(f);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        try {
+            objectOutputStream.writeObject(allPlayersSavedGames);
+        }catch (Exception e){}
+
+    }
+
+    public void fetchData() throws IOException {
+        if(Files.size(Paths.get("SavedGames.txt"))!=0){
+            FileInputStream fileInputStream = new FileInputStream(f);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            try {
+                allPlayersSavedGames = (HashMap<String, ArrayList<Game>>) objectInputStream.readObject();
+//                objectInputStream.
+            }catch(Exception e){
+                e.printStackTrace();
+                System.out.println("not able to read");
+            }
+            System.out.println("size of the hash map:" + allPlayersSavedGames.size());
+        }else{
+            System.out.println("since the file was empty therefore there is no data to fetch!");
+        }
+    }
+
+    public void load(String dateSelected){
+        Game gameOld = null;
+        ListIterator<Game> listIterator = allPlayersSavedGames.get(player.getMyName()).listIterator();
+        while (listIterator.hasNext()){
+            gameOld = listIterator.next();
+            if(gameOld.getDateOfGamePlayed().equals(dateSelected)){
+                break;
+            }
+        }
+        game = gameOld;
+        game.setLoadedGame(true);
+        player = game.getPlayer();
+        //game.askPositionToReviveEverything();
+        game.playGame();
+    }
+
+    public Game getGame(){
+        return game;
+    }
+
 }

@@ -11,28 +11,39 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.io.Serializable;
 
-public class SettingsPageView
+
+public class SettingsPageView implements Serializable
 {
-    private Scene scene2;
-    private static Scene scene4;
+
+    private Homepage homepage;
+
+    public SettingsPageView(Homepage homepage){
+        this.homepage = homepage;
+    }
 
     @FXML
-    private AnchorPane myAnchorPane;
+    private transient AnchorPane myAnchorPane;
 
-//    @FXML
-//    private ImageView player;
+
+    @FXML
+    private transient ImageView save;
+
+
+    @FXML
+    void saveGame(MouseEvent event) throws IOException, ClassNotFoundException {
+        homepage.save();
+    }
+
+
     FxmlLoader fxmlLoader = new FxmlLoader();
 
     public void goToHomePage(MouseEvent mouseEvent) {
-        HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage"));
+        System.out.println("present in goToHomePage in SettingsPageView");
+        HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage", homepage, "Homepage"));
     }
 
 

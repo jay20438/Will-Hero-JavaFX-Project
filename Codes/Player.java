@@ -1,31 +1,61 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
-import javafx.scene.Group;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Player {
-    private ImageView mineImageView;
+public class Player implements Serializable {
+    private transient ImageView mineImageView;
     private int nOfCoins;
     private Knife knife;
     private Missile missile;
     private CreateEntity createEntity;
-    private blankController bk;
-    private Timer timer;
+    private Position bk;
+    private transient Timer timer;
     private int gainedUpHeight;
     private boolean flag4Up;
     private Player p;
     private boolean living;
+    private String userName;
+    private String imageName;
+    private double x;
+    private double y;
+    private double height;
+    private double width;
+    private transient AnchorPane anchorPane;
 
-    public Player(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, CreateEntity createEntity, blankController bk) throws InterruptedException {
+    public Player(String name){
+        System.out.println("my name:" + name);
+        this.userName = name;
+    }
+
+//    public Player(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, CreateEntity createEntity, Position bk) throws InterruptedException {
+//        living = true;
+//        this.createEntity = createEntity;
+//        this.bk = bk;
+//        gainedUpHeight = 0;
+//        knife = null;
+//        p = this;
+//        flag4Up = false;
+//        missile = null;
+//        nOfCoins = 0;
+//        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+//        anchorPane.getChildren().add(mineImageView);
+//        mineImageView.setPreserveRatio(true);
+//        this.jump();
+//    }
+
+
+
+    public void formMyImage(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, CreateEntity createEntity, Position bk) throws InterruptedException {
         living = true;
         this.createEntity = createEntity;
         this.bk = bk;
@@ -38,6 +68,8 @@ public class Player {
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
         anchorPane.getChildren().add(mineImageView);
         mineImageView.setPreserveRatio(true);
+        this.anchorPane = anchorPane;
+        this.imageName = imageName;
         this.jump();
     }
 
@@ -133,34 +165,54 @@ public class Player {
         rotateTransition.play();
     }
 
-
     public void throwWeapon(){
         if(knife!=null){
             this.throwKnife();
-        }
-        else if(missile!=null){
+        }else if(missile!=null){
             this.launchMissile();
         }
     }
 
     public void launchMissile()
     {
-        bk.setMissile(missile);
-        double xPosition = mineImageView.getBoundsInParent().getMaxX();
-        double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
-        missile.moveWeapon( xPosition-80, xPosition+100,yPosition,  1000).play();
-        missile.fade();
-        bk.checkCollisionOfOrcAndWeapon();
+        missile.moveWeapon( 30, 120,  Duration.millis(1000)).play();
     }
 
     public void throwKnife()
     {
-        bk.setKnife(knife);
-        double xPosition = mineImageView.getBoundsInParent().getMaxX();
-        double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
-        knife.moveWeapon(xPosition-80, xPosition+100,yPosition,  1000).play();
-        knife.fade();
-        bk.checkCollisionOfOrcAndWeapon();
+        ImageView imv2 = knife.getImageView();
+        knife.moveWeapon(30, 120,  Duration.millis(1000)).play();
+    }
+
+    public void setCoordinatesAfterCollision(int value){
+        mineImageView.setLayoutX(value);
+    }
+
+//    public void displaySavedGames(List){
+//
+//    }
+
+    public String getMyName(){
+
+        return userName;
+    }
+
+    public void store(){
+        System.out.println("player x while storing:" + mineImageView.getLayoutX()+" y:"+mineImageView.getLayoutY());
+         x = mineImageView.getLayoutX();
+         y = mineImageView.getLayoutY();
+         height = mineImageView.getFitHeight();
+         width = mineImageView.getFitWidth();
+    }
+
+
+    public void revive(AnchorPane anchorPane)  {
+        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        System.out.println("player x after reviving:" + mineImageView.getLayoutX() + " y:"+mineImageView.getLayoutY());
+        anchorPane.getChildren().add(mineImageView);
+        try {
+            this.jump();
+        }catch (Exception e){}
     }
 
 }
