@@ -37,10 +37,8 @@ public class CreateEntity implements Serializable {
         greenOrcMaxNo = 3;
         redOrcMaxNo = 3;
         tntMaxNo = 3;
-        heightOfEntities.put("coins", 46);
-        widthOfEntities.put("coins", 39);
-        heightOfEntities.put("playerWithKnife", 93);
-        widthOfEntities.put("playerWithKnife", 75);
+        heightOfEntities.put("playerWithKnife", 150);
+        widthOfEntities.put("playerWithKnife", 148);
         heightOfEntities.put("playerWithMissile", 72);
         widthOfEntities.put("playerWithMissile", 63);
         heightOfEntities.put("greenOrc",81);

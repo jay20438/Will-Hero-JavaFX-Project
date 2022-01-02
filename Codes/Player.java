@@ -37,21 +37,6 @@ public class Player implements Serializable {
         this.userName = name;
     }
 
-//    public Player(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, CreateEntity createEntity, Position bk) throws InterruptedException {
-//        living = true;
-//        this.createEntity = createEntity;
-//        this.bk = bk;
-//        gainedUpHeight = 0;
-//        knife = null;
-//        p = this;
-//        flag4Up = false;
-//        missile = null;
-//        nOfCoins = 0;
-//        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-//        anchorPane.getChildren().add(mineImageView);
-//        mineImageView.setPreserveRatio(true);
-//        this.jump();
-//    }
 
 
 
@@ -100,9 +85,19 @@ public class Player implements Serializable {
         CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX(), mineImageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("crushedPlayer"), createEntity.getWidthOfEntity("crushedPlayer"));
     }
 
+    public void jumpWait()  {
+        try{
+            timer.wait();
+        }catch (Exception e){}
+
+    }
+
+    public void notifyJump(){
+        timer.notify();
+    }
+
     public void terminateJump(){
         timer.cancel();
-        timer.purge();
     }
 
     public void jump() throws InterruptedException {
@@ -164,25 +159,36 @@ public class Player implements Serializable {
         rotateTransition.setCycleCount(1);
         rotateTransition.play();
     }
+//
+//    public void throwWeapon(){
+//        if(knife!=null){
+//            this.throwKnife();
+//        }
+//        else if(missile!=null){
+//            this.launchMissile();
+//        }
+//    }
+//
+//    public void launchMissile()
+//    {
+//        bk.setMissile(missile);
+//        double xPosition = mineImageView.getBoundsInParent().getMaxX();
+//        double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
+//        missile.moveWeapon( xPosition-80, xPosition+100,yPosition,  1000).play();
+//        missile.fade();
+//        bk.checkCollisionOfOrcAndWeapon();
+//    }
+//
+//    public void throwKnife()
+//    {
+//        bk.setKnife(knife);
+//        double xPosition = mineImageView.getBoundsInParent().getMaxX();
+//        double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
+//        knife.moveWeapon(xPosition-80, xPosition+100,yPosition,  1000).play();
+//        knife.fade();
+//        bk.checkCollisionOfOrcAndWeapon();
+//    }
 
-    public void throwWeapon(){
-        if(knife!=null){
-            this.throwKnife();
-        }else if(missile!=null){
-            this.launchMissile();
-        }
-    }
-
-    public void launchMissile()
-    {
-        missile.moveWeapon( 30, 120,  Duration.millis(1000)).play();
-    }
-
-    public void throwKnife()
-    {
-        ImageView imv2 = knife.getImageView();
-        knife.moveWeapon(30, 120,  Duration.millis(1000)).play();
-    }
 
     public void setCoordinatesAfterCollision(int value){
         mineImageView.setLayoutX(value);

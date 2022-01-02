@@ -1,5 +1,7 @@
 package com.example.willherojavafxproject;
 
+import javafx.scene.input.MouseEvent;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,8 +15,10 @@ public class Game implements Serializable {
     private String playedOn;
     private Position position;
     private Homepage homepage;
+    private boolean resumedGame;
 
     public Game(Player player, Homepage homepage){
+        resumedGame = false;
         loadedGame = false;
         this.homepage = homepage;
         System.out.println("in game constructor");
@@ -26,8 +30,10 @@ public class Game implements Serializable {
     }
 
     public void playGame(){
-        dNow = new Date();
-        playedOn = fmt.format(dNow);
+        if(!resumedGame) {
+            dNow = new Date();
+            playedOn = fmt.format(dNow);
+        }
         HelloApplication.setDifferentScene(fxmlLoader.getScene("blank", position, "Position"));
     }
 
@@ -57,6 +63,27 @@ public class Game implements Serializable {
 
     public boolean getLoadedGame(){
         return loadedGame;
+    }
+
+    public void pauseGame(MouseEvent e) throws InterruptedException {
+        askPositionToStoreCoordinates();
+        position.makeAllTimerCancel();
+        homepage.goToSettings(e);
+    }
+
+    public void resumeGame(){
+        resumedGame = true;
+        playGame();
+//        position.startAllTimers();
+//        HelloApplication.setDifferentScene(fxmlLoader.getScene("blank", position, "Position"));
+    }
+
+    public boolean getResumedGame(){
+        return resumedGame;
+    }
+
+    public void setResumedGame(boolean value){
+        resumedGame = value;
     }
 
 }

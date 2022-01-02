@@ -28,10 +28,11 @@ public class Homepage implements Initializable, Serializable {
     private HashMap<String, ArrayList<Game>> allPlayersSavedGames;
     private Player player;
     private File f;
-
+    private SettingsPageView settingsPageView;
     private Game game;
 
     public  Homepage(Player player) throws IOException {
+        settingsPageView = new SettingsPageView(this);
         f = new File("SavedGames.txt");
         f.createNewFile();
         System.out.println("in homepage constructor");
@@ -68,13 +69,17 @@ public class Homepage implements Initializable, Serializable {
 
     @FXML
     void playTheGame(MouseEvent event) {
-        game.playGame();
+        if(game.getResumedGame()){
+            game = new Game(player, this);
+        }else{
+            game.playGame();
+        }
+
     }
 
 
     @FXML
     void goToSettings(MouseEvent event) {
-        SettingsPageView settingsPageView = new SettingsPageView(this);
         HelloApplication.setDifferentScene(fxmlLoader.getScene("SettingsPageView", settingsPageView, "SettingsPageView"));
     }
 
@@ -113,10 +118,7 @@ public class Homepage implements Initializable, Serializable {
 
     }
 
-    @FXML
-    void callForGameLoad(MouseEvent event) {
 
-    }
 
     public void save() throws IOException, ClassNotFoundException {
         this.fetchData();

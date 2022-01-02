@@ -158,18 +158,13 @@ public class Position implements Initializable, Serializable {
     private transient ImageView tnt;
 
 
-//    @FXML
-//    void saveGame(MouseEvent event) {
-//
-//    }
-
 
     @FXML
     void moveContent(MouseEvent event) throws FileNotFoundException, InterruptedException {
         if(playerObj.isLiving() && !playerFalls){
             nOfClick += 1;
             nOfSteps.setText(String.valueOf(nOfClick));
-            playerObj.throwWeapon();
+            //playerObj.throwWeapon();
         }
 
         if(nOfClick>120 && island6.getBoundsInParent().getMaxX()<1408){
@@ -255,45 +250,47 @@ public class Position implements Initializable, Serializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(!homepage.getGame().getLoadedGame()){
-            createEntity = new CreateEntity(this, mainAnchorPane);
-            try {
-                createEntity.formPlayerImage(playerObj);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            player = playerObj.getMineImageView();
-            //chestTypeObjects = new ArrayList<>();
+//        if(!homepage.getGame().getResumedGame()) {
+            if (!homepage.getGame().getLoadedGame() && !homepage.getGame().getResumedGame()) {
+                createEntity = new CreateEntity(this, mainAnchorPane);
+                try {
+                    createEntity.formPlayerImage(playerObj);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                player = playerObj.getMineImageView();
+                //chestTypeObjects = new ArrayList<>();
 
-            try {
-                createEntity = new CreateEntity(this, mainAnchorPane);
-                createEntity.create(island2);
-                createEntity = new CreateEntity(this, mainAnchorPane);
-                createEntity.create(island3);
-                createEntity = new CreateEntity(this,  mainAnchorPane);
-                createEntity.create(island4);
-                createEntity = new CreateEntity(this,  mainAnchorPane);
-                createEntity.create(island5);
-                createEntity = new CreateEntity(this,  mainAnchorPane);
-                createEntity.create(island6);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    createEntity = new CreateEntity(this, mainAnchorPane);
+                    createEntity.create(island2);
+                    createEntity = new CreateEntity(this, mainAnchorPane);
+                    createEntity.create(island3);
+                    createEntity = new CreateEntity(this, mainAnchorPane);
+                    createEntity.create(island4);
+                    createEntity = new CreateEntity(this, mainAnchorPane);
+                    createEntity.create(island5);
+                    createEntity = new CreateEntity(this, mainAnchorPane);
+                    createEntity.create(island6);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                island1.setLayoutX(-1000);
+                island2.setLayoutX(-1000);
+                island3.setLayoutX(-1000);
+                island4.setLayoutX(-1000);
+                island5.setLayoutX(-1000);
+                island6.setLayoutX(-1000);
+                reviveEverything();
             }
-        }else{
-            island1.setLayoutX(-1000);
-            island2.setLayoutX(-1000);
-            island3.setLayoutX(-1000);
-            island4.setLayoutX(-1000);
-            island5.setLayoutX(-1000);
-            island6.setLayoutX(-1000);
-            reviveEverything();
-        }
             System.out.println("in intiialize");
             checkCollisionOfPlayerWithCoin();
             checkCollisionWithChestAndPlayer();
             checkCollisionOfPlayerWithRedOrc();
             checkCollisionOfPlayerWithGreenOrc();
             checkCollisionOfPlayerWithTnt();
+//        }
     }
 
 
@@ -376,11 +373,6 @@ public class Position implements Initializable, Serializable {
         }
         System.out.println("in game over");
         playerObj.terminateJump();
-//        if(boss!=null){
-//            boss.terminateJump();
-//            timer6.cancel();
-//        }
-
         System.out.println("game over");
     }
 
@@ -399,9 +391,97 @@ public class Position implements Initializable, Serializable {
     }
 
     @FXML
-    void goToSettings(MouseEvent event) {
-        homepage.goToSettings(event);
+    void goToSettings(MouseEvent event) throws InterruptedException {
+        homepage.getGame().pauseGame(event);
     }
+
+//    public void makeAllOrcsJumpWait(){
+//        ListIterator<RedOrc> listIterator1 = redOrcs.listIterator();
+//        ListIterator<GreenOrc> listIterator2 = greenOrcs.listIterator();
+//        while (listIterator1.hasNext()){
+//            RedOrc redOrc = listIterator1.next();
+//            redOrc.jumpWait();
+//        }
+//
+//        while (listIterator2.hasNext()){
+//            GreenOrc  greenOrc = listIterator2.next();
+//            greenOrc.jumpWait();
+//        }
+//    }
+
+    public void startJumpsOfAllOrcs() throws InterruptedException {
+//        ListIterator<RedOrc> listIterator1 = redOrcs.listIterator();
+//        ListIterator<GreenOrc> listIterator2 = greenOrcs.listIterator();
+//        while (listIterator1.hasNext()){
+//            RedOrc redOrc = listIterator1.next();
+//            redOrc.notifyJump();
+//        }
+//
+//        while (listIterator2.hasNext()){
+//            GreenOrc  greenOrc = listIterator2.next();
+//            greenOrc.notifyJump();
+//        }
+        ListIterator<RedOrc> listIterator1 = redOrcs.listIterator();
+        ListIterator<GreenOrc> listIterator2 = greenOrcs.listIterator();
+        while (listIterator1.hasNext()){
+            RedOrc redOrc = listIterator1.next();
+            redOrc.jump();
+        }
+
+        while (listIterator2.hasNext()){
+            GreenOrc  greenOrc = listIterator2.next();
+            greenOrc.jump();
+        }
+    }
+
+    public void makeAllTimerCancel() throws InterruptedException {
+        System.out.println("cancelling all timers############");
+        try {
+            timer1.cancel();
+            timer2.cancel();
+            timer3.cancel();
+            timer4.cancel();
+            timer5.cancel();
+            if (boss != null) {
+                timer6.cancel();
+                boss.terminateJump();
+                boss.terminateMoveLeft();
+            }
+            terminateJumpOfAllOrcs();
+            playerObj.terminateJump();
+        }catch (NullPointerException e){}
+    }
+
+//    public void startAllTimers(){
+//        System.out.println("starting all timers@@@@@@@@@@@@@");
+//        try {
+//
+////            timer1.notify();
+////            timer2.notify();
+////            timer3.notify();
+////            timer4.notify();
+////            timer5.notify();
+//            checkCollisionOfPlayerWithCoin();
+//            checkCollisionWithChestAndPlayer();
+//            checkCollisionOfPlayerWithRedOrc();
+//            checkCollisionOfPlayerWithGreenOrc();
+//            checkCollisionOfPlayerWithTnt();
+//
+//            if (boss != null){
+//                checkCollisionOfPlayerAndBoss();
+//                boss.jump();
+//                boss.moveLeft();
+//            }
+//            startJumpsOfAllOrcs();
+//            playerObj.jump();
+//        }catch(Exception e){}
+//
+////        checkCollisionOfPlayerWithCoin();
+////        checkCollisionWithChestAndPlayer();
+////        checkCollisionOfPlayerWithRedOrc();
+////        checkCollisionOfPlayerWithGreenOrc();
+////        checkCollisionOfPlayerWithTnt();
+//    }
 
     public double getDepthOfBaseOfIsland(ImageView imageView){
         System.out.println("in getDepthOf island");
@@ -609,6 +689,7 @@ public class Position implements Initializable, Serializable {
     }
 
     public void reviveEverything() {
+        System.out.println("present here to revive all the things ");
 //        mainAnchorPane = new AnchorPane();
 //        mainAnchorPane.setLayoutX(coordinatesOfAnchorPane[0]);
 //        mainAnchorPane.setLayoutY(coordinatesOfAnchorPane[1]);
@@ -632,6 +713,7 @@ public class Position implements Initializable, Serializable {
         player = playerObj.getMineImageView();
         try {
             boss.revive(mainAnchorPane);
+            boss.reviveMoveLeft();
         }catch(Exception e){}
         ListIterator<TNT> listIterator1 = tntObjects.listIterator();
         ListIterator<RedOrc> listIterator2 = redOrcs.listIterator();

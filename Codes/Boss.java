@@ -23,7 +23,6 @@ public class Boss extends Enemy{
         this.bk = bk;
         mineImageView = super.getImageView();
 
-
     }
 
     public void terminateTimer(){
@@ -67,6 +66,17 @@ public class Boss extends Enemy{
         timer.scheduleAtFixedRate(timerTask, 400, 900);
     }
 
+    public void moveWait()  {
+        try{
+            timer.wait();
+        }catch (Exception e){}
+
+    }
+
+    public void notifyMove(){
+        timer.notify();
+    }
+
     public void terminateMoveLeft(){
         timer.cancel();
     }
@@ -82,7 +92,8 @@ public class Boss extends Enemy{
 //        }
 //    }
 
-
-
+    public void reviveMoveLeft(){
+        this.moveLeft();
+    }
 
 }

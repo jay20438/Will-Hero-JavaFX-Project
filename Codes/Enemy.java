@@ -81,7 +81,16 @@ public abstract class Enemy implements Serializable {
     }
 
 
+    public void jumpWait()  {
+        try{
+            timer1.wait();
+        }catch (Exception e){}
 
+    }
+
+    public void notifyJump(){
+        timer1.notify();
+    }
 
 
     public void terminateJump(){

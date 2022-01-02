@@ -32,6 +32,17 @@ public class SettingsPageView implements Serializable
     @FXML
     private transient ImageView save;
 
+    @FXML
+    private ImageView resumeButton;
+
+
+
+
+    @FXML
+    void resumeGame(MouseEvent event) {
+        homepage.getGame().resumeGame();
+    }
+
 
     @FXML
     void saveGame(MouseEvent event) throws IOException, ClassNotFoundException {
