@@ -23,9 +23,9 @@ public class Game implements Serializable {
         pausedGame = false;
         loadedGame = false;
         this.homepage = homepage;
-        System.out.println("in game constructor");
+        //System.out.println("in game constructor");
         this.player = player;
-        System.out.println(player.getMyName());
+        //System.out.println(player.getMyName());
         position = new Position(player, homepage);
         fmt = new SimpleDateFormat("E d MMM y, H:mm:ss z");
         fxmlLoader = new FxmlLoader();
