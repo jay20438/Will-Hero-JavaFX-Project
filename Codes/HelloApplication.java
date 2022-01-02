@@ -25,7 +25,7 @@ public class HelloApplication extends Application implements Serializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        System.out.println("hiStart");
+        //System.out.println("hiStart");
     }
 
     public static void main(String[] args) {
