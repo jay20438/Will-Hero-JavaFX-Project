@@ -1,4 +1,5 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
@@ -10,31 +11,22 @@ public abstract class Weapon {
 
     //    private Image image;
     //private final TranslateTransition translate4;
-    private ImageView weaponImageView;
     private double x;
     private double y;
     private double height;
     private double width;
+    private int distance;
+    private int count;
     private CreateEntity createEntity;
     private AnchorPane anchorPane;
 
     public Weapon(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
         createEntity = new CreateEntity(null, null);
+        this.distance = 1600;
     }
 
-    public TranslateTransition moveWeapon(int from, int to, Duration duration) {
-        weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying", 30, 120, 50, 150);
-        anchorPane.getChildren().add(weaponImageView);
-        TranslateTransition translateTransition = new TranslateTransition();
-        translateTransition.setNode(weaponImageView);
-        translateTransition.setDuration(duration);
-        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
-        translateTransition.setToX(to);
-        translateTransition.setFromX(from);
-        return translateTransition;
-    }
-
+    abstract void moveWeapon(double from,ImageView weaponImageView,double yPosition, double duration);
 
 
     /*public void killEnemy(Enemy enemy){
@@ -48,8 +40,23 @@ public abstract class Weapon {
         fadeTransition3.play();
     }*/
 
+    public int getDistance()
+    {
+        return distance;
+    }
 
-    public ImageView getImageView() {
-        return weaponImageView;
+    public int getCount()
+    {
+        return count;
+    }
+
+    public void setCount(int count)
+    {
+        this.count = count;
+    }
+
+    public void setDistance(int distance)
+    {
+        this.distance = distance;
     }
 }

@@ -60,6 +60,8 @@ public class CreateEntity {
         widthOfEntities.put("crushedPlayer",50);
         heightOfEntities.put("boss", 184);
         widthOfEntities.put("boss", 171);
+        heightOfEntities.put("enemyBlood",62);
+        widthOfEntities.put("enemyBlood",61);
     }
 
     public void create(ImageView imageViewOfIslandOperatingUpon) throws InterruptedException {

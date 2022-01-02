@@ -145,22 +145,35 @@ public class Player {
 
     public void launchMissile()
     {
-        bk.setMissile(missile);
         double xPosition = mineImageView.getBoundsInParent().getMaxX();
         double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
-        missile.moveWeapon( xPosition-80, xPosition+100,yPosition,  1000).play();
-        missile.fade();
-        bk.checkCollisionOfOrcAndWeapon();
+        ImageView imageView = missile.formImageView(mineImageView.getBoundsInParent().getMaxX()-80, mineImageView.getBoundsInParent().getMaxX()+200,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
+        missile.moveWeapon( mineImageView.getBoundsInParent().getMaxX()-80, imageView,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
+        //missile.fade();
+
+        startCheckingCollision(imageView);
     }
 
     public void throwKnife()
     {
-        bk.setKnife(knife);
         double xPosition = mineImageView.getBoundsInParent().getMaxX();
         double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
-        knife.moveWeapon(xPosition-80, xPosition+100,yPosition,  1000).play();
-        knife.fade();
-        bk.checkCollisionOfOrcAndWeapon();
+        ImageView imageView = knife.formImageView(mineImageView.getBoundsInParent().getMaxX()-80, mineImageView.getBoundsInParent().getMaxX()+200,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
+        knife.moveWeapon( mineImageView.getBoundsInParent().getMaxX()-80, imageView,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
+        startCheckingCollision(imageView);
+    }
+
+    public void startCheckingCollision(ImageView imageView)
+    {
+
+        Timer timer2 = new Timer();
+        TimerTask timerTask2 = new TimerTask() {
+            @Override
+            public void run() {
+                bk.checkCollisionOfOrcAndWeapon(imageView);
+            }
+        };
+        timer2.scheduleAtFixedRate(timerTask2, 100, 100);
     }
 
 }

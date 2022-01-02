@@ -1,8 +1,11 @@
 package com.example.javafx2;
 
 
+import javafx.animation.FadeTransition;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -87,9 +90,17 @@ public abstract class Enemy {
         double xCoordinate = imageView.getBoundsInParent().getMinX();
         CommonAnimations.replaceImageView("enemyBlood", imageView);
         CommonAnimations.setCoordinates(imageView, xCoordinate, yCoordinate-60, createEntity.getHeightOfEntity("enemyBlood"), createEntity.getWidthOfEntity("enemyBlood"));
+        e.fade();
+
     }
 
-
+    public void fade() {
+        FadeTransition fadeTransition4 = new FadeTransition();
+        fadeTransition4.setNode(imageView);
+        fadeTransition4.setDuration(Duration.millis(5000));
+        fadeTransition4.setToValue(0);
+        fadeTransition4.play();
+    }
 
     public void setyChange(int value){
         yChange = value;

@@ -721,51 +721,31 @@ public class blankController implements Initializable {
 //     }
     }
 
-    public void checkCollisionOfOrcAndWeapon()
+    public void checkCollisionOfOrcAndWeapon(ImageView imageView)
     {
-        ListIterator<GreenOrc> listIterator8 = greenOrcs.listIterator();
+        //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+imageView.getLayoutX());
+                ListIterator<GreenOrc> listIterator8 = greenOrcs.listIterator();
+                while (listIterator8.hasNext()) {
+                    GreenOrc greenOrc = listIterator8.next();
+                    ImageView temp = greenOrc.getImageView();
+                    if (temp.getBoundsInParent().getMaxX() > imageView.getBoundsInParent().getMinX() && temp.getBoundsInParent().getMinX() < imageView.getBoundsInParent().getMaxX()
+                            && temp.getBoundsInParent().getMaxY() > imageView.getBoundsInParent().getMinY() && temp.getBoundsInParent().getMinY() < imageView.getBoundsInParent().getMaxY()) {
+                        greenOrc.die();
+                    }
+                }
+
         ListIterator<RedOrc> listIterator9 = redOrcs.listIterator();
-        ListIterator<Knife> listIterator10 = knives.listIterator();
-        ListIterator<Missile> listIterator11 = missiles.listIterator();
-        Knife kn = listIterator10.next();
-        ImageView kni = kn.getImageView();
-        Missile m = listIterator11.next();
-        ImageView rocket = m.getImageView();
-        while (listIterator8.hasNext()) {
-                GreenOrc greenOrc = listIterator8.next();
-                ImageView temp = greenOrc.getImageView();
-
-                if ((temp.getBoundsInParent().getMaxX() > kni.getBoundsInParent().getMinX() && temp.getBoundsInParent().getMinX() < kni.getBoundsInParent().getMaxX()
-                        && temp.getBoundsInParent().getMaxY() > kni.getBoundsInParent().getMinY() && temp.getBoundsInParent().getMinY() < kni.getBoundsInParent().getMaxY()) ||
-                        temp.getBoundsInParent().getMaxX() > rocket.getBoundsInParent().getMinX() && temp.getBoundsInParent().getMinX() < rocket.getBoundsInParent().getMaxX()
-                                && temp.getBoundsInParent().getMaxY() > rocket.getBoundsInParent().getMinY() && temp.getBoundsInParent().getMinY() < rocket.getBoundsInParent().getMaxY()) {
-                    greenOrc.die();
-                }
+        while (listIterator9.hasNext()) {
+            RedOrc redOrc = listIterator9.next();
+            ImageView temp = redOrc.getImageView();
+            if (temp.getBoundsInParent().getMaxX() > imageView.getBoundsInParent().getMinX() && temp.getBoundsInParent().getMinX() < imageView.getBoundsInParent().getMaxX()
+                    && temp.getBoundsInParent().getMaxY() > imageView.getBoundsInParent().getMinY() && temp.getBoundsInParent().getMinY() < imageView.getBoundsInParent().getMaxY()) {
+                redOrc.die();
             }
-            while (listIterator9.hasNext()) {
-                RedOrc redOrc = listIterator9.next();
-                ImageView temp = redOrc.getImageView();
-
-                if ((temp.getBoundsInParent().getMaxX() > kni.getBoundsInParent().getMinX() && temp.getBoundsInParent().getMinX() < kni.getBoundsInParent().getMaxX()
-                        && temp.getBoundsInParent().getMaxY() > kni.getBoundsInParent().getMinY() && temp.getBoundsInParent().getMinY() < kni.getBoundsInParent().getMaxY()) ||
-                        temp.getBoundsInParent().getMaxX() > rocket.getBoundsInParent().getMinX() && temp.getBoundsInParent().getMinX() < rocket.getBoundsInParent().getMaxX()
-                                && temp.getBoundsInParent().getMaxY() > rocket.getBoundsInParent().getMinY() && temp.getBoundsInParent().getMinY() < rocket.getBoundsInParent().getMaxY()) {
-                    redOrc.die();
-                }
-            }
-
-        Timer timer1 = new Timer();
-        TimerTask timerTask1 = new TimerTask() {
-            @Override
-            public void run() {
-                if(kni.getOpacity()==0){
-                    terminateTimer(timer1);
-                }
-
-            }
-        };
-        timer1.scheduleAtFixedRate(timerTask1, 100, 100);
+        }
     }
+
+
 
     public void terminateTimer(Timer timer){
         timer.cancel();
