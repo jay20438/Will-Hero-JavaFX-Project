@@ -31,7 +31,7 @@ public class HelloApplication extends Application implements Serializable {
     public static void main(String[] args) {
         launch();
         System.exit(0);
-        System.out.println("hiMain");
+        //System.out.println("hiMain");
     }
 
     public static void setDifferentScene(Scene scene){
