@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="3036.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="background" fitHeight="736.0" fitWidth="1518.0" onMouseClicked="#moveContent" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@WillHeroImages/backGround.png" />
+            </image>
+        </ImageView>
+          <TextField fx:id="tf1" layoutX="65.0" layoutY="368.0" text="4treesIsland3" visible="false" />
+          <ImageView fx:id="island1" fitHeight="288.0" fitWidth="316.0" layoutX="48.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@WillHeroImages/4treesIsland3.png" />
+              </image>
+          </ImageView>
+          <TextField fx:id="tf2" layoutX="432.0" layoutY="339.0" text="4treesIsland2" visible="false" />
+          <ImageView fx:id="island2" fitHeight="270.0" fitWidth="343.0" layoutX="409.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@WillHeroImages/4treesIsland2.png" />
+              </image>
+          </ImageView>
+          <TextField fx:id="tf3" layoutX="907.0" layoutY="393.0" text="SideIsland" visible="false" />
+          <ImageView fx:id="island3" fitHeight="283.0" fitWidth="426.0" layoutX="891.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@WillHeroImages/SideIsland.png" />
+              </image>
+          </ImageView>
+          <TextField fx:id="tf4" layoutX="1477.0" layoutY="393.0" text="doubleIsland" visible="false" />
+          <ImageView fx:id="island4" fitHeight="260.0" fitWidth="563.0" layoutX="1477.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@WillHeroImages/doubleIsland.png" />
+              </image>
+          </ImageView>
+          <TextField fx:id="tf5" layoutX="2113.0" layoutY="397.0" text="4treesIsland" visible="false" />
+          <ImageView fx:id="island5" fitHeight="297.0" fitWidth="343.0" layoutX="2104.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@WillHeroImages/4treesIsland.png" />
+              </image>
+          </ImageView>
+          <TextField fx:id="tf6" layoutX="2568.0" layoutY="356.0" text="LongIsland" visible="false" />
+          <ImageView fx:id="island6" fitHeight="280.0" fitWidth="480.0" layoutX="2542.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@WillHeroImages/LongIsland.png" />
+              </image>
+          </ImageView>
+        <ImageView fx:id="settingsButton" fitHeight="48.0" fitWidth="54.0" layoutX="21.0" layoutY="14.0" onMouseClicked="#goToSettings" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@WillHeroImages/SettingsButton-removebg-preview.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="coinSymbol" fitHeight="53.0" fitWidth="54.0" layoutX="1298.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@WillHeroImages/coin.png" />
+            </image>
+        </ImageView>
+      <TextField fx:id="nOfSteps" alignment="CENTER" editable="false" layoutX="554.0" layoutY="29.0" prefHeight="32.0" prefWidth="54.0" />
+      <TextField fx:id="nOfCoins" alignment="CENTER" editable="false" layoutX="1249.0" layoutY="26.0" prefHeight="38.0" prefWidth="40.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="439.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1189.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+</AnchorPane>

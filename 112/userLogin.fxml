@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="myPane" prefHeight="521.0" prefWidth="1151.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherojavafxproject.UserLogin">
+   <children>
+      <ImageView fitHeight="532.0" fitWidth="1077.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/backGroundLogin.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lock" fitHeight="60.0" fitWidth="74.0" layoutX="1077.0" layoutY="369.0" onMouseClicked="#verifyAndAllow" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@WillHeroImages/lockOpenClosed.gif" />
+         </image>
+      </ImageView>
+      <TextField fx:id="prompt" layoutX="504.0" layoutY="452.0" prefHeight="31.0" prefWidth="143.0" visible="false" />
+      <TextField fx:id="textFieldForUsername" layoutX="-274.0" layoutY="369.0" prefHeight="60.0" prefWidth="268.0" promptText="Enter Username" text="Enter Username" />
+   </children>
+</AnchorPane>
