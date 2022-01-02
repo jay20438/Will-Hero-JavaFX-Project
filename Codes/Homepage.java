@@ -35,7 +35,6 @@ public class Homepage implements Initializable, Serializable {
         settingsPageView = new SettingsPageView(this);
         f = new File("SavedGames.txt");
         f.createNewFile();
-        System.out.println("in homepage constructor");
         allPlayersSavedGames = new HashMap<>();
         this.player = player;
         playerName = new ArrayList<>();
@@ -121,12 +120,10 @@ public class Homepage implements Initializable, Serializable {
         this.fetchData();
         game.askPositionToStoreCoordinates();
         if(allPlayersSavedGames.get(player.getMyName())==null){
-            System.out.println("added the game for the player with no initial data");
             ArrayList<Game> arrayList = new ArrayList<>();
             arrayList.add(game);
             allPlayersSavedGames.put(player.getMyName(), arrayList);
         }else{
-            System.out.println("added the game for the player with some inital data!");
             allPlayersSavedGames.get(player.getMyName()).add(game);
         }
         FileOutputStream fileOutputStream = new FileOutputStream(f);
@@ -146,11 +143,8 @@ public class Homepage implements Initializable, Serializable {
 //                objectInputStream.
             }catch(Exception e){
                 e.printStackTrace();
-                System.out.println("not able to read");
             }
-            System.out.println("size of the hash map:" + allPlayersSavedGames.size());
         }else{
-            System.out.println("since the file was empty therefore there is no data to fetch!");
         }
     }
 

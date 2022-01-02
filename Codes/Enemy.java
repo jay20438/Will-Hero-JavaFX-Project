@@ -168,7 +168,6 @@ public abstract class Enemy implements Serializable {
     }
 
     public void store(){
-        System.out.println("Enemy before store x:"+mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY() + " class" + this.getClass().getName());
          x = mineImageView.getLayoutX();
          y = mineImageView.getLayoutY();
          height = mineImageView.getFitHeight();
@@ -178,7 +177,6 @@ public abstract class Enemy implements Serializable {
 
     public void revive(AnchorPane anchorPane) throws InterruptedException {
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        System.out.println("Enemy after revive x:" + mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY() + " class" + this.getClass().getName());
         anchorPane.getChildren().add(mineImageView);
         //if(!imageName.equals("boss")){
             this.jump();

@@ -33,7 +33,7 @@ public class SettingsPageView implements Serializable
     private transient ImageView save;
 
     @FXML
-    private ImageView resumeButton;
+    private transient ImageView resumeButton;
 
     @FXML
     private transient ImageView restartButton;

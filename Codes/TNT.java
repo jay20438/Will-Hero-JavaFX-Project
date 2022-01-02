@@ -48,6 +48,7 @@ public class TNT implements Serializable
 
     public void initiate(){
         bursted = true;
+        fadeTransition = new FadeTransition();
         fadeTransition.setDuration(Duration.millis(200));
         fadeTransition.setCycleCount(4);
         fadeTransition.setAutoReverse(true);

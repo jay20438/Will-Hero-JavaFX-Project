@@ -25,13 +25,11 @@ public class HelloApplication extends Application implements Serializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        System.out.println("hiStart");
     }
 
     public static void main(String[] args) {
         launch();
         System.exit(0);
-        System.out.println("hiMain");
     }
 
     public static void setDifferentScene(Scene scene){

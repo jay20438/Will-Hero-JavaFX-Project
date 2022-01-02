@@ -17,14 +17,12 @@ public class FxmlLoader implements Serializable {
     public static Scene getScene(String filename) {
         try{
             URL fileUrl = HelloApplication.class.getResource(filename+".fxml");
-            System.out.println(fileUrl);
             if(fileUrl == null){
                 throw new FileNotFoundException("fxml file can not be found");
             }
             FXMLLoader fxmlLoader = new FXMLLoader(fileUrl);
             view  = new Scene(fxmlLoader.load());
         }catch (Exception e){
-            System.out.println("No page " + filename + " please check the fxml file");
         }
         return view;
     }
@@ -32,16 +30,12 @@ public class FxmlLoader implements Serializable {
     public static Scene getScene(String filename, Object obj, String className){
         try{
             URL fileUrl = HelloApplication.class.getResource(filename+".fxml");
-            System.out.println(fileUrl);
             if(fileUrl == null){
                 throw new FileNotFoundException("fxml file can not be found");
             }
             FXMLLoader fxmlLoader = new FXMLLoader(fileUrl);
             fxmlLoader.setController(null);
-            System.out.println("jgh");
-            System.out.println("opop");
             if(className.equals("Homepage")){
-                System.out.println("hituier");
                 fxmlLoader.setController((Homepage)obj);
             }else if(className.equals("Position")){
 //                fxmlLoader.
@@ -53,11 +47,9 @@ public class FxmlLoader implements Serializable {
             }else if(className.equals("GameOutcome")){
                 fxmlLoader.setController((GameOutcome)obj);
             }
-            System.out.println("toper");
             view  = new Scene(fxmlLoader.load());
         }catch (Exception e){
             e.printStackTrace();
-            System.out.println("No page " + filename + " please check the fxml file");
         }
         return view;
     }

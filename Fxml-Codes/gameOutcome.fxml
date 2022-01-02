@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="526.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -13,20 +14,23 @@
             <Image url="@WillHeroImages/backGround.png" />
          </image>
       </ImageView>
-      <TextField fx:id="myCoins" layoutX="382.0" layoutY="348.0" prefHeight="26.0" prefWidth="240.0" />
-      <TextField fx:id="mySteps" layoutX="382.0" layoutY="441.0" prefHeight="26.0" prefWidth="240.0" />
-      <Label fx:id="gameOutcomeLabel" contentDisplay="CENTER" layoutX="319.0" layoutY="52.0" prefHeight="154.0" prefWidth="340.0" text="jhjhjhjh" textAlignment="RIGHT" />
+      <TextField fx:id="myCoins" alignment="CENTER" editable="false" layoutX="541.0" layoutY="260.0" prefHeight="57.0" prefWidth="78.0" />
+      <TextField fx:id="mySteps" alignment="CENTER" editable="false" layoutX="541.0" layoutY="407.0" prefHeight="57.0" prefWidth="89.0" />
+      <Label fx:id="gameOutcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="73.0" prefHeight="98.0" prefWidth="577.0" textAlignment="RIGHT">
+         <font>
+            <Font size="47.0" />
+         </font></Label>
       <ImageView fx:id="homeButton" fitHeight="55.0" fitWidth="51.0" layoutX="41.0" layoutY="16.0" onMouseClicked="#goToHomePage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/HomeButtonpic.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="319.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="82.0" fitWidth="79.0" layoutX="354.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/coin.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="49.0" fitWidth="30.0" layoutX="316.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="82.0" fitWidth="61.0" layoutX="368.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WillHeroImages/steps.png" />
          </image>
