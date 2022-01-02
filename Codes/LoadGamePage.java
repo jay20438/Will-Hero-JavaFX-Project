@@ -70,7 +70,7 @@ public class LoadGamePage implements Initializable, Serializable {
                 while (listIterator.hasNext()) {
                     Game game = listIterator.next();
                     myList.getItems().add(game.getDateOfGamePlayed());
-                    System.out.println("while adding into the list:"+game.getDateOfGamePlayed());
+                    //System.out.println("while adding into the list:"+game.getDateOfGamePlayed());
                 }
 
                 myList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
