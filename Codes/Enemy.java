@@ -1,4 +1,4 @@
-package com.example.willherojavafxproject;
+package com.example.javafx2;
 
 
 import javafx.scene.image.ImageView;
@@ -83,8 +83,12 @@ public abstract class Enemy {
     }
 
     public void die(){
-       // CommonAnimations.replaceImageView("enemyBlood", imageView);
+        double yCoordinate  = imageView.getBoundsInParent().getMinY();
+        double xCoordinate = imageView.getBoundsInParent().getMinX();
+        CommonAnimations.replaceImageView("enemyBlood", imageView);
+        CommonAnimations.setCoordinates(imageView, xCoordinate, yCoordinate-60, createEntity.getHeightOfEntity("enemyBlood"), createEntity.getWidthOfEntity("enemyBlood"));
     }
+
 
 
     public void setyChange(int value){
@@ -145,6 +149,8 @@ public abstract class Enemy {
     public void burnt(){
 
     }
+
+
 
     public void changeStatusOfLiving(boolean val){
         living = val;
