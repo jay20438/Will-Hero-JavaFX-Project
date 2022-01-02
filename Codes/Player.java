@@ -34,7 +34,7 @@ public class Player implements Serializable {
     private boolean gameStatusWin;
 
     public Player(String name){
-        System.out.println("my name:" + name);
+        //System.out.println("my name:" + name);
         this.userName = name;
         gameStatusWin = false;
     }
@@ -187,7 +187,7 @@ public class Player implements Serializable {
     }
 
     public void store(){
-        System.out.println("player x while storing:" + mineImageView.getLayoutX()+" y:"+mineImageView.getLayoutY());
+        //System.out.println("player x while storing:" + mineImageView.getLayoutX()+" y:"+mineImageView.getLayoutY());
          x = mineImageView.getLayoutX();
          y = mineImageView.getLayoutY();
          height = mineImageView.getFitHeight();
@@ -197,7 +197,7 @@ public class Player implements Serializable {
 
     public void revive(AnchorPane anchorPane)  {
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        System.out.println("player x after reviving:" + mineImageView.getLayoutX() + " y:"+mineImageView.getLayoutY());
+        //System.out.println("player x after reviving:" + mineImageView.getLayoutX() + " y:"+mineImageView.getLayoutY());
         anchorPane.getChildren().add(mineImageView);
         try {
             this.jump();
