@@ -9,14 +9,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserLogin implements Initializable {
 
     private FxmlLoader fxmlLoader;
-    private TranslateTransition t1;
-    private TranslateTransition t2;
+    private transient TranslateTransition t1;
+    private transient TranslateTransition t2;
 
     public  UserLogin() {
         t1 = new TranslateTransition();
@@ -25,28 +26,31 @@ public class UserLogin implements Initializable {
     }
 
     @FXML
-    private ImageView lock;
+    private  transient ImageView lock;
 
 
     @FXML
-    private AnchorPane myPane;
+    private  transient AnchorPane myPane;
 
 
     @FXML
-    private TextField prompt;
+    private transient TextField prompt;
 
     @FXML
-    private TextField textFieldForUsername;
+    private transient TextField textFieldForUsername;
 
     @FXML
-    void verifyAndAllow(MouseEvent event) {
+    void verifyAndAllow(MouseEvent event) throws IOException {
         String userName = textFieldForUsername.getText();
         System.out.println(userName);
         if(userName.equals("Enter Username")){
             prompt.setVisible(true);
             prompt.setText("No UserName Entered!");
         }else {
-            HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage"));
+//            System.out.println(prompt.getText());
+            Player player = new Player(userName);
+            Homepage homepage = new Homepage(player);
+            HelloApplication.setDifferentScene(fxmlLoader.getScene("homepage", homepage, "Homepage"));
         }
     }
 

@@ -30,9 +30,9 @@ public class PlayerFallsInAbyss implements Initializable {
     private double y;
     private String[] namesOfScenes = {"homepage", "playerInitiatedTnt", "playerKilledInTntBlast"};
     private Scene[] scenes;
-    private Scene scene;
-    private Scene scene3;
-    private Parent root;
+    private transient Scene scene;
+    private transient Scene scene3;
+    private transient Parent root;
     FxmlLoader obj = new FxmlLoader();
 
     @FXML

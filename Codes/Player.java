@@ -1,31 +1,46 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
-import javafx.scene.Group;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Player {
-    private ImageView mineImageView;
+public class Player implements Serializable {
+    private transient ImageView mineImageView;
     private int nOfCoins;
     private Knife knife;
     private Missile missile;
     private CreateEntity createEntity;
-    private blankController bk;
-    private Timer timer;
+    private Position bk;
+    private transient Timer timer;
     private int gainedUpHeight;
     private boolean flag4Up;
     private Player p;
     private boolean living;
+    private String userName;
+    private String imageName;
+    private double x;
+    private double y;
+    private double height;
+    private double width;
+    private transient AnchorPane anchorPane;
 
-    public Player(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, CreateEntity createEntity, blankController bk) throws InterruptedException {
+    public Player(String name){
+        System.out.println("my name:" + name);
+        this.userName = name;
+    }
+
+
+
+
+    public void formMyImage(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, CreateEntity createEntity, Position bk) throws InterruptedException {
         living = true;
         this.createEntity = createEntity;
         this.bk = bk;
@@ -38,6 +53,8 @@ public class Player {
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
         anchorPane.getChildren().add(mineImageView);
         mineImageView.setPreserveRatio(true);
+        this.anchorPane = anchorPane;
+        this.imageName = imageName;
         this.jump();
     }
 
@@ -51,12 +68,14 @@ public class Player {
 
     public void getKnife(Knife knife){
         this.knife = knife;
+        imageName = "playerWithKnife";
         CommonAnimations.replaceImageView("playerWithKnife", mineImageView);
         CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX(), mineImageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("playerWithKnife"), createEntity.getWidthOfEntity("playerWithKnife"));
     }
 
     public void getMissile(Missile missile){
         this.missile = missile;
+        imageName = "playerWithMissile";
         CommonAnimations.replaceImageView("playerWithMissile", mineImageView);
         CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX(), mineImageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("playerWithMissile"), createEntity.getWidthOfEntity("playerWithMissile"));
     }
@@ -64,13 +83,24 @@ public class Player {
     public void die()
     {
         living = false;
+        imageName = "crushedPlayer";
         CommonAnimations.replaceImageView("crushedPlayer", mineImageView);
         CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX(), mineImageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("crushedPlayer"), createEntity.getWidthOfEntity("crushedPlayer"));
     }
 
+    public void jumpWait()  {
+        try{
+            timer.wait();
+        }catch (Exception e){}
+
+    }
+
+    public void notifyJump(){
+        timer.notify();
+    }
+
     public void terminateJump(){
         timer.cancel();
-        timer.purge();
     }
 
     public void jump() throws InterruptedException {
@@ -133,6 +163,37 @@ public class Player {
         rotateTransition.play();
     }
 
+    public void setCoordinatesAfterCollision(int value){
+        mineImageView.setLayoutX(value);
+    }
+
+//    public void displaySavedGames(List){
+//
+//    }
+
+    public String getMyName(){
+
+        return userName;
+    }
+
+    public void store(){
+        System.out.println("player x while storing:" + mineImageView.getLayoutX()+" y:"+mineImageView.getLayoutY());
+         x = mineImageView.getLayoutX();
+         y = mineImageView.getLayoutY();
+         height = mineImageView.getFitHeight();
+         width = mineImageView.getFitWidth();
+    }
+
+
+    public void revive(AnchorPane anchorPane)  {
+        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        System.out.println("player x after reviving:" + mineImageView.getLayoutX() + " y:"+mineImageView.getLayoutY());
+        anchorPane.getChildren().add(mineImageView);
+        try {
+            this.jump();
+        }catch (Exception e){}
+    }
+
 
     public void throwWeapon(){
         if(knife!=null){
@@ -145,19 +206,13 @@ public class Player {
 
     public void launchMissile()
     {
-        double xPosition = mineImageView.getBoundsInParent().getMaxX();
-        double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
         ImageView imageView = missile.formImageView(mineImageView.getBoundsInParent().getMaxX()-80, mineImageView.getBoundsInParent().getMaxX()+200,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
-        missile.moveWeapon( mineImageView.getBoundsInParent().getMaxX()-80, imageView,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
-        //missile.fade();
-
+        missile.moveWeapon(mineImageView.getBoundsInParent().getMaxX()-80, imageView,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
         startCheckingCollision(imageView);
     }
 
     public void throwKnife()
     {
-        double xPosition = mineImageView.getBoundsInParent().getMaxX();
-        double yPosition = mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight();
         ImageView imageView = knife.formImageView(mineImageView.getBoundsInParent().getMaxX()-80, mineImageView.getBoundsInParent().getMaxX()+200,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
         knife.moveWeapon( mineImageView.getBoundsInParent().getMaxX()-80, imageView,mineImageView.getBoundsInParent().getMaxY()-mineImageView.getFitHeight(),  1000);
         startCheckingCollision(imageView);

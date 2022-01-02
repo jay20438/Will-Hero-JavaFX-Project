@@ -1,5 +1,4 @@
-package com.example.javafx2;
-
+package com.example.willherojavafxproject;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
@@ -7,26 +6,39 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public abstract class Weapon {
+import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
 
-    //    private Image image;
-    //private final TranslateTransition translate4;
-    private double x;
-    private double y;
-    private double height;
-    private double width;
-    private int distance;
-    private int count;
+public abstract class Weapon implements Serializable {
+    private transient ImageView weaponImageView;
+    private  double x;
+    private  double y;
+    private  double height;
+    private  double width;
+    private String imageName;
     private CreateEntity createEntity;
-    private AnchorPane anchorPane;
+    private transient AnchorPane anchorPane;
+    private Timer timer;
 
     public Weapon(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
         createEntity = new CreateEntity(null, null);
-        this.distance = 1600;
     }
 
-    abstract void moveWeapon(double from,ImageView weaponImageView,double yPosition, double duration);
+//
+//    public TranslateTransition moveWeapon(int from, int to, Duration duration) {
+//        weaponImageView = CommonAnimations.makeImageAndSetCoord("missileFlying", 30, 120, 50, 150);
+//        anchorPane.getChildren().add(weaponImageView);
+//        TranslateTransition translateTransition = new TranslateTransition();
+//        translateTransition.setNode(weaponImageView);
+//        translateTransition.setDuration(duration);
+//        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+//        translateTransition.setToX(to);
+//        translateTransition.setFromX(from);
+//        return translateTransition;
+//    }
+
 
 
     /*public void killEnemy(Enemy enemy){
@@ -40,23 +52,41 @@ public abstract class Weapon {
         fadeTransition3.play();
     }*/
 
-    public int getDistance()
-    {
-        return distance;
+
+    public ImageView getImageView() {
+        return weaponImageView;
     }
 
-    public int getCount()
-    {
-        return count;
+    public AnchorPane getAnchorPane(){
+        return anchorPane;
     }
 
-    public void setCount(int count)
-    {
-        this.count = count;
+//    abstract void moveWeapon(double from,ImageView weaponImageView,double yPosition, double duration);
+
+    public void moveWeapon(double from,ImageView weaponImageView,double yPosition, double duration) {
+        timer = new Timer();
+        TimerTask timerTask3 = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("moving the weapon");
+                if(weaponImageView.getLayoutX() < from + 700) {
+                    weaponImageView.setLayoutX(weaponImageView.getLayoutX() + 50);
+                }
+                else
+                {
+                    weaponImageView.setOpacity(0);
+                    terminateWeaponTimer(timer);
+
+                }
+            }
+
+        };
+        timer.scheduleAtFixedRate(timerTask3, 100, 100);
     }
 
-    public void setDistance(int distance)
-    {
-        this.distance = distance;
+    public void terminateWeaponTimer(Timer timer){
+        timer.cancel();
+        timer.purge();
     }
+
 }

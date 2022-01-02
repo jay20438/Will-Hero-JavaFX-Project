@@ -8,14 +8,15 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class HelloApplication extends Application {
-    private static Stage staged;
+public class HelloApplication extends Application implements Serializable {
+    static transient Stage staged;
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("blank.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1518, 736);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("userLogin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1077, 522);
         //1017, 532
         Image icon = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ "WillHeroIcon.jpg"));
         stage.getIcons().add(icon);
@@ -36,6 +37,10 @@ public class HelloApplication extends Application {
     public static void setDifferentScene(Scene scene){
         staged.setScene(scene);
     }
+
+
+
+
 }
 
 

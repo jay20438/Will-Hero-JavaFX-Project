@@ -1,4 +1,4 @@
-package com.example.javafx2;
+package com.example.willherojavafxproject;
 
 
 import javafx.animation.FadeTransition;
@@ -6,40 +6,46 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class Enemy {
-    private blankController bk;
-    private ImageView imageView;
-    private AnchorPane anchorPane;
+public abstract class Enemy implements Serializable {
+    private Position bk;
+    private transient ImageView mineImageView;
+    private transient AnchorPane anchorPane;
     private boolean collided;
     private CreateEntity createEntity;
-    private Timer timer1;
+    private transient Timer timer1;
     private int gainedUpHeight;
     private boolean flag4Up;
     private Enemy e;
     private boolean living;
     private int maxHeight;
     private int yChange;
+    private String imageName;
+    private double x;
+    private double y;
+    private double height;
+    private double width;
 
 
 
-    public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, blankController bk, int maxHeight, int yChange) throws InterruptedException {
+    public Enemy(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, Position bk, int maxHeight, int yChange) throws InterruptedException {
         this.maxHeight = maxHeight;
         this.yChange = yChange;
         this.bk = bk;
         e = this;
+        this.imageName = imageName;
         collided = false;
         flag4Up = false;
         living = true;
         gainedUpHeight = 0;
         this.anchorPane = anchorPane;
-        imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        imageView.setPreserveRatio(true);
-        anchorPane.getChildren().add(imageView);
+        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        anchorPane.getChildren().add(mineImageView);
         createEntity = new CreateEntity(null, null);
-        System.out.println(imageView.getLayoutY());
+        System.out.println("i am orc and mine before coordinates before saving:x:" + mineImageView.getLayoutX()+" y:"+mineImageView.getLayoutY());
         if(!imageName.equals("boss")){
             this.jump();
         }
@@ -67,7 +73,7 @@ public abstract class Enemy {
                     }
                 }
                 try {
-                    bk.jump(imageView, e, e.getyChange(), e.getFlag4Up(), e.isLiving());
+                    bk.jump(mineImageView, e, e.getyChange(), e.getFlag4Up(), e.isLiving());
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
@@ -77,7 +83,16 @@ public abstract class Enemy {
     }
 
 
+    public void jumpWait()  {
+        try{
+            timer1.wait();
+        }catch (Exception e){}
 
+    }
+
+    public void notifyJump(){
+        timer1.notify();
+    }
 
 
     public void terminateJump(){
@@ -85,22 +100,6 @@ public abstract class Enemy {
         timer1.purge();
     }
 
-    public void die(){
-        double yCoordinate  = imageView.getBoundsInParent().getMinY();
-        double xCoordinate = imageView.getBoundsInParent().getMinX();
-        CommonAnimations.replaceImageView("enemyBlood", imageView);
-        CommonAnimations.setCoordinates(imageView, xCoordinate, yCoordinate-60, createEntity.getHeightOfEntity("enemyBlood"), createEntity.getWidthOfEntity("enemyBlood"));
-        e.fade();
-
-    }
-
-    public void fade() {
-        FadeTransition fadeTransition4 = new FadeTransition();
-        fadeTransition4.setNode(imageView);
-        fadeTransition4.setDuration(Duration.millis(5000));
-        fadeTransition4.setToValue(0);
-        fadeTransition4.play();
-    }
 
     public void setyChange(int value){
         yChange = value;
@@ -111,7 +110,7 @@ public abstract class Enemy {
     }
 
     public ImageView getImageView(){
-        return imageView;
+        return mineImageView;
     }
 
     public boolean isCollided(){
@@ -124,8 +123,8 @@ public abstract class Enemy {
 
 
     public void slide(int amount){
-        //CommonAnimations.setCoordinates(imageView, imageView.getBoundsInParent().getMinX()+90, imageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("greenOrc"), createEntity.getWidthOfEntity("greenOrc"));
-        imageView.setLayoutX(imageView.getLayoutX()+amount);
+        //CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX()+90, mineImageView.getBoundsInParent().getMinY(), createEntity.getHeightOfEntity("greenOrc"), createEntity.getWidthOfEntity("greenOrc"));
+        mineImageView.setLayoutX(mineImageView.getLayoutX()+amount);
     }
 
 
@@ -161,12 +160,46 @@ public abstract class Enemy {
 
     }
 
-
-
     public void changeStatusOfLiving(boolean val){
         living = val;
     }
     public boolean isLiving(){
         return living;
+    }
+
+    public void store(){
+        System.out.println("Enemy before store x:"+mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY() + " class" + this.getClass().getName());
+         x = mineImageView.getLayoutX();
+         y = mineImageView.getLayoutY();
+         height = mineImageView.getFitHeight();
+         width = mineImageView.getFitWidth();
+    }
+
+
+    public void revive(AnchorPane anchorPane) throws InterruptedException {
+        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        System.out.println("Enemy after revive x:" + mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY() + " class" + this.getClass().getName());
+        anchorPane.getChildren().add(mineImageView);
+        //if(!imageName.equals("boss")){
+            this.jump();
+        //}
+    }
+
+    public void die(){
+        living = false;
+        double yCoordinate  = mineImageView.getBoundsInParent().getMinY();
+        double xCoordinate = mineImageView.getBoundsInParent().getMinX();
+        imageName = "enemyBlood";
+        CommonAnimations.replaceImageView("enemyBlood", mineImageView);
+        CommonAnimations.setCoordinates(mineImageView, xCoordinate, yCoordinate-60, createEntity.getHeightOfEntity("enemyBlood"), createEntity.getWidthOfEntity("enemyBlood"));
+        this.fade();
+    }
+
+    public void fade() {
+        FadeTransition fadeTransition4 = new FadeTransition();
+        fadeTransition4.setNode(mineImageView);
+        fadeTransition4.setDuration(Duration.millis(5000));
+        fadeTransition4.setToValue(0);
+        fadeTransition4.play();
     }
 }

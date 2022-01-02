@@ -7,46 +7,52 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TNT extends Obstacle
+public class TNT extends Obstacle implements Serializable
 {
-    private Image image;
-    private ImageView imageView;
+
+    private transient ImageView mineImageView;
     private double x;
     private double y;
     private double height;
     private double width;
-    private AnchorPane anchorPane;
+    private String imageName;
+    private transient AnchorPane anchorPane;
     private int open;
     private CreateEntity createEntity;
-    private FadeTransition fadeTransition;
+    private transient FadeTransition fadeTransition;
     private boolean collided;
+    private boolean bursted;
+    private double opacityOfImage;
 
     public TNT(String imageName, double x, double y, double height, double width, AnchorPane anchorPane, CreateEntity createEntity){
+        opacityOfImage = 1;
         this.createEntity = createEntity;
         collided = false;
+        bursted = false;
         fadeTransition = new FadeTransition();
         this.anchorPane = anchorPane;
-        this.height = height;
-        this.width  = width;
-        imageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        anchorPane.getChildren().add(imageView);
-        imageView.setPreserveRatio(true);
+        this.imageName = imageName;
+        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        anchorPane.getChildren().add(mineImageView);
+        mineImageView.setPreserveRatio(true);
     }
 
 
     public ImageView getImageView(){
-        return imageView;
+        return mineImageView;
     }
 
     public void initiate(){
+        bursted = true;
         fadeTransition.setDuration(Duration.millis(200));
         fadeTransition.setCycleCount(4);
         fadeTransition.setAutoReverse(true);
         fadeTransition.setToValue(0.5);
-        fadeTransition.setNode(imageView);
+        fadeTransition.setNode(mineImageView);
         fadeTransition.play();
         help();
     }
@@ -65,24 +71,25 @@ public class TNT extends Obstacle
 
     public void blast(){
         FadeTransition fadeTransition2 = new FadeTransition();
-        double helpy  = imageView.getBoundsInParent().getMinY();
-        double helpx = imageView.getBoundsInParent().getMinX();
-        imageView.setOpacity(1);
-        CommonAnimations.replaceImageView("tntFire", imageView);
-        CommonAnimations.setCoordinates(imageView, helpx, helpy-60, createEntity.getHeightOfEntity("tntFire"), createEntity.getWidthOfEntity("tntFire"));
+        //double mineImageView.getBoundsInParent().getMinY()  = mineImageView.getBoundsInParent().getMinY();
+        //double mineImageView.getBoundsInParent().getMinX() = mineImageView.getBoundsInParent().getMinX();
+        mineImageView.setOpacity(1);
+        imageName = "tntFire";
+        CommonAnimations.replaceImageView("tntFire", mineImageView);
+        CommonAnimations.setCoordinates(mineImageView, mineImageView.getBoundsInParent().getMinX(), mineImageView.getBoundsInParent().getMinY()-60, createEntity.getHeightOfEntity("tntFire"), createEntity.getWidthOfEntity("tntFire"));
         fadeTransition2.setDuration(Duration.millis(2500));
         fadeTransition2.setToValue(0);
-        fadeTransition2.setNode(imageView);
+        fadeTransition2.setNode(mineImageView);
         fadeTransition2.play();
 
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                if(imageView.getOpacity()==0){
+                if(mineImageView.getOpacity()==0){
                     terminateTimer(timer);
                 }
-                createEntity.getBk().checkCollisionOfEntitiesAndFire(imageView);
+                createEntity.getBk().checkCollisionOfEntitiesAndFire(mineImageView);
             }
         };
         timer.scheduleAtFixedRate(timerTask, 100, 100);
@@ -100,5 +107,29 @@ public class TNT extends Obstacle
 
     public void setCollided(boolean flag){
         collided = flag;
+    }
+
+    public void store(){
+        System.out.println("tnt before store x:"+mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
+         x = mineImageView.getLayoutX();
+         y = mineImageView.getLayoutY();
+         System.out.println("tnt height and width before storing:" + mineImageView.getFitHeight()+" "+mineImageView.getFitWidth());
+         height = mineImageView.getFitHeight();
+         width = mineImageView.getFitWidth();
+    }
+
+
+    public void revive(AnchorPane anchorPane) throws InterruptedException {
+        mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
+        System.out.println("tnt after revive x:" + mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
+        System.out.println("tnt height and width after storing:" + mineImageView.getFitHeight()+" "+mineImageView.getFitWidth());
+        anchorPane.getChildren().add(mineImageView);
+        if(imageName.equals("tntFire")){
+            FadeTransition fadeTransition2 = new FadeTransition();
+            fadeTransition2.setDuration(Duration.millis(1500));
+            fadeTransition2.setToValue(0);
+            fadeTransition2.setNode(mineImageView);
+            fadeTransition2.play();
+        }
     }
 }
