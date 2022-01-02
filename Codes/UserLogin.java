@@ -42,7 +42,7 @@ public class UserLogin implements Initializable {
     @FXML
     void verifyAndAllow(MouseEvent event) throws IOException {
         String userName = textFieldForUsername.getText();
-        System.out.println(userName);
+        //System.out.println(userName);
         if(userName.equals("Enter Username")){
             prompt.setVisible(true);
             prompt.setText("No UserName Entered!");
