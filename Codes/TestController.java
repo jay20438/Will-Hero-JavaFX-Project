@@ -23,25 +23,25 @@ public class TestController implements Initializable {
 
 
     @FXML
-    private ImageView bg;
+    private transient ImageView bg;
 
     @FXML
-    private Group contPlayer;
+    private transient Group contPlayer;
 
     @FXML
-    private Group gp;
+    private transient Group gp;
 
     @FXML
-    private Group gp2;
+    private transient Group gp2;
 
     @FXML
-    private ImageView island;
+    private transient ImageView island;
 
     @FXML
-    private ImageView island2;
+    private transient ImageView island2;
 
     @FXML
-    private ImageView player;
+    private transient ImageView player;
 
     Random random = new Random();
     int randNo3;

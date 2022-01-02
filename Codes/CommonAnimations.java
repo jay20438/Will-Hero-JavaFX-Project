@@ -5,10 +5,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CommonAnimations {
+public class CommonAnimations implements Serializable {
 
     static public TranslateTransition makeYTranslationalObj(ImageView imageView, int from, int to, boolean autoReverse, Duration duration){
         TranslateTransition translateTransition = new TranslateTransition();
@@ -34,6 +35,16 @@ public class CommonAnimations {
     static public void replaceImageView(String newImage, ImageView imageView){
         Image image = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ newImage + ".png"));
         imageView.setImage(image);
+
+    }
+
+    static public void replaceImageView(String newImage, ImageView imageView, double x, double y, double height, double width){
+        Image image = new Image(HelloApplication.class.getResourceAsStream("WillHeroImages/"+ newImage + ".png"));
+        imageView.setImage(image);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
+        imageView.setLayoutX(x);
+        imageView.setLayoutY(y);
 
     }
 
