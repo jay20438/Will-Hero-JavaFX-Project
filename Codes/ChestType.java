@@ -108,7 +108,7 @@ public class ChestType implements Serializable {
     }
 
     public void store(){
-        System.out.println("chest before store x:"+mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
+        //System.out.println("chest before store x:"+mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
          x = mineImageView.getLayoutX();
          y = mineImageView.getLayoutY();
          height = mineImageView.getFitHeight();
@@ -119,7 +119,7 @@ public class ChestType implements Serializable {
     public void revive(AnchorPane anchorPane){
         this.anchorPane = anchorPane;
         mineImageView = CommonAnimations.makeImageAndSetCoord(imageName, x, y, height, width);
-        System.out.println("chest after revive x:" + mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
+        //System.out.println("chest after revive x:" + mineImageView.getLayoutX() + " y:" + mineImageView.getLayoutY());
         anchorPane.getChildren().add(mineImageView);
     }
 
