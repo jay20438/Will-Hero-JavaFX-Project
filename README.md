@@ -1,5 +1,5 @@
 # Will-Hero-Project
-some screen shots.
+Some screenshots of the game.
 ![willHeroPic3](https://user-images.githubusercontent.com/88544208/206139272-c0a13cce-a5e6-4750-be0a-d414c8951af2.png)
 ![willHeroPic2](https://user-images.githubusercontent.com/88544208/206139283-57b992b0-9daa-4a06-a7c4-f021c112beaa.png)
 ![willHeroPic1](https://user-images.githubusercontent.com/88544208/206139288-c698fbe8-9728-40aa-b08f-cf4498e2f1df.png)
